@@ -1,0 +1,16 @@
+{
+  "periods": [
+    { "start": "0930", "end": "1020", "name": "Chaverim" },
+    { "start": "1030", "end": "1120", "name": "Ofarim" },
+    { "start": "1130", "end": "1220", "name": "Tzofim" },
+    { "start": "1230", "name": "Lunch", "ignore": true },
+    { "start": "1300", "end": "1330", "name": "Day camp" },
+    { "start": "1400", "end": "1450", "name": "Chaluzim" },
+    { "start": "1500", "end": "1600", "name": "K/Bolim" }
+  ],
+  "activities-rules": [
+    { "name": "Pool", "max":10, "min": 6 },
+    { "name": "Lake", "max": 10, "min": 6 },
+    { "name": "HOFF", "max": 5, "min": 2 }
+  ]
+}

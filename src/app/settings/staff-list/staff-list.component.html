@@ -1,0 +1,12 @@
+<div>
+    <span>Edit staff:</span>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Staff</mat-label>
+        <mat-select [(value)]="selectedStaff" >
+            <mat-option *ngFor="let staff of staffList" [value]="staff">
+            {{ staff.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>

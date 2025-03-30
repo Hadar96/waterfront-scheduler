@@ -1,0 +1,117 @@
+{
+  "todays-type": "weekday",
+  "activities": [
+    {
+      "name": "Pool",
+      "color": "#00f"
+    },
+    {
+      "name": "Lake",
+      "color": "#0f0"
+    },
+    {
+      "name": "HOFF",
+      "color": "yellow"
+    },
+    {
+      "name": "DOFF",
+      "color": "#orange"
+    },
+    {
+      "name": "Bunk time",
+      "color": "#f00"
+    },
+    {
+      "name": "Teaching",
+      "color": "cyan"
+    }
+  ],
+  "staff-members": [
+    {
+      "name": "Hadar",
+      "schedule": [],
+      "daycampCount": 0,
+      "partyCount": 0,
+      "preferPool": true,
+      "hoffCo": "Aviv",
+      "locked": false
+    },
+    {
+      "name": "Aviv",
+      "schedule": [],
+      "daycampCount": 0,
+      "partyCount": 0,
+      "preferPool": false,
+      "hoffCo": "Hadar",
+      "locked": false
+    },
+    {
+      "name": "Olaf",
+      "schedule": [],
+      "daycampCount": 0,
+      "partyCount": 0,
+      "preferPool": false,
+      "locked": false
+    },
+    {
+      "name": "Maya",
+      "schedule": [],
+      "daycampCount": 0,
+      "partyCount": 0,
+      "preferPool": true,
+      "hoffCo": "Noa",
+      "locked": false
+    },
+    {
+      "name": "Liam",
+      "schedule": [],
+      "daycampCount": 0,
+      "partyCount": 0,
+      "preferPool": false,
+      "locked": false
+    },
+    {
+      "name": "Noa",
+      "schedule": [],
+      "daycampCount": 0,
+      "partyCount": 0,
+      "preferPool": true,
+      "hoffCo": "Maya",
+      "locked": false
+    },
+    {
+      "name": "Ethan",
+      "schedule": [],
+      "daycampCount": 0,
+      "partyCount": 0,
+      "preferPool": false,
+      "locked": false
+    },
+    {
+      "name": "Sophia",
+      "schedule": [],
+      "daycampCount": 0,
+      "partyCount": 0,
+      "preferPool": true,
+      "hoffCo": "Daniel",
+      "locked": false
+    },
+    {
+      "name": "Daniel",
+      "schedule": [],
+      "daycampCount": 0,
+      "partyCount": 0,
+      "preferPool": false,
+      "locked": false
+    },
+    {
+      "name": "Emma",
+      "schedule": [],
+      "daycampCount": 0,
+      "partyCount": 0,
+      "preferPool": true,
+      "hoffCo": "Sophia",
+      "locked": false
+    }
+  ]
+}
