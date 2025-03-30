@@ -7,14 +7,14 @@
     { "id": 5, "start": "1300", "end": "1330", "name": "Day camp", "ignore": true },
     { "id": 6, "start": "1400", "end": "1450", "name": "Chaluzim" },
     { "id": 7, "start": "1500", "end": "1550", "name": "K/Bonim" },
-    { "id": 8, "start": "1600", "end": "1650", "name": "Breira" },
+    { "id": 8, "start": "1600", "end": "1650", "name": "Breira", "exclude-actions": ["Lake"] },
     { "id": 9, "start": "1700", "end": "1750", "name": "Olim" },
     { "id": 10, "start": "1800", "end": "1850", "name": "Dinner", "ignore": true },
     { "id": 11, "start": "1900", "end": "1950", "name": "Pool party", "ignore": true }
   ],
   "activities-rules": [
     { "name": "Pool", "max": 10, "min": 6 },
-    { "name": "Lake", "max": 10, "min": 6, "exclude-periods": [7,9] },
+    { "name": "Lake", "max": 10, "min": 6 },
     { "name": "HOFF", "max": 5, "min": 2 }
   ]
 }
