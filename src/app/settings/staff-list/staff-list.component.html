@@ -1,12 +1,56 @@
 <div>
     <span>Edit staff:</span>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
         <mat-label>Staff</mat-label>
-        <mat-select [(value)]="selectedStaff" >
-            <mat-option *ngFor="let staff of staffList" [value]="staff">
-            {{ staff.name }}
+        <mat-select [(value)]="selectedStaff" style="color: black;">
+            <mat-option *ngFor="let staff of (staffList$ | async)" [value]="staff">
+                {{ staff.name }}
             </mat-option>
         </mat-select>
     </mat-form-field>
+
+    <span>
+        <button mat-icon-button color="primary" (click)="editStaff()" style="border: 1px solid;">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteStaff()" style="border: 1px solid;">
+            <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" (click)="addStaff()" style="border: 1px solid;">
+            <mat-icon>add</mat-icon>
+        </button>
+    </span>
+
+    <div *ngIf="showForm">
+        <form [formGroup]="lifeguardForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" />
+            </mat-form-field>
+
+            <div style="margin: 10px 0;">
+                <span>Zone Preference:</span>
+                <mat-button-toggle-group formControlName="zonePreference">
+                    <mat-button-toggle [value]="undefined">/</mat-button-toggle>
+                    <mat-button-toggle [value]="true">Pool</mat-button-toggle>
+                    <mat-button-toggle [value]="false">Lake</mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Hoff Co Preference</mat-label>
+                <mat-select formControlName="hoffCoPref">
+                    <mat-option *ngFor="let staff of (staffList$ | async)" [value]="staff.name">
+                        {{ staff.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div style="margin-top: 15px;">
+                <button mat-raised-button color="primary" type="submit">Save</button>
+                <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancel</button>
+            </div>
+        </form>
+    </div>
 </div>
