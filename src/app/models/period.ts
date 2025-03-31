@@ -13,15 +13,17 @@ export class Period {
     name: string,
     start: string,
     end?: string,
-    workingPeriod: boolean = true
+    workingPeriod: boolean = true,
+    locked: boolean = false,
+    excludedActions: string[] = []
   ) {
     this._id = ++Period._autoId; // Increment and return the next ID
     this._name = name;
     this._start = start;
     this._end = end;
     this._workingPeriod = workingPeriod;
-    this._locked = !workingPeriod ? true : false; // Lock if not a working period
-    this._excludedActions = [];
+    this._locked = !workingPeriod ? true : locked; // Lock if not a working period
+    this._excludedActions = excludedActions;
   }
 
   get id(): number {

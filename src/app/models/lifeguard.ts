@@ -1,78 +1,83 @@
-import { Activity } from './activity';
-import { Period } from './period';
-
 export class Lifeguard {
-  private name: string;
-  private schedule: { [key: string]: string };
-  private daycampCount: number;
-  private partyCount: number;
-  private hoffCo: string | undefined;
-  private preferPool: boolean | undefined;
-  private locked: boolean;
+  private _name: string;
+  private _schedule: { [key: string]: string };
+  private _daycampCount: number;
+  private _partyCount: number;
+  private _hoffCo: string | undefined;
+  private _preferPool: boolean | undefined;
+  private _locked: boolean;
 
-  constructor(name: string, preferPool?: boolean, hoffCo?: string) {
-    this.name = name;
-    this.schedule = {};
-    this.daycampCount = 0;
-    this.partyCount = 0;
-    this.preferPool = preferPool;
-    this.locked = false;
-    this.hoffCo = hoffCo;
+  constructor(
+    name: string,
+    schedule: { [key: string]: string } = {},
+    preferPool?: boolean,
+    hoffCo?: string,
+    locked: boolean = false,
+    daycampCount: number = 0,
+    partyCount: number = 0
+  ) {
+    this._name = name;
+    this._schedule = schedule;
+    this._daycampCount = daycampCount;
+    this._partyCount = partyCount;
+    this._preferPool = preferPool;
+    this._locked = locked;
+    this._hoffCo = hoffCo;
   }
 
-  getName(): string {
-    return this.name;
+  get name(): string {
+    return this._name;
   }
 
-  setName(name: string): void {
-    this.name = name;
+  set name(name: string) {
+    this._name = name;
   }
 
-  getSchedule(): { [key: string]: string } {
-    return this.schedule;
+  get schedule(): { [key: string]: string } {
+    return this._schedule;
   }
 
-  setSchedule(schedule: { [key: string]: string }): void {
-    this.schedule = schedule;
+  set schedule(schedule: { [key: string]: string }) {
+    this._schedule = schedule;
   }
 
-  getDaycampCount(): number {
-    return this.daycampCount;
+  get daycampCount(): number {
+    return this._daycampCount;
   }
 
-  setDaycampCount(daycampCount: number): void {
-    this.daycampCount = daycampCount;
+  set daycampCount(daycampCount: number) {
+    this._daycampCount = daycampCount;
   }
 
-  getPartyCount(): number {
-    return this.partyCount;
+  get partyCount(): number {
+    return this._partyCount;
   }
 
-  setPartyCount(partyCount: number): void {
-    this.partyCount = partyCount;
+  set partyCount(partyCount: number) {
+    this._partyCount = partyCount;
   }
 
-  getPreferPool(): boolean | undefined {
-    return this.preferPool;
+  get preferPool(): boolean | undefined {
+    return this._preferPool;
   }
 
-  setPreferPool(preferPool: boolean): void {
-    this.preferPool = preferPool;
+  set preferPool(preferPool: boolean | undefined) {
+    this._preferPool = preferPool;
   }
 
-  getLocked(): boolean {
-    return this.locked;
+  get locked(): boolean {
+    return this._locked;
   }
 
-  setLocked(locked: boolean): void {
-    this.locked = locked;
+  set locked(locked: boolean) {
+    this._locked = locked;
   }
 
-  getHoffCo(): string | undefined {
-    return this.hoffCo;
+  get hoffCo(): string | undefined {
+    return this._hoffCo;
   }
 
-  setHoffCo(hoffCo: string): void {
-    this.hoffCo = hoffCo;
+  set hoffCo(hoffCo: string | undefined) {
+    this._hoffCo = hoffCo;
   }
 }

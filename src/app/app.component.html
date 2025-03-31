@@ -1,1 +1,10 @@
-<router-outlet></router-outlet>
+<div *ngIf="isLoading" class="loading-container">
+    <mat-spinner></mat-spinner> <!-- Angular Material spinner -->
+</div>
+
+<div *ngIf="!isLoading">
+    <span>
+        {{ (typeday$ | async)?.name }}
+    </span>
+    <router-outlet></router-outlet>
+</div>

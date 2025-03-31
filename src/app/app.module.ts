@@ -2,13 +2,17 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +34,7 @@ import { DaytypeTabsComponent } from './settings/daytype-tabs/daytype-tabs.compo
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule, // Required for Angular Material
     HttpClientModule, // Import HttpClientModule here
     MatIconModule,
@@ -38,6 +43,9 @@ import { DaytypeTabsComponent } from './settings/daytype-tabs/daytype-tabs.compo
     MatButtonModule,
     MatSelectModule,
     MatTabsModule,
+    MatProgressSpinnerModule,
+    MatSlideToggleModule,
+    MatButtonToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
