@@ -4,7 +4,7 @@ export class Activity {
   private _min?: number;
   private _max?: number;
 
-  constructor(name: string, color: string, min?: number, max?: number) {
+  constructor(name: string, color: string = "#000000", min?: number, max?: number) {
     this._name = name;
     this._color = color;
     this._min = min;

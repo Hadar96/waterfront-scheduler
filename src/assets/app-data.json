@@ -93,27 +93,27 @@
   "activities": [
     {
       "name": "Pool",
-      "color": "#00f"
+      "color": "#0000ff"
     },
     {
       "name": "Lake",
-      "color": "#0f0"
+      "color": "#00ff00"
     },
     {
       "name": "HOFF",
-      "color": "yellow"
+      "color": "#ffff00"
     },
     {
       "name": "DOFF",
-      "color": "#orange"
+      "color": "#ffa500"
     },
     {
       "name": "Bunk time",
-      "color": "#f00"
+      "color": "#ff0000"
     },
     {
       "name": "Teaching",
-      "color": "cyan"
+      "color": "#00ffff"
     }
   ],
   "lifeguards": [

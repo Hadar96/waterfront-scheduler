@@ -1,1 +1,43 @@
-<p>action-list works!</p>
+<div>
+    <span>Edit activities:</span>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Staff</mat-label>
+        <mat-select [(value)]="selectedAct" style="color: black;" [ngStyle]="{'background-color': selectedAct.color}">
+            <mat-option *ngFor="let act of (actList$ | async)" [value]="act">
+                {{ act.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <span>
+        <button mat-icon-button color="primary" (click)="editAct()" style="border: 1px solid;">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteAct()" style="border: 1px solid;">
+            <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" (click)="addAct()" style="border: 1px solid;">
+            <mat-icon>add</mat-icon>
+        </button>
+    </span>
+
+    <div *ngIf="showForm">
+        <form [formGroup]="activityForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Color</mat-label>
+                <input matInput formControlName="color" type="color" />
+            </mat-form-field>
+
+            <div style="margin-top: 15px;">
+                <button mat-raised-button color="primary" type="submit">Save</button>
+                <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
