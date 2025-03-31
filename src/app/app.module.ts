@@ -13,6 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import { MainComponent } from './main/main.component';
 import { StaffListComponent } from './settings/staff-list/staff-list.component';
 import { ActionListComponent } from './settings/action-list/action-list.component';
 import { DaytypeTabsComponent } from './settings/daytype-tabs/daytype-tabs.component';
+import { PeriodListComponent } from './settings/period-list/period-list.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { DaytypeTabsComponent } from './settings/daytype-tabs/daytype-tabs.compo
     MainComponent,
     StaffListComponent,
     ActionListComponent,
-    DaytypeTabsComponent
+    DaytypeTabsComponent,
+    PeriodListComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ import { DaytypeTabsComponent } from './settings/daytype-tabs/daytype-tabs.compo
     MatProgressSpinnerModule,
     MatSlideToggleModule,
     MatButtonToggleModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

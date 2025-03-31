@@ -3,7 +3,7 @@ export class Period {
 
   private _id: number;
   private _start: string;
-  private _end?: string;
+  private _end: string;
   private _name: string;
   private _workingPeriod: boolean;
   private _locked: boolean;
@@ -12,7 +12,7 @@ export class Period {
   constructor(
     name: string,
     start: string,
-    end?: string,
+    end: string,
     workingPeriod: boolean = true,
     locked: boolean = false,
     excludedActions: string[] = []
@@ -31,18 +31,26 @@ export class Period {
   }
 
   get start(): string {
-    return this._start;
+    let str = this._start;
+    if (str.length === 4) {
+      str = str.substring(0, 2) + ':' + str.substring(2, 4);
+    }
+    return str;
   }
 
   set start(value: string) {
     this._start = value;
   }
 
-  get end(): string | undefined {
-    return this._end;
+  get end(): string {
+    let str = this._end;
+    if (str.length === 4) {
+      str = str.substring(0, 2) + ':' + str.substring(2, 4);
+    }
+    return str;
   }
 
-  set end(value: string | undefined) {
+  set end(value: string) {
     this._end = value;
   }
 

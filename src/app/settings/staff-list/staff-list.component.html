@@ -24,9 +24,18 @@
 
     <div *ngIf="showForm">
         <form [formGroup]="lifeguardForm" (ngSubmit)="onSubmit()">
-            <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-form-field appearance="outline">
                 <mat-label>Name</mat-label>
                 <input matInput formControlName="name" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Hoff Co Preference</mat-label>
+                <mat-select formControlName="hoffCoPref">
+                    <mat-option *ngFor="let staff of (staffList$ | async)" [value]="staff.name">
+                        {{ staff.name }}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
 
             <div style="margin: 10px 0;">
@@ -37,15 +46,6 @@
                     <mat-button-toggle [value]="false">Lake</mat-button-toggle>
                 </mat-button-toggle-group>
             </div>
-
-            <mat-form-field appearance="outline" style="width: 100%;">
-                <mat-label>Hoff Co Preference</mat-label>
-                <mat-select formControlName="hoffCoPref">
-                    <mat-option *ngFor="let staff of (staffList$ | async)" [value]="staff.name">
-                        {{ staff.name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
 
             <div style="margin-top: 15px;">
                 <button mat-raised-button color="primary" type="submit">Save</button>

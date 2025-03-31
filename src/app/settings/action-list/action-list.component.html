@@ -2,7 +2,7 @@
     <span>Edit activities:</span>
 
     <mat-form-field appearance="outline">
-        <mat-label>Staff</mat-label>
+        <mat-label>Activity</mat-label>
         <mat-select [(value)]="selectedAct" style="color: black;" [ngStyle]="{'background-color': selectedAct.color}">
             <mat-option *ngFor="let act of (actList$ | async)" [value]="act">
                 {{ act.name }}
@@ -24,12 +24,12 @@
 
     <div *ngIf="showForm">
         <form [formGroup]="activityForm" (ngSubmit)="onSubmit()">
-            <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-form-field appearance="outline">
                 <mat-label>Name</mat-label>
                 <input matInput formControlName="name" />
             </mat-form-field>
 
-            <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-form-field appearance="outline">
                 <mat-label>Color</mat-label>
                 <input matInput formControlName="color" type="color" />
             </mat-form-field>
