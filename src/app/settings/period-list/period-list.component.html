@@ -1,0 +1,47 @@
+<div>
+    <span>Edit periods:</span>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Period</mat-label>
+        <mat-select [(value)]="selected" style="color: black;" (selectionChange)="onPeriodChange($event.value)">
+            <mat-option *ngFor="let period of periods" [value]="period">
+                {{ period.name + ' (' + period.start + ' - ' + period.end + ')' }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <span>
+        <button mat-icon-button color="primary" (click)="edit()" style="border: 1px solid;">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="delete()" style="border: 1px solid;">
+            <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" (click)="add()" style="border: 1px solid;">
+            <mat-icon>add</mat-icon>
+        </button>
+    </span>
+
+    <div *ngIf="showForm">
+        <form [formGroup]="periodForm">
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Start at</mat-label>
+                <input matInput formControlName="start" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>End at</mat-label>
+                <input matInput formControlName="end" />
+            </mat-form-field>
+            <mat-checkbox formControlName="workingPeriod">Working Period</mat-checkbox>
+
+            <div style="margin-top: 15px;">
+                <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Save</button>
+                <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
