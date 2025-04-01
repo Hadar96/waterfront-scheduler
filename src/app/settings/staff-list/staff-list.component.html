@@ -23,7 +23,7 @@
     </span>
 
     <div *ngIf="showForm">
-        <form [formGroup]="lifeguardForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="lifeguardForm">
             <mat-form-field appearance="outline">
                 <mat-label>Name</mat-label>
                 <input matInput formControlName="name" />
@@ -48,7 +48,7 @@
             </div>
 
             <div style="margin-top: 15px;">
-                <button mat-raised-button color="primary" type="submit">Save</button>
+                <button mat-raised-button color="primary" type="button" (click)="onSubmit()">Save</button>
                 <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancel</button>
             </div>
         </form>
