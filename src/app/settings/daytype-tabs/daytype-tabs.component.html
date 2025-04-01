@@ -1,1 +1,20 @@
-<p>daytype-tabs works!</p>
+<button mat-icon-button color="warn" (click)="deleteTab()" style="border: 1px solid;">
+    <mat-icon>delete</mat-icon>
+</button>
+<button mat-icon-button color="accent" (click)="addTab()" style="border: 1px solid;">
+    <mat-icon>add</mat-icon>
+</button>
+
+<mat-tab-group [selectedIndex]="selectedIndex" (selectedTabChange)="onTabChange($event)">
+    <mat-tab *ngFor="let dayType of daytypeList$ | async; let i = index" [label]="dayType.name">
+        <form [formGroup]="daytypeForm" (ngSubmit)="onSubmit()">
+            <mat-form-field> <input matInput formControlName="name" /> </mat-form-field>
+            <period-list [periods]="selectedType.periods"></period-list>
+
+            <div style="margin-top: 15px;">
+                <button mat-raised-button color="primary" type="submit">Save new tab</button>
+                <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancel edits</button>
+            </div>
+        </form>
+    </mat-tab>
+</mat-tab-group>
