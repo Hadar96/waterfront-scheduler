@@ -4,6 +4,8 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Observable } from 'rxjs';
 import { DayType } from 'src/app/models/daytype';
 import { appStore } from 'src/app/services/store';
+import { ActRule } from '../activity-rules/activity-rules.component';
+import { Period } from 'src/app/models/period';
 
 @Component({
   selector: 'daytype-tabs',
@@ -23,17 +25,31 @@ export class DaytypeTabsComponent {
     this.selectedType = this.typeList[this.selectedIndex];
     this.daytypeForm = new FormGroup({
       name: new FormControl(),
-      periods: new FormControl(),
-      rules: new FormControl(),
     });
 
     this.updateFormWithSelected();
+  }
+
+  onRulesChange(updatedRules: ActRule[]) {
+    this.selectedType.actRules = updatedRules;
+    this.updateSelectedTypeInList();
+  }
+
+  onPeriodsChange(updatedPeriods: Period[]) {
+    this.selectedType.periods = updatedPeriods;
+    this.updateSelectedTypeInList();
   }
 
   onTabChange($event: MatTabChangeEvent) {
     this.selectedIndex = $event.index;
     this.selectedType = this.typeList[this.selectedIndex];
     this.updateFormWithSelected();
+  }
+
+  updateSelectedTypeInList() {
+    if (this.selectedType) {
+      this.typeList[this.selectedIndex] = this.selectedType;
+    }
   }
 
   updateFormWithSelected() {
@@ -71,16 +87,16 @@ export class DaytypeTabsComponent {
     this.updateFormWithSelected();
   }
 
-  onSubmit() {
+  saveTab() {
     this.selectedType.name = this.daytypeForm.value.name;
-    // this.selectedType.periods = this.daytypeForm.value.periods;
-    this.typeList.push(this.selectedType);
-
-    // Remove duplicates
-    this.typeList = this.typeList.filter(
-      (day, index, self) =>
-        index === self.findIndex((dt) => dt.name === day.name)
+    const existingType = this.typeList.some(
+      (dt) => dt.name === this.selectedType.name
     );
+    if (existingType) {
+      this.typeList[this.selectedIndex] = this.selectedType;
+    } else {
+      this.typeList.push(this.selectedType);
+    }
 
     // Update the app state
     appStore.updateState({

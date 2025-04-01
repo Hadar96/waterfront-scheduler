@@ -7,12 +7,13 @@
 
 <mat-tab-group [selectedIndex]="selectedIndex" (selectedTabChange)="onTabChange($event)">
     <mat-tab *ngFor="let dayType of daytypeList$ | async; let i = index" [label]="dayType.name">
-        <form [formGroup]="daytypeForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="daytypeForm">
             <mat-form-field> <input matInput formControlName="name" /> </mat-form-field>
-            <period-list [periods]="selectedType.periods"></period-list>
+            <period-list [periods]="selectedType.periods" (periodsChange)="onPeriodsChange($event)"></period-list>
+            <activity-rules [rules]="selectedType.actRules" (rulesChange)="onRulesChange($event)"></activity-rules>
 
             <div style="margin-top: 15px;">
-                <button mat-raised-button color="primary" type="submit">Save new tab</button>
+                <button mat-raised-button color="primary" type="button" (click)="saveTab()">Save tab</button>
                 <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancel edits</button>
             </div>
         </form>

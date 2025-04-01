@@ -1,4 +1,11 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Period } from 'src/app/models/period';
@@ -10,6 +17,8 @@ import { Period } from 'src/app/models/period';
 })
 export class PeriodListComponent implements OnChanges {
   @Input() periods: Period[] = [];
+  @Output() periodsChange = new EventEmitter<Period[]>();
+
   selected: Period;
   showForm: boolean = false;
   periodForm: FormGroup;
@@ -30,7 +39,7 @@ export class PeriodListComponent implements OnChanges {
     this.selected = this.periods[0];
   }
 
-  onPeriodChange(event: any) {
+  onPeriodSelected(event: any) {
     this.selected = event;
   }
 
@@ -58,6 +67,7 @@ export class PeriodListComponent implements OnChanges {
 
     this.showForm = false;
     this.selected = this.periods[0];
+    this.periodsChange.emit(this.periods); // Emit updated periods to parent
     this.updateFormWithSelected(); // Update the form with the new selected staff
   }
 
@@ -82,6 +92,7 @@ export class PeriodListComponent implements OnChanges {
       (act, index, self) => index === self.findIndex((a) => a.name === act.name)
     );
 
+    this.periodsChange.emit(this.periods); // Emit updated periods to parent
     this.showForm = false;
   }
 }
