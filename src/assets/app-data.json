@@ -48,7 +48,7 @@
           "locked": true
         }
       ],
-      "activities-rules": [
+      "actRules": [
         { "name": "Pool", "max": 10, "min": 6 },
         { "name": "Lake", "max": 10, "min": 6 },
         { "name": "HOFF", "max": 5, "min": 2 }
@@ -71,7 +71,7 @@
         { "start": "1400", "end": "1450", "name": "Chaluzim" },
         { "start": "1500", "end": "1600", "name": "K/Bolim" }
       ],
-      "activities-rules": [
+      "actRules": [
         { "name": "Pool", "max": 10, "min": 6 },
         { "name": "Lake", "max": 10, "min": 6 },
         { "name": "HOFF", "max": 5, "min": 2 }
@@ -91,7 +91,7 @@
           "locked": true
         }
       ],
-      "activities-rules": [
+      "actRules": [
         { "name": "Pool", "max": 10, "min": 5 },
         { "name": "Lake", "max": 0 },
         { "name": "HOFF", "max": 10, "min": 9 }

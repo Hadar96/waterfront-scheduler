@@ -13,7 +13,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { StaffListComponent } from './settings/staff-list/staff-list.component';
 import { ActionListComponent } from './settings/action-list/action-list.component';
 import { DaytypeTabsComponent } from './settings/daytype-tabs/daytype-tabs.component';
 import { PeriodListComponent } from './settings/period-list/period-list.component';
+import { ActivityRulesComponent } from './settings/activity-rules/activity-rules.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { PeriodListComponent } from './settings/period-list/period-list.componen
     StaffListComponent,
     ActionListComponent,
     DaytypeTabsComponent,
-    PeriodListComponent
+    PeriodListComponent,
+    ActivityRulesComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,8 +53,9 @@ import { PeriodListComponent } from './settings/period-list/period-list.componen
     MatSlideToggleModule,
     MatButtonToggleModule,
     MatCheckboxModule,
+    MatAutocompleteModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,0 +1,39 @@
+<p *ngFor="let rule of rules">
+    <input type="text" matInput [value]="rule.name" [matAutocomplete]="auto" #ruleActName>
+    <span>At least
+        <input matInput type="number" [value]="rule.min" #ruleMin />
+    </span>
+    <span>At most
+        <input matInput type="number" [value]="rule.max" #ruleMax />
+    </span>
+    <span>
+        <button mat-icon-button color="accent" (click)="saveRule({ name: ruleActName.value, 
+                min: (ruleMin.value == '') ? +ruleMin.value : undefined, 
+                max : (ruleMax.value == '') ? +ruleMax.value : undefined})" style="border: 1px solid;">
+            <mat-icon>check</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteRule(rule.name)" style="border: 1px solid;">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </span>
+</p>
+
+<p>New rule:
+    <br>
+    <input type="text" matInput [matAutocomplete]="auto" #newName>
+    <span>At least <input matInput type="number" #newMin /> </span>
+    <span>At most <input matInput type="number" #newMax /> </span>
+    <span>
+        <button mat-icon-button color="accent" (click)="saveRule({ name: newName.value, 
+                min: (newMin.value == '') ? +newMin.value : undefined, 
+                max : (newMax.value == '') ? +newMax.value : undefined})" style="border: 1px solid;">
+            <mat-icon>check</mat-icon>
+        </button>
+    </span>
+</p>
+
+<mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let act of (activities$ | async)" [value]="act.name">
+        {{ act.name }}
+    </mat-option>
+</mat-autocomplete>

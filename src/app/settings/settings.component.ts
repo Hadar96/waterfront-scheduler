@@ -7,15 +7,9 @@ import { DbService } from '../services/db.service';
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-  settings: any;
-
   constructor(private dbService: DbService) {}
 
-  ngOnInit(): void {
-    this.dbService.getData().subscribe(data => {
-      this.settings = data.settings;
-    });
-  }
+  ngOnInit(): void {}
 
   save() {}
 }
