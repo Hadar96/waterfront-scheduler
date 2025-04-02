@@ -3,12 +3,20 @@ export class Activity {
   private _color: string;
   private _min?: number;
   private _max?: number;
+  private _available: boolean;
 
-  constructor(name: string, color: string = "#000000", min?: number, max?: number) {
+  constructor(
+    name: string,
+    color: string = '#000000',
+    min?: number,
+    max?: number,
+    available: boolean = true
+  ) {
     this._name = name;
     this._color = color;
     this._min = min;
     this._max = max;
+    this._available = available;
   }
 
   get name(): string {
@@ -41,5 +49,13 @@ export class Activity {
 
   set max(value: number) {
     this._max = value;
+  }
+
+  get available(): boolean {
+    return this._available;
+  }
+
+  set available(value: boolean) {
+    this._available = value;
   }
 }

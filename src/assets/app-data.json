@@ -101,11 +101,11 @@
   "activities": [
     {
       "name": "Pool",
-      "color": "#0000ff"
+      "color": "#000080"
     },
     {
       "name": "Lake",
-      "color": "#00ff00"
+      "color": "#006400"
     },
     {
       "name": "HOFF",
@@ -127,81 +127,161 @@
   "lifeguards": [
     {
       "name": "Hadar",
-      "schedule": [],
+      "schedule": {
+        "Chaverim": "Lake",
+        "Ofarim": "HOFF",
+        "Tzofim": "Pool",
+        "Chaluzim": "Lake",
+        "K/Bonim": "HOFF",
+        "Breira": "Pool",
+        "Olim": "Lake"
+      },
       "daycampCount": 0,
       "partyCount": 0,
       "preferPool": true,
       "hoffCo": "Aviv",
       "locked": false
-    },
-    {
+        },
+        {
       "name": "Aviv",
-      "schedule": [],
+      "schedule": {
+        "Chaverim": "HOFF",
+        "Ofarim": "Pool",
+        "Tzofim": "Lake",
+        "Chaluzim": "Pool",
+        "K/Bonim": "Lake",
+        "Breira": "HOFF",
+        "Olim": "Pool"
+      },
       "daycampCount": 0,
       "partyCount": 0,
       "hoffCo": "Hadar",
       "locked": false
-    },
-    {
+        },
+        {
       "name": "Olaf",
-      "schedule": [],
+      "schedule": {
+        "Chaverim": "Pool",
+        "Ofarim": "Lake",
+        "Tzofim": "HOFF",
+        "Chaluzim": "Pool",
+        "K/Bonim": "Lake",
+        "Breira": "Pool",
+        "Olim": "HOFF"
+      },
       "daycampCount": 0,
       "partyCount": 0,
       "preferPool": false,
       "locked": false
-    },
-    {
+        },
+        {
       "name": "Maya",
-      "schedule": [],
+      "schedule": {
+        "Chaverim": "Lake",
+        "Ofarim": "Pool",
+        "Tzofim": "Lake",
+        "Chaluzim": "HOFF",
+        "K/Bonim": "Pool",
+        "Breira": "Lake",
+        "Olim": "Pool"
+      },
       "daycampCount": 0,
       "partyCount": 0,
       "preferPool": true,
       "hoffCo": "Noa",
       "locked": false
-    },
-    {
+        },
+        {
       "name": "Liam",
-      "schedule": [],
+      "schedule": {
+        "Chaverim": "HOFF",
+        "Ofarim": "Lake",
+        "Tzofim": "Pool",
+        "Chaluzim": "Lake",
+        "K/Bonim": "HOFF",
+        "Breira": "Pool",
+        "Olim": "Lake"
+      },
       "daycampCount": 0,
       "partyCount": 0,
       "preferPool": false,
       "locked": false
-    },
-    {
+        },
+        {
       "name": "Noa",
-      "schedule": [],
+      "schedule": {
+        "Chaverim": "Pool",
+        "Ofarim": "HOFF",
+        "Tzofim": "Lake",
+        "Chaluzim": "Pool",
+        "K/Bonim": "Lake",
+        "Breira": "HOFF",
+        "Olim": "Pool"
+      },
       "daycampCount": 0,
       "partyCount": 0,
       "preferPool": true,
       "hoffCo": "Maya",
       "locked": false
-    },
-    {
+        },
+        {
       "name": "Ethan",
-      "schedule": [],
+      "schedule": {
+        "Chaverim": "Lake",
+        "Ofarim": "Pool",
+        "Tzofim": "HOFF",
+        "Chaluzim": "Lake",
+        "K/Bonim": "Pool",
+        "Breira": "Lake",
+        "Olim": "HOFF"
+      },
       "daycampCount": 0,
       "partyCount": 0,
       "locked": false
-    },
-    {
+        },
+        {
       "name": "Sophia",
-      "schedule": [],
+      "schedule": {
+        "Chaverim": "HOFF",
+        "Ofarim": "Lake",
+        "Tzofim": "Pool",
+        "Chaluzim": "Lake",
+        "K/Bonim": "HOFF",
+        "Breira": "Pool",
+        "Olim": "Lake"
+      },
       "daycampCount": 0,
       "partyCount": 0,
       "hoffCo": "Daniel",
       "locked": false
-    },
-    {
+        },
+        {
       "name": "Daniel",
-      "schedule": [],
+      "schedule": {
+        "Chaverim": "Pool",
+        "Ofarim": "HOFF",
+        "Tzofim": "Lake",
+        "Chaluzim": "Pool",
+        "K/Bonim": "Lake",
+        "Breira": "HOFF",
+        "Olim": "Pool"
+      },
       "daycampCount": 0,
       "partyCount": 0,
       "preferPool": false,
       "locked": false
-    },
-    {
+        },
+        {
       "name": "Emma",
-      "schedule": [],
+      "schedule": {
+        "Chaverim": "Lake",
+        "Ofarim": "Pool",
+        "Tzofim": "HOFF",
+        "Chaluzim": "Lake",
+        "K/Bonim": "Pool",
+        "Breira": "Lake",
+        "Olim": "HOFF"
+      },
       "daycampCount": 0,
       "partyCount": 0,
       "hoffCo": "Sophia",

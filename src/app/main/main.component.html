@@ -1,4 +1,46 @@
 <button mat-icon-button color="primary" [routerLink]="'/settings'">
     <mat-icon>settings</mat-icon>
 </button>
-<p>main works!</p>
+
+<mat-form-field appearance="outline">
+    <mat-label>Day Type</mat-label>
+    <mat-select [(value)]="currDayType" (selectionChange)="onDayTypeChange($event.value)" style="color: black;">
+        <mat-option *ngFor="let day of dayTypes" [value]="day">
+            {{ day.name }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<div>
+    <tr>
+        <td *ngFor="let activity of activities" [ngStyle]="{'opacity': activity.available ? '1' : '0.5',
+            'border': '1px solid black', 'cursor': 'pointer',
+            'background-color': activity.color,
+            'text-decoration': activity.available ? 'none' : 'line-through'
+            }" (click)="changeActStatus(activity)">
+            {{ activity.name }}
+        </td>
+    </tr>
+</div> <br>
+
+<table mat-table style="text-align: center; width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th style="border: 1px solid black;"></th>
+            <th *ngFor="let lifeguard of staffList" style="border: 1px solid black;">{{ lifeguard.name }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let period of currDayType.periods">
+            <td style="border: 1px solid black;">
+                {{ period.name }}
+                <br> ({{ period.start }}-{{ period.end }})
+            </td>
+            <td *ngFor="let lifeguard of staffList"
+                [style.background-color]="getActivityColor(lifeguard.schedule[period.name])"
+                style="border: 1px solid black;">
+                {{ lifeguard.schedule[period.name] }}
+            </td>
+        </tr>
+    </tbody>
+</table>
