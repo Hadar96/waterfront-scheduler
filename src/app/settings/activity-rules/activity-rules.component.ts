@@ -42,7 +42,9 @@ export class ActivityRulesComponent {
 
     // Remove duplicates or invalid rules
     this.rules = this.rules.filter(
-      (act, index, self) => index === self.findIndex((a) => a.name === act.name)
+      (act, index, self) =>
+        index === self.findIndex((a) => a.name === act.name) &&
+        this.activities.some((activity) => activity.name === act.name)
     );
 
     this.rulesChange.emit(this.rules); // Emit updated rules to parent

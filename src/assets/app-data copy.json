@@ -12,14 +12,15 @@
           "start": "1200",
           "end": "1250",
           "name": "Lunch",
-          "ignore": true
+          "locked": true,
+          "workingPeriod": false
         },
         {
           "id": 5,
           "start": "1300",
           "end": "1330",
           "name": "Day camp",
-          "ignore": true
+          "locked": true
         },
         { "id": 6, "start": "1400", "end": "1450", "name": "Chaluzim" },
         { "id": 7, "start": "1500", "end": "1550", "name": "K/Bonim" },
@@ -36,17 +37,18 @@
           "start": "1800",
           "end": "1850",
           "name": "Dinner",
-          "ignore": true
+          "locked": true,
+          "workingPeriod": false
         },
         {
           "id": 11,
           "start": "1900",
           "end": "1950",
           "name": "Pool party",
-          "ignore": true
+          "locked": true
         }
       ],
-      "activities-rules": [
+      "actRules": [
         { "name": "Pool", "max": 10, "min": 6 },
         { "name": "Lake", "max": 10, "min": 6 },
         { "name": "HOFF", "max": 5, "min": 2 }
@@ -58,12 +60,18 @@
         { "start": "0930", "end": "1020", "name": "Chaverim" },
         { "start": "1030", "end": "1120", "name": "Ofarim" },
         { "start": "1130", "end": "1220", "name": "Tzofim" },
-        { "start": "1230", "name": "Lunch", "ignore": true },
+        {
+          "start": "1230",
+          "end": "1330",
+          "name": "Lunch",
+          "locked": true,
+          "workingPeriod": false
+        },
         { "start": "1300", "end": "1330", "name": "Day camp" },
         { "start": "1400", "end": "1450", "name": "Chaluzim" },
         { "start": "1500", "end": "1600", "name": "K/Bolim" }
       ],
-      "activities-rules": [
+      "actRules": [
         { "name": "Pool", "max": 10, "min": 6 },
         { "name": "Lake", "max": 10, "min": 6 },
         { "name": "HOFF", "max": 5, "min": 2 }
@@ -80,10 +88,10 @@
           "start": "1900",
           "end": "1950",
           "name": "Pool party",
-          "ignore": true
+          "locked": true
         }
       ],
-      "activities-rules": [
+      "actRules": [
         { "name": "Pool", "max": 10, "min": 5 },
         { "name": "Lake", "max": 0 },
         { "name": "HOFF", "max": 10, "min": 9 }
@@ -93,27 +101,27 @@
   "activities": [
     {
       "name": "Pool",
-      "color": "#00f"
+      "color": "#0000ff"
     },
     {
       "name": "Lake",
-      "color": "#0f0"
+      "color": "#00ff00"
     },
     {
       "name": "HOFF",
-      "color": "yellow"
+      "color": "#ffff00"
     },
     {
       "name": "DOFF",
-      "color": "#orange"
+      "color": "#ffa500"
     },
     {
       "name": "Bunk time",
-      "color": "#f00"
+      "color": "#ff0000"
     },
     {
       "name": "Teaching",
-      "color": "cyan"
+      "color": "#00ffff"
     }
   ],
   "lifeguards": [
