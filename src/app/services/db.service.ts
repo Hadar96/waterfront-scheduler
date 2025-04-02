@@ -37,6 +37,14 @@ export class DbService {
     return null;
   }
 
+  cleanDataFromLocalStorage() {
+    try {
+      localStorage.removeItem(this.localStorageKey);
+    } catch (error) {
+      console.error('Error cleaning local storage:', error);
+    }
+  }
+
   // Method to save data to the database file
   saveDataToLocalStorage(data: any): boolean {
     try {

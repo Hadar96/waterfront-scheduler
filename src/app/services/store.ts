@@ -8,14 +8,14 @@ export interface AppState {
   lifeguards: Lifeguard[];
   activities: Activity[];
   daytypes: DayType[];
-  currentDayType: DayType | null;
+  currentDayType: DayType;
 }
 
 const initialState: AppState = {
   lifeguards: [],
   activities: [],
   daytypes: [],
-  currentDayType: null,
+  currentDayType: {} as DayType,
 };
 
 export class AppStore {
@@ -34,8 +34,6 @@ export class AppStore {
   // Update the state
   updateState(partialState: Partial<AppState>) {
     const currentState = this.state$.getValue();
-    // console.log('Current State:', currentState);
-    // console.log('Partial State:', partialState);
     this.state$.next({ ...currentState, ...partialState });
   }
 

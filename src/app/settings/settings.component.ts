@@ -21,6 +21,10 @@ export class SettingsComponent implements OnInit {
     }
   }
 
+  restoreData() {
+    this.dbService.cleanDataFromLocalStorage();
+  }
+
   private cleanData(data: any): any {
     if (Array.isArray(data)) {
       return data.map((item) => this.cleanData(item));
