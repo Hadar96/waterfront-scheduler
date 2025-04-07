@@ -7,7 +7,7 @@ export class Activity {
 
   constructor(
     name: string,
-    color: string = '#000000',
+    color: string = '#ffffff',
     min?: number,
     max?: number,
     available: boolean = true
@@ -59,3 +59,5 @@ export class Activity {
     this._available = value;
   }
 }
+
+export const DEFAULT_ACTIVITY = new Activity('/', '#ffffff');
