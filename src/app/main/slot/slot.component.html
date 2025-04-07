@@ -1,0 +1,13 @@
+<div [style.background-color]="activity.color" (click)="openActMenu = !openActMenu" (focusout)="openActMenu = false"
+    tabindex="0">
+    {{ period.name == "Day camp" ? lifeguard.daycampCount: activity.name }}
+    <div *ngIf="openActMenu" style="position: fixed">
+        <tr>
+            <td *ngFor="let activity of activities" (click)="changeActivity(activity, $event)"
+                style="border: 1px solid black; cursor: pointer; width: 10px;"
+                [ngStyle]="{'background-color': activity.color }">
+                {{ activity.name[0] }}
+            </td>
+        </tr>
+    </div>
+</div>

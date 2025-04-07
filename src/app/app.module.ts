@@ -25,6 +25,7 @@ import { ActionListComponent } from './settings/action-list/action-list.componen
 import { DaytypeTabsComponent } from './settings/daytype-tabs/daytype-tabs.component';
 import { PeriodListComponent } from './settings/period-list/period-list.component';
 import { ActivityRulesComponent } from './settings/activity-rules/activity-rules.component';
+import { SlotComponent } from './main/slot/slot.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ActivityRulesComponent } from './settings/activity-rules/activity-rules
     DaytypeTabsComponent,
     PeriodListComponent,
     ActivityRulesComponent,
+    SlotComponent,
   ],
   imports: [
     BrowserModule,
