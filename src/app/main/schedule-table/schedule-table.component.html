@@ -1,0 +1,19 @@
+<table mat-table style="text-align: center; width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th style="border: 1px solid black;"></th>
+            <th *ngFor="let lifeguard of staffList" style="border: 1px solid black;">{{ lifeguard.name }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let period of currDayType.periods">
+            <td style="border: 1px solid black;">
+                {{ period.name }}
+                <br> ({{ period.start }}-{{ period.end }})
+            </td>
+            <td *ngFor="let lifeguard of staffList" style="border: 1px solid black;">
+                <slot [lifeguard]="lifeguard" [period]="period"></slot>
+            </td>
+        </tr>
+    </tbody>
+</table>

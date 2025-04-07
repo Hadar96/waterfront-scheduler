@@ -1,31 +1,30 @@
 import { Component } from '@angular/core';
-import { appStore } from '../services/store';
-import { DayType } from '../models/daytype';
-import { Lifeguard } from '../models/lifeguard';
-import { Period } from '../models/period';
-import { Activity } from '../models/activity';
+import { Activity } from 'src/app/models/activity';
+import { DayType } from 'src/app/models/daytype';
+import { Lifeguard } from 'src/app/models/lifeguard';
+import { appStore } from 'src/app/services/store';
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss'],
+  selector: 'schedule-table',
+  templateUrl: './schedule-table.component.html',
+  styleUrls: ['./schedule-table.component.scss'],
 })
-export class MainComponent {
+export class ScheduleTableComponent {
   appData$: any;
+  staffList: Lifeguard[];
   activities: Activity[];
   dayTypes: DayType[];
   currDayType: DayType;
 
   constructor() {
     this.appData$ = appStore.getState();
+    this.staffList = appStore.getSnapshot().lifeguards;
     this.activities = appStore.getSnapshot().activities;
     this.dayTypes = appStore.getSnapshot().daytypes;
     this.currDayType = appStore.getSnapshot().currentDayType;
-  }
 
-  onDayTypeChange(selected: DayType): void {
-    appStore.updateState({
-      currentDayType: selected,
+    appStore.getCurrentDayType().subscribe((dayType) => {
+      this.currDayType = dayType;
     });
   }
 

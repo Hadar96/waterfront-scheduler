@@ -26,6 +26,7 @@ import { DaytypeTabsComponent } from './settings/daytype-tabs/daytype-tabs.compo
 import { PeriodListComponent } from './settings/period-list/period-list.component';
 import { ActivityRulesComponent } from './settings/activity-rules/activity-rules.component';
 import { SlotComponent } from './main/slot/slot.component';
+import { ScheduleTableComponent } from './main/schedule-table/schedule-table.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { SlotComponent } from './main/slot/slot.component';
     PeriodListComponent,
     ActivityRulesComponent,
     SlotComponent,
+    ScheduleTableComponent,
   ],
   imports: [
     BrowserModule,
