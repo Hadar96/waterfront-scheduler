@@ -2,7 +2,9 @@
     <thead>
         <tr>
             <th style="border: 1px solid black;"></th>
-            <th *ngFor="let lifeguard of staffList" style="border: 1px solid black;">{{ lifeguard.name }}</th>
+            <th *ngFor="let lifeguard of staffList" style="border: 1px solid black;">
+                <slot [lifeguard]="lifeguard" [type]="SlotTypes.HEAD"></slot>
+            </th>
         </tr>
     </thead>
     <tbody>

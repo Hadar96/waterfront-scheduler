@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { Activity } from 'src/app/models/activity';
+import { Activity, DEFAULT_ACTIVITY } from 'src/app/models/activity';
 import { DayType } from 'src/app/models/daytype';
 import { Lifeguard } from 'src/app/models/lifeguard';
 import { appStore } from 'src/app/services/store';
+import { SlotType } from '../slot/slot.component';
 
 @Component({
   selector: 'schedule-table',
@@ -15,11 +16,14 @@ export class ScheduleTableComponent {
   activities: Activity[];
   dayTypes: DayType[];
   currDayType: DayType;
+  SlotTypes = SlotType;
 
   constructor() {
     this.appData$ = appStore.getState();
     this.staffList = appStore.getSnapshot().lifeguards;
-    this.activities = appStore.getSnapshot().activities;
+    this.activities = appStore
+      .getSnapshot()
+      .activities.concat([DEFAULT_ACTIVITY]);
     this.dayTypes = appStore.getSnapshot().daytypes;
     this.currDayType = appStore.getSnapshot().currentDayType;
 
@@ -33,17 +37,5 @@ export class ScheduleTableComponent {
       (activity) => activity.name === actName
     );
     return activity ? activity.color : 'white';
-  }
-
-  changeActStatus(act: Activity) {
-    const activity = this.activities.find(
-      (activity) => activity.name === act.name
-    );
-    if (activity) {
-      activity.available = !activity.available;
-      appStore.updateState({
-        activities: this.activities,
-      });
-    }
   }
 }

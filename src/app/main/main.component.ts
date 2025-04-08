@@ -29,13 +29,6 @@ export class MainComponent {
     });
   }
 
-  getActivityColor(actName: string) {
-    const activity = this.activities.find(
-      (activity) => activity.name === actName
-    );
-    return activity ? activity.color : 'white';
-  }
-
   changeActStatus(act: Activity) {
     const activity = this.activities.find(
       (activity) => activity.name === act.name

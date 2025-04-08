@@ -1,13 +1,36 @@
-<div [style.background-color]="activity.color" (click)="openActMenu = !openActMenu" (focusout)="openActMenu = false"
-    tabindex="0">
-    {{ period.name == "Day camp" ? lifeguard.daycampCount: activity.name }}
-    <div *ngIf="openActMenu" style="position: fixed">
-        <tr>
-            <td *ngFor="let activity of activities" (click)="changeActivity(activity, $event)"
-                style="border: 1px solid black; cursor: pointer; width: 10px;"
-                [ngStyle]="{'background-color': activity.color }">
-                {{ activity.name[0] }}
-            </td>
-        </tr>
+<div *ngIf="type == SlotTypes.ACTIVITY">
+    <mat-icon *ngIf="lifeguard.schedule[period.name]?.locked" style="font-size: small;">lock</mat-icon>
+    <div [style.background-color]="activity.color" (click)="openActMenu = !openActMenu" (focusout)="openActMenu = false"
+        tabindex="0">
+        {{ period.name == "Day camp" ? lifeguard.daycampCount: activity.name }}
+        <div *ngIf="openActMenu" style="position: fixed">
+            <tr>
+                <td *ngFor="let activity of activities" (click)="changeActivity(activity, $event)"
+                    style="border: 1px solid black; cursor: pointer; width: 10px;"
+                    [ngStyle]="{'background-color': activity.color }">
+                    {{ activity.name[0] }}
+                </td>
+            </tr>
+            <!-- <tr>
+                <mat-checkbox [checked]="lifeguard.schedule[period.name]?.locked ?? false"
+                    (change)="lockSlot($event)">locked</mat-checkbox>
+            </tr> -->
+        </div>
+    </div>
+</div>
+
+<div *ngIf="type == SlotTypes.HEAD">
+    <mat-icon *ngIf="lifeguard.locked" style="font-size: small;">lock</mat-icon>
+    <div (click)="openActMenu = !openActMenu" (focusout)="openActMenu = false" tabindex="0">
+        {{ lifeguard.name }}
+        <div *ngIf="openActMenu" style="position: fixed">
+            <tr>
+                <td *ngFor="let activity of activities" (click)="setLifeguardDay(activity, lifeguard, $event)"
+                    style="border: 1px solid black; cursor: pointer; width: 10px;"
+                    [ngStyle]="{'background-color': activity.color }">
+                    {{ activity.name[0] }}
+                </td>
+            </tr>
+        </div>
     </div>
 </div>
