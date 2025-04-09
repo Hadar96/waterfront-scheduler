@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { appStore } from '../services/store';
 import { DayType } from '../models/daytype';
-import { Lifeguard } from '../models/lifeguard';
-import { Period } from '../models/period';
 import { Activity } from '../models/activity';
+import { DbService } from '../services/db.service';
+import { UtilsService } from '../services/utils.service';
 
 @Component({
   selector: 'app-main',
@@ -16,7 +16,7 @@ export class MainComponent {
   dayTypes: DayType[];
   currDayType: DayType;
 
-  constructor() {
+  constructor(private dbService: DbService, private utils: UtilsService) {
     this.appData$ = appStore.getState();
     this.activities = appStore.getSnapshot().activities;
     this.dayTypes = appStore.getSnapshot().daytypes;
@@ -39,5 +39,21 @@ export class MainComponent {
         activities: this.activities,
       });
     }
+  }
+
+  saveAllChanges() {
+    if (this.dbService.saveDataToLocalStorage(appStore.getSnapshot())) {
+      console.log('Data saved successfully to local storage.');
+    } else {
+      console.error('Error saving data to local storage.');
+    }
+  }
+
+  generateSchedule() {
+    this.utils.generateSchedule();
+  }
+
+  exportExcel() {
+    throw new Error('Method not implemented.');
   }
 }

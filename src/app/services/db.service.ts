@@ -37,7 +37,7 @@ export class DbService {
     return null;
   }
 
-  cleanDataFromLocalStorage() {
+  clearDataFromLocalStorage() {
     try {
       localStorage.removeItem(this.localStorageKey);
     } catch (error) {
@@ -47,12 +47,27 @@ export class DbService {
 
   // Method to save data to the database file
   saveDataToLocalStorage(data: any): boolean {
+    const cData = this.cleanData(data); // Clean the data before saving
     try {
-      localStorage.setItem(this.localStorageKey, JSON.stringify(data));
+      localStorage.setItem(this.localStorageKey, JSON.stringify(cData));
       return true;
     } catch (error) {
       console.error('Error saving data to local storage:', error);
       return false;
     }
+  }
+
+  private cleanData(data: any): any {
+    if (Array.isArray(data)) {
+      return data.map((item) => this.cleanData(item));
+    } else if (typeof data === 'object' && data !== null) {
+      return Object.keys(data).reduce((acc, key) => {
+        const newKey = key.replace(/_/g, ''); // Remove underscores from the key
+        acc[newKey] = this.cleanData(data[key]); // Recursively clean the value
+        return acc;
+      }, {} as any);
+    }
+    // If the data is a primitive value, return it as is
+    return data;
   }
 }
