@@ -19,8 +19,8 @@ export class SlotComponent implements OnInit {
   @Input() type: SlotType = SlotType.ACTIVITY;
   activity: Activity = DEFAULT_ACTIVITY;
   activities: Activity[] = appStore
-  .getSnapshot()
-  .activities.concat([DEFAULT_ACTIVITY]);
+    .getSnapshot()
+    .activities.concat([DEFAULT_ACTIVITY]);
   staffList: Lifeguard[] = appStore.getSnapshot().lifeguards;
   openActMenu: boolean = false;
   SlotTypes = SlotType;
@@ -60,7 +60,7 @@ export class SlotComponent implements OnInit {
       lg.schedule[period].activity = act.name;
     });
     const index = this.staffList.findIndex((l) => l.name === lg.name);
-    if (index !== -1) this.staffList[index] = new Lifeguard(lg);
+    if (index !== -1) this.staffList[index] = new Lifeguard(lg); // Create a new instance to trigger change detection
 
     appStore.updateState({ lifeguards: this.staffList });
     this.openActMenu = false;

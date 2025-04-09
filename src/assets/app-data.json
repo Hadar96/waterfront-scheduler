@@ -51,7 +51,7 @@
       "actRules": [
         { "name": "Pool", "max": 10, "min": 6 },
         { "name": "Lake", "max": 10, "min": 6 },
-        { "name": "HOFF", "max": 5, "min": 2 }
+        { "name": "HOFF", "max": 2, "min": 0 }
       ]
     },
     {
@@ -128,12 +128,11 @@
     {
       "name": "Hadar",
       "schedule": {
-        "Chaverim": { "activity": "Lake", "locked": true },
         "Ofarim": { "activity": "HOFF", "locked": false },
         "Tzofim": { "activity": "Pool", "locked": false },
-        "Chaluzim": { "activity": "Lake", "locked": false },
-        "K/Bonim": { "activity": "HOFF", "locked": false },
-        "Breira": { "activity": "Pool", "locked": false },
+        "Chaluzim": { "activity": "Lake", "locked": true },
+        "K/Bonim": { "activity": "HOFF", "locked": true },
+        "Breira": { "activity": "Pool", "locked": true },
         "Olim": { "activity": "Lake", "locked": false }
       },
       "daycampCount": 0,
@@ -156,7 +155,7 @@
       "daycampCount": 0,
       "partyCount": 0,
       "hoffCo": "Hadar",
-      "locked": false
+      "locked": true
     },
     {
       "name": "Olaf",
