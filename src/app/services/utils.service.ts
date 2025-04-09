@@ -60,19 +60,26 @@ export class UtilsService {
     this.periods.forEach((period) => {
       if (period.locked) return;
 
-      let hoffCount = 0;
+      let periodicalActivityCount = this.resetActivityCount();
+      this.staffList.forEach((staff) => {
+        if (staff.schedule) {
+          const periodAssign = staff.schedule[period.name];
+          if (periodAssign.locked || staff.locked) periodicalActivityCount[periodAssign.activity]++;
+        }
+      });
       this.staffList.forEach((staff) => {
         if (staff.locked || staff.schedule[period.name]?.locked) return;
 
-        const allowHoff = !hasHoff[staff.name] && hoffCount < rulesCount['HOFF'].max;
+        const allowHoff =
+          !hasHoff[staff.name] && periodicalActivityCount['HOFF'] < rulesCount['HOFF'].max;
         const activity = this.randomizeActivity(allowHoff);
         staff.schedule[period.name] = staff.schedule[period.name]
           ? { ...staff.schedule[period.name], activity: activity.name }
           : { activity: activity.name, locked: false };
+        periodicalActivityCount[activity.name]++;
 
         if (activity.name === 'HOFF') {
           hasHoff[staff.name] = true;
-          hoffCount++;
         }
       });
     });
@@ -88,5 +95,12 @@ export class UtilsService {
 
     const randomIndex = Math.floor(Math.random() * allowedActivities.length);
     return allowedActivities[randomIndex];
+  }
+
+  private resetActivityCount(): { [key: string]: number } {
+    return this.activities.reduce((acc, activity) => {
+      acc[activity.name] = 0;
+      return acc;
+    }, {} as { [key: string]: number });
   }
 }

@@ -8,8 +8,8 @@
     </span>
     <span>
         <button mat-icon-button color="accent" (click)="saveRule({ name: ruleActName.value, 
-                min: (ruleMin.value == '') ? +ruleMin.value : undefined, 
-                max : (ruleMax.value == '') ? +ruleMax.value : undefined})" style="border: 1px solid;">
+                min: (ruleMin.value !== '') ? +ruleMin.value : undefined, 
+                max : (ruleMax.value !== '') ? +ruleMax.value : undefined})" style="border: 1px solid;">
             <mat-icon>check</mat-icon>
         </button>
         <button mat-icon-button color="warn" (click)="deleteRule(rule.name)" style="border: 1px solid;">
@@ -25,8 +25,8 @@
     <span>At most <input matInput type="number" #newMax /> </span>
     <span>
         <button mat-icon-button color="accent" (click)="saveRule({ name: newName.value, 
-                min: (newMin.value == '') ? +newMin.value : undefined, 
-                max : (newMax.value == '') ? +newMax.value : undefined})" style="border: 1px solid;">
+                min: (newMin.value !== '') ? +newMin.value : undefined, 
+                max : (newMax.value !== '') ? +newMax.value : undefined})" style="border: 1px solid;">
             <mat-icon>check</mat-icon>
         </button>
     </span>
