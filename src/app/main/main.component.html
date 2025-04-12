@@ -17,6 +17,7 @@
 <schedule-table></schedule-table>
 
 <br>
+<div class="footer">
 <mat-form-field appearance="outline">
     <mat-label>Day Type</mat-label>
     <mat-select [(value)]="currDayType" (selectionChange)="onDayTypeChange($event.value)" style="color: black;">
@@ -26,12 +27,17 @@
     </mat-select>
 </mat-form-field>
 
-<button mat-icon-button color="primary" (click)="exportExcel()">
-    <mat-icon>file_open</mat-icon>
+    <button mat-icon-button style="color:rgb(85, 226, 85)" (click)="exportExcel()">
+        <i class="fas fa-file-excel"></i>
+    </button>
+    <button mat-icon-button style="color: gold;" (click)="saveAllChanges()">
+        <i class="fas fa-save"></i>
 </button>
-<button mat-icon-button color="primary" (click)="saveAllChanges()">
-    <mat-icon>save</mat-icon>
+    <button mat-icon-button style="color: lightcoral;" (click)="generateSchedule()">
+        <i class="fas fa-play-circle"></i>
 </button>
-<button mat-icon-button color="primary" (click)="generateSchedule()">
-    <mat-icon>play_circle</mat-icon>
+    <button mat-icon-button (click)="lockAll()">
+        <i *ngIf="!isAllLocked" class="fas fa-table-cells-row-lock"></i>
+        <i *ngIf="isAllLocked" class="fas fa-table-cells-row-unlock"></i>
 </button>
+</div>

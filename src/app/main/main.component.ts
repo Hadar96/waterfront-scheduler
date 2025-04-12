@@ -15,6 +15,7 @@ export class MainComponent {
   activities: Activity[];
   dayTypes: DayType[];
   currDayType: DayType;
+  isAllLocked: boolean = false;
 
   constructor(private dbService: DbService, private utils: UtilsService) {
     this.appData$ = appStore.getState();
@@ -51,6 +52,13 @@ export class MainComponent {
 
   generateSchedule() {
     this.utils.generateSchedule();
+  }
+
+  lockAll() {
+    this.isAllLocked = !this.isAllLocked;
+    const staff = appStore.getSnapshot().lifeguards;
+    staff.forEach((lg) => (lg.locked = this.isAllLocked));
+    appStore.updateState({ lifeguards: staff });
   }
 
   exportExcel() {
