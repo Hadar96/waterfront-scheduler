@@ -64,7 +64,7 @@ export class UtilsService {
       this.staffList.forEach((staff) => {
         if (staff.schedule) {
           const periodAssign = staff.schedule[period.name];
-          if (periodAssign.locked || staff.locked) periodicalActivityCount[periodAssign.activity]++;
+          if (periodAssign?.locked || staff.locked) periodicalActivityCount[periodAssign.activity]++;
         }
       });
       this.staffList.forEach((staff) => {

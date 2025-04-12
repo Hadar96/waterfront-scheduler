@@ -38,7 +38,16 @@ export class SlotComponent implements OnInit {
   changeActivity(activity: Activity, event: MouseEvent) {
     event.stopPropagation(); // Prevent the click event from propagating to the parent
     this.activity = activity;
-    this.lifeguard.schedule[this.period.name].activity = activity.name;
+    // this.lifeguard.schedule[this.period.name].activity = activity.name;
+
+    const schedule = this.lifeguard.schedule[this.period.name];
+    if (schedule)
+      this.lifeguard.schedule[this.period.name].activity = activity.name;
+    else
+      this.lifeguard.schedule[this.period.name] = {
+        activity: activity.name,
+        locked: false,
+      };
 
     this.updateState();
     this.openActMenu = false; // Close the menu after selecting an activity
