@@ -60,4 +60,4 @@ export class Activity {
   }
 }
 
-export const DEFAULT_ACTIVITY = new Activity('/', '#ffffff');
+export const DEFAULT_ACTIVITY = new Activity('/', '#ffffff00');

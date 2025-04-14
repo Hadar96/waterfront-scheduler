@@ -1,0 +1,26 @@
+table {
+    width: 99%;
+    margin: auto;
+    table-layout: fixed;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th,
+td {
+    border: solid silver 1px;
+}
+
+.lg-name {
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.period-name {
+    /*width: 5%;*/
+}
+
+.slot {
+    /*  display: table-cell;*/
+    height: 100%;
+}

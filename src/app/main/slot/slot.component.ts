@@ -23,7 +23,10 @@ export class SlotComponent implements OnInit {
     .activities.concat([DEFAULT_ACTIVITY]);
   staffList: Lifeguard[] = appStore.getSnapshot().lifeguards;
   openActMenu: boolean = false;
+  isLocked: boolean = false;
+  isDisabled: boolean = false;
   SlotTypes = SlotType;
+  DEFAULT_ACTIVITY = DEFAULT_ACTIVITY;
 
   constructor() {}
 
@@ -32,51 +35,59 @@ export class SlotComponent implements OnInit {
       this.activities.find(
         (a) => a.name === this.lifeguard.schedule[this.period.name]?.activity
       ) ?? DEFAULT_ACTIVITY;
+
+    this.setLocked();
+    this.isDisabled =
+      this.type == SlotType.ACTIVITY && !this.period.workingPeriod;
   }
 
-  //#region head type methods
   changeActivity(activity: Activity, event: MouseEvent) {
     event.stopPropagation(); // Prevent the click event from propagating to the parent
     this.activity = activity;
-    // this.lifeguard.schedule[this.period.name].activity = activity.name;
 
-    const schedule = this.lifeguard.schedule[this.period.name];
-    if (schedule)
-      this.lifeguard.schedule[this.period.name].activity = activity.name;
-    else
-      this.lifeguard.schedule[this.period.name] = {
-        activity: activity.name,
-        locked: false,
-      };
+    if (this.type == SlotType.ACTIVITY) {
+      const schedule = this.lifeguard.schedule[this.period.name];
+      if (schedule)
+        this.lifeguard.schedule[this.period.name].activity = activity.name;
+      else
+        this.lifeguard.schedule[this.period.name] = {
+          activity: activity.name,
+          locked: false,
+        };
+      this.updateState();
+    }
 
-    this.updateState();
+    if (this.type == SlotType.HEAD) {
+      Object.keys(this.lifeguard.schedule).forEach((period) => {
+        this.lifeguard.schedule[period].activity = activity.name;
+      });
+      const index = this.staffList.findIndex(
+        (l) => l.name === this.lifeguard.name
+      );
+      if (index !== -1) this.staffList[index] = new Lifeguard(this.lifeguard); // Create a new instance to trigger change detection
+      appStore.updateState({ lifeguards: this.staffList });
+    }
+
     this.openActMenu = false; // Close the menu after selecting an activity
   }
 
   lockSlot(event: any) {
-    event.stopPropagation();
-    this.lifeguard.schedule[this.period.name].locked = event.checked;
+    this.isLocked = event.checked;
+    if (this.type == SlotType.ACTIVITY)
+      this.lifeguard.schedule[this.period.name].locked = event.checked;
+    if (this.type == SlotType.HEAD) this.lifeguard.locked = event.checked;
     this.updateState();
     this.openActMenu = false;
   }
-  //#endregion
-
-  //#region Lifeguard type methods
-  setLifeguardDay(act: Activity, lg: Lifeguard, $event: MouseEvent) {
-    $event.stopPropagation();
-
-    Object.keys(lg.schedule).forEach((period) => {
-      lg.schedule[period].activity = act.name;
-    });
-    const index = this.staffList.findIndex((l) => l.name === lg.name);
-    if (index !== -1) this.staffList[index] = new Lifeguard(lg); // Create a new instance to trigger change detection
-
-    appStore.updateState({ lifeguards: this.staffList });
-    this.openActMenu = false;
-  }
-  //#endregion
 
   //#region Private Methods
+  private setLocked() {
+    if (this.type == SlotType.ACTIVITY)
+      this.isLocked =
+        this.lifeguard.schedule[this.period.name]?.locked ?? false;
+    if (this.type == SlotType.HEAD) this.isLocked = this.lifeguard.locked;
+  }
+
   private updateState() {
     const lifeguards = appStore.getSnapshot().lifeguards.map((lg) => {
       if (lg.name === this.lifeguard.name) {

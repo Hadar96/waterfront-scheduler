@@ -1,20 +1,24 @@
-<table mat-table style="text-align: center; width: 100%; border-collapse: collapse;">
+<table mat-table>
+    <colgroup>
+        <col style="width: 10%;" /> <!-- First column -->
+        <col *ngFor="let col of staffList" [style.width.%]="90 / staffList.length" /> <!-- Angular loop example -->
+    </colgroup>
     <thead>
         <tr>
-            <th style="border: 1px solid black;"></th>
-            <th *ngFor="let lifeguard of staffList" style="border: 1px solid black;">
+            <th></th>
+            <th *ngFor="let lifeguard of staffList" class="lg-name slot">
                 <slot [lifeguard]="lifeguard" [type]="SlotTypes.HEAD"></slot>
             </th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let period of currDayType.periods">
-            <td style="border: 1px solid black;">
+            <td class="period-name">
                 {{ period.name }}
                 <br> ({{ period.start }}-{{ period.end }})
             </td>
-            <td *ngFor="let lifeguard of staffList" style="border: 1px solid black;">
-                <slot [lifeguard]="lifeguard" [period]="period"></slot>
+            <td *ngFor="let lifeguard of staffList" class="slot">
+                <slot [lifeguard]="lifeguard" [period]="period" class="slot"></slot>
             </td>
         </tr>
     </tbody>

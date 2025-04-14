@@ -1,33 +1,33 @@
 <p *ngFor="let rule of rules">
-    <input type="text" matInput [value]="rule.name" [matAutocomplete]="auto" #ruleActName>
+    <input type="text" matInput [value]="rule.name" [matAutocomplete]="auto" #ruleActName class="act-name">
     <span>At least
-        <input matInput type="number" [value]="rule.min" #ruleMin />
+        <input matInput type="number" [value]="rule.min" #ruleMin class="act-minmax" />
     </span>
     <span>At most
-        <input matInput type="number" [value]="rule.max" #ruleMax />
+        <input matInput type="number" [value]="rule.max" #ruleMax class="act-minmax" />
     </span>
     <span>
-        <button mat-icon-button color="accent" (click)="saveRule({ name: ruleActName.value, 
+        <button mat-button color="accent" (click)="saveRule({ name: ruleActName.value, 
                 min: (ruleMin.value !== '') ? +ruleMin.value : undefined, 
                 max : (ruleMax.value !== '') ? +ruleMax.value : undefined})" style="border: 1px solid;">
-            <mat-icon>check</mat-icon>
+            <i class="fas fa-check"></i>
         </button>
-        <button mat-icon-button color="warn" (click)="deleteRule(rule.name)" style="border: 1px solid;">
-            <mat-icon>delete</mat-icon>
+        <button mat-button color="warn" (click)="deleteRule(rule.name)" style="border: 1px solid;">
+            <i class="fas fa-trash-alt"></i>
         </button>
     </span>
 </p>
 
 <p>New rule:
     <br>
-    <input type="text" matInput [matAutocomplete]="auto" #newName>
-    <span>At least <input matInput type="number" #newMin /> </span>
-    <span>At most <input matInput type="number" #newMax /> </span>
+    <input type="text" matInput [matAutocomplete]="auto" #newName class="act-name">
+    <span>At least <input matInput type="number" #newMin class="act-minmax" /> </span>
+    <span>At most <input matInput type="number" #newMax class="act-minmax" /> </span>
     <span>
         <button mat-icon-button color="accent" (click)="saveRule({ name: newName.value, 
                 min: (newMin.value !== '') ? +newMin.value : undefined, 
-                max : (newMax.value !== '') ? +newMax.value : undefined})" style="border: 1px solid;">
-            <mat-icon>check</mat-icon>
+                max : (newMax.value !== '') ? +newMax.value : undefined})">
+            <i class="fas fa-check"></i>
         </button>
     </span>
 </p>

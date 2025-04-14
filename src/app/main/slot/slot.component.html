@@ -1,36 +1,40 @@
-<div *ngIf="type == SlotTypes.ACTIVITY">
-    <mat-icon *ngIf="lifeguard.schedule[period.name]?.locked" style="font-size: small;">lock</mat-icon>
-    <div [style.background-color]="activity.color" (click)="openActMenu = !openActMenu" (focusout)="openActMenu = false"
-        tabindex="0">
+<!-- <div *ngIf="type == SlotTypes.ACTIVITY" class="slot">
+    <div [style.background-color]="activity.color" (dblclick)="openActMenu = !openActMenu" class="slot-content"
+        [ngStyle]="{'color': (period.name == 'Day camp') ? 'whitesmoke': activity.color}">
+        <i *ngIf="lifeguard.schedule[period.name]?.locked" class="fas fa-lock" style="color: black;"></i>
         {{ period.name == "Day camp" ? lifeguard.daycampCount: activity.name }}
-        <div *ngIf="openActMenu" style="position: fixed">
-            <tr>
-                <td *ngFor="let activity of activities" (click)="changeActivity(activity, $event)"
-                    style="border: 1px solid black; cursor: pointer; width: 10px;"
-                    [ngStyle]="{'background-color': activity.color }">
-                    {{ activity.name[0] }}
-                </td>
-            </tr>
-            <!-- <tr>
-                <mat-checkbox [checked]="lifeguard.schedule[period.name]?.locked ?? false"
-                    (change)="lockSlot($event)">locked</mat-checkbox>
-            </tr> -->
-        </div>
     </div>
 </div>
 
-<div *ngIf="type == SlotTypes.HEAD">
-    <mat-icon *ngIf="lifeguard.locked" style="font-size: small;">lock</mat-icon>
-    <div (click)="openActMenu = !openActMenu" (focusout)="openActMenu = false" tabindex="0">
+<div *ngIf="type == SlotTypes.HEAD" class="slot">
+    <span (dblclick)="openActMenu = !openActMenu" class="slot-content">
+        <i *ngIf="lifeguard.locked" class="fas fa-lock"></i>
         {{ lifeguard.name }}
-        <div *ngIf="openActMenu" style="position: fixed">
-            <tr>
-                <td *ngFor="let activity of activities" (click)="setLifeguardDay(activity, lifeguard, $event)"
-                    style="border: 1px solid black; cursor: pointer; width: 10px;"
-                    [ngStyle]="{'background-color': activity.color }">
-                    {{ activity.name[0] }}
-                </td>
-            </tr>
-        </div>
-    </div>
+    </span>
+</div> -->
+
+<div (dblclick)="openActMenu = !openActMenu" (click)="openActMenu = false" class="slot" [class.disabled]="isDisabled">
+
+    <span *ngIf="type == SlotTypes.ACTIVITY" class="slot-content" [class.selected]="openActMenu"
+        [ngStyle]="{'background-color': activity.color, 'color': (period.name == 'Day camp') ? 'whitesmoke': activity.color}">
+        <i *ngIf="lifeguard.schedule[period.name]?.locked" class="fas fa-lock" style="color: black;"></i>
+        {{ period.name == "Day camp" ? lifeguard.daycampCount: activity.name }}
+    </span>
+
+    <span *ngIf="type == SlotTypes.HEAD" class="slot-content" [class.selected]="openActMenu">
+        <i *ngIf="lifeguard.locked" class="fas fa-lock"></i>
+        {{ lifeguard.name }}
+    </span>
+
+</div>
+
+<!-- Activities Menu -->
+<div *ngIf="openActMenu" class="slot-menu">
+    <tr>
+        <td *ngFor="let activity of activities" (click)="changeActivity(activity, $event)"
+            [ngStyle]="{'background-color': (activity.name == DEFAULT_ACTIVITY.name) ? 'white' : activity.color}">
+            {{ activity.name[0] }}
+        </td>
+    </tr>
+    <mat-checkbox [checked]="isLocked" (change)="lockSlot($event)">locked</mat-checkbox>
 </div>

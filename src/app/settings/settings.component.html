@@ -1,14 +1,22 @@
-<button mat-icon-button color="primary" [routerLink]="'/'">
-    <mat-icon>home</mat-icon>
-</button>
+<div class="settings-toolbar">
+    <button mat-button class="settings-btn" [routerLink]="'/'">
+        <mat-icon>home</mat-icon>
+    </button>
+    <span>
+        <button mat-button color="primary" class="settings-btn" (click)="saveAllChanges()">
+            <mat-icon>save</mat-icon>
+        </button>
+        <button mat-button color="warn" class="settings-btn" (click)="restoreData()">
+            <mat-icon>settings_backup_restore</mat-icon>
+        </button>
+    </span>
+</div>
 
-<staff-list></staff-list>
-<action-list></action-list>
-<daytype-tabs></daytype-tabs>
+<div class="settings-sections">
+    <staff-list class="settings-section"></staff-list>
+    <action-list class="settings-section"></action-list>
+    <daytype-tabs class="settings-section"></daytype-tabs>
+</div>
 
-<button mat-icon-button color="primary" (click)="saveAllChanges()">
-    <mat-icon>save</mat-icon>
-</button>
-<button mat-icon-button color="warn" (click)="restoreData()">
-    <mat-icon>settings_backup_restore</mat-icon>
-</button>
+<div class="settings-actions">
+</div>

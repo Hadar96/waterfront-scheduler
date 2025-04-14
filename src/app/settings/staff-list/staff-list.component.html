@@ -11,13 +11,13 @@
     </mat-form-field>
 
     <span>
-        <button mat-icon-button color="primary" (click)="editStaff()" style="border: 1px solid;">
+        <button mat-icon-button color="primary" (click)="editStaff()" class="menu-btn">
             <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="deleteStaff()" style="border: 1px solid;">
+        <button mat-icon-button color="warn" (click)="deleteStaff()" class="menu-btn">
             <mat-icon>delete</mat-icon>
         </button>
-        <button mat-icon-button color="accent" (click)="addStaff()" style="border: 1px solid;">
+        <button mat-icon-button color="accent" (click)="addStaff()" class="menu-btn">
             <mat-icon>add</mat-icon>
         </button>
     </span>
@@ -48,8 +48,8 @@
             </div>
 
             <div style="margin-top: 15px;">
-                <button mat-raised-button color="primary" type="button" (click)="onSubmit()">Save</button>
-                <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancel</button>
+                <button mat-raised-button color="primary" type="button" class="menu-btn" (click)="onSubmit()">Save</button>
+                <button mat-raised-button color="warn" type="button" class="menu-btn" (click)="cancel()">Cancel</button>
             </div>
         </form>
     </div>

@@ -67,7 +67,7 @@
           "locked": true,
           "workingPeriod": false
         },
-        { "start": "1300", "end": "1330", "name": "Day camp" },
+        { "start": "1300", "end": "1330", "name": "Day camp", "locked": true },
         { "start": "1400", "end": "1450", "name": "Chaluzim" },
         { "start": "1500", "end": "1600", "name": "K/Bolim" }
       ],

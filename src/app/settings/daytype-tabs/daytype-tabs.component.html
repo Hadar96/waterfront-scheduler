@@ -1,10 +1,3 @@
-<button mat-icon-button color="warn" (click)="deleteTab()" style="border: 1px solid;">
-    <mat-icon>delete</mat-icon>
-</button>
-<button mat-icon-button color="accent" (click)="addTab()" style="border: 1px solid;">
-    <mat-icon>add</mat-icon>
-</button>
-
 <mat-tab-group [selectedIndex]="selectedIndex" (selectedTabChange)="onTabChange($event)">
     <mat-tab *ngFor="let dayType of daytypeList$ | async; let i = index" [label]="dayType.name">
         <form [formGroup]="daytypeForm">
@@ -13,8 +6,13 @@
             <activity-rules [rules]="selectedType.actRules" (rulesChange)="onRulesChange($event)"></activity-rules>
 
             <div style="margin-top: 15px;">
-                <button mat-raised-button color="primary" type="button" (click)="saveTab()">Save tab</button>
-                <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancel edits</button>
+                <button mat-icon-button color="primary" (click)="saveTab()"><mat-icon>save</mat-icon></button>
+                <button mat-icon-button color="warn" (click)="deleteTab()">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-icon-button color="accent" (click)="addTab()">
+                    <mat-icon>add</mat-icon>
+                </button><!-- <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancel edits</button> -->
             </div>
         </form>
     </mat-tab>

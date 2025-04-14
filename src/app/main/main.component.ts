@@ -16,12 +16,14 @@ export class MainComponent {
   dayTypes: DayType[];
   currDayType: DayType;
   isAllLocked: boolean = false;
+  today: string | number | Date;
 
   constructor(private dbService: DbService, private utils: UtilsService) {
     this.appData$ = appStore.getState();
     this.activities = appStore.getSnapshot().activities;
     this.dayTypes = appStore.getSnapshot().daytypes;
     this.currDayType = appStore.getSnapshot().currentDayType;
+    this.today = new Date();
   }
 
   onDayTypeChange(selected: DayType): void {
@@ -57,7 +59,11 @@ export class MainComponent {
   lockAll() {
     this.isAllLocked = !this.isAllLocked;
     const staff = appStore.getSnapshot().lifeguards;
-    staff.forEach((lg) => (lg.locked = this.isAllLocked));
+    staff.forEach((lg: Lifeguard) => {
+      Object.keys(lg.schedule).forEach((period) => {
+        lg.schedule[period].locked = this.isAllLocked;
+      });
+    });
     appStore.updateState({ lifeguards: staff });
   }
 

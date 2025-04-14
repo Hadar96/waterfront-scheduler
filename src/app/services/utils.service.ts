@@ -64,14 +64,17 @@ export class UtilsService {
       this.staffList.forEach((staff) => {
         if (staff.schedule) {
           const periodAssign = staff.schedule[period.name];
-          if (periodAssign?.locked || staff.locked) periodicalActivityCount[periodAssign.activity]++;
+          if (periodAssign && (periodAssign.locked || staff.locked))
+            periodicalActivityCount[periodAssign.activity]++;
         }
       });
+
       this.staffList.forEach((staff) => {
         if (staff.locked || staff.schedule[period.name]?.locked) return;
 
         const allowHoff =
-          !hasHoff[staff.name] && periodicalActivityCount['HOFF'] < rulesCount['HOFF'].max;
+          !hasHoff[staff.name] &&
+          periodicalActivityCount['HOFF'] < rulesCount['HOFF'].max;
         const activity = this.randomizeActivity(allowHoff);
         staff.schedule[period.name] = staff.schedule[period.name]
           ? { ...staff.schedule[period.name], activity: activity.name }
