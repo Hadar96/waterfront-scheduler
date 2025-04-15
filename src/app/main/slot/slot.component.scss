@@ -19,6 +19,7 @@
 .slot-menu {
     display: flex;
     flex-direction: column;
+    align-items: baseline;
     position: absolute;
     z-index: 1;
     border: solid whitesmoke 1px;

@@ -24,6 +24,7 @@ export class SlotComponent implements OnInit {
   staffList: Lifeguard[] = appStore.getSnapshot().lifeguards;
   openActMenu: boolean = false;
   isLocked: boolean = false;
+  isPM: boolean = false;
   isDisabled: boolean = false;
   SlotTypes = SlotType;
   DEFAULT_ACTIVITY = DEFAULT_ACTIVITY;
@@ -39,6 +40,9 @@ export class SlotComponent implements OnInit {
     this.setLocked();
     this.isDisabled =
       this.type == SlotType.ACTIVITY && !this.period.workingPeriod;
+    this.isPM =
+      SlotType.ACTIVITY &&
+      (this.lifeguard.schedule[this.period.name]?.pm ?? false);
   }
 
   changeActivity(activity: Activity, event: MouseEvent) {
@@ -76,6 +80,18 @@ export class SlotComponent implements OnInit {
     if (this.type == SlotType.ACTIVITY)
       this.lifeguard.schedule[this.period.name].locked = event.checked;
     if (this.type == SlotType.HEAD) this.lifeguard.locked = event.checked;
+    this.updateState();
+    this.openActMenu = false;
+  }
+
+  setManager(event: any) {
+    this.isPM = event.checked;
+    if (this.type == SlotType.ACTIVITY)
+      this.lifeguard.schedule[this.period.name].pm = event.checked;
+    if (this.type == SlotType.HEAD) {
+      for (const period in this.lifeguard.schedule)
+        this.lifeguard.schedule[period].pm = event.checked;
+    }
     this.updateState();
     this.openActMenu = false;
   }

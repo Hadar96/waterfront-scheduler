@@ -18,6 +18,7 @@
     <span *ngIf="type == SlotTypes.ACTIVITY" class="slot-content" [class.selected]="openActMenu"
         [ngStyle]="{'background-color': activity.color, 'color': (period.name == 'Day camp') ? 'whitesmoke': activity.color}">
         <i *ngIf="lifeguard.schedule[period.name]?.locked" class="fas fa-lock" style="color: black;"></i>
+        <i *ngIf="lifeguard.schedule[period.name]?.pm" class="fas fa-crown" style="color: black;"></i>
         {{ period.name == "Day camp" ? lifeguard.daycampCount: activity.name }}
     </span>
 
@@ -37,4 +38,5 @@
         </td>
     </tr>
     <mat-checkbox [checked]="isLocked" (change)="lockSlot($event)">locked</mat-checkbox>
+    <mat-checkbox [checked]="isPM" (change)="setManager($event)">manager</mat-checkbox>
 </div>
