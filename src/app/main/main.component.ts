@@ -4,6 +4,8 @@ import { DayType } from '../models/daytype';
 import { Activity } from '../models/activity';
 import { DbService } from '../services/db.service';
 import { UtilsService } from '../services/utils.service';
+import { Lifeguard } from '../models/lifeguard';
+import { ExcelExportService } from '../services/excel.service';
 
 @Component({
   selector: 'app-main',
@@ -18,7 +20,11 @@ export class MainComponent {
   isAllLocked: boolean = false;
   today: string | number | Date;
 
-  constructor(private dbService: DbService, private utils: UtilsService) {
+  constructor(
+    private dbService: DbService,
+    private utils: UtilsService,
+    private xls: ExcelExportService
+  ) {
     this.appData$ = appStore.getState();
     this.activities = appStore.getSnapshot().activities;
     this.dayTypes = appStore.getSnapshot().daytypes;
@@ -67,7 +73,9 @@ export class MainComponent {
     appStore.updateState({ lifeguards: staff });
   }
 
-  exportExcel() {
-    throw new Error('Method not implemented.');
+  async exportExcel() {
+    await this.xls.exportColoredScheduleWithExcelJS();
+    // this.xls.exportTableToExcel('schedule-table');
+    // this.xls.exportToColoredSchedule();
   }
 }
