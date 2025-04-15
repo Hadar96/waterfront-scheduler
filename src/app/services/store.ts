@@ -33,6 +33,11 @@ export class AppStore {
 
   // Update the state
   updateState(partialState: Partial<AppState>) {
+    const staff: Lifeguard[] = partialState.lifeguards
+      ? this.sortStaff(partialState.lifeguards)
+      : this.getSnapshot().lifeguards;
+    partialState.lifeguards = staff;
+
     const currentState = this.state$.getValue();
     this.state$.next({ ...currentState, ...partialState });
   }
@@ -59,6 +64,16 @@ export class AppStore {
 
   getAllDayTypes() {
     return this.state$.asObservable().pipe(map((state) => state.daytypes));
+  }
+
+  private sortStaff(staff: Lifeguard[]): Lifeguard[] {
+    const lt = staff
+      .filter((lg) => lg.isLT)
+      .sort((a, b) => a.name.localeCompare(b.name));
+    const nonLt = staff
+      .filter((lg) => !lg.isLT)
+      .sort((a, b) => a.name.localeCompare(b.name));
+    return nonLt.concat(lt);
   }
 }
 

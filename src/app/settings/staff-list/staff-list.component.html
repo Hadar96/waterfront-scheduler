@@ -3,7 +3,7 @@
 
     <mat-form-field appearance="outline">
         <mat-label>Staff</mat-label>
-        <mat-select [(value)]="selectedStaff" style="color: black;">
+        <mat-select [(value)]="selectedStaff">
             <mat-option *ngFor="let staff of (staffList$ | async)" [value]="staff">
                 {{ staff.name }}
             </mat-option>
@@ -46,9 +46,11 @@
                     <mat-button-toggle [value]="false">Lake</mat-button-toggle>
                 </mat-button-toggle-group>
             </div>
+            <mat-checkbox formControlName="isLT">Pool Manager?</mat-checkbox>
 
             <div style="margin-top: 15px;">
-                <button mat-raised-button color="primary" type="button" class="menu-btn" (click)="onSubmit()">Save</button>
+                <button mat-raised-button color="primary" type="button" class="menu-btn"
+                    (click)="onSubmit()">Save</button>
                 <button mat-raised-button color="warn" type="button" class="menu-btn" (click)="cancel()">Cancel</button>
             </div>
         </form>

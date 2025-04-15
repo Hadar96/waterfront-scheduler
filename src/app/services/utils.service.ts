@@ -75,6 +75,7 @@ export class UtilsService {
         const allowHoff =
           !hasHoff[staff.name] &&
           periodicalActivityCount['HOFF'] < rulesCount['HOFF'].max;
+
         const activity = this.randomizeActivity(allowHoff);
         staff.schedule[period.name] = staff.schedule[period.name]
           ? { ...staff.schedule[period.name], activity: activity.name }
@@ -83,6 +84,7 @@ export class UtilsService {
 
         if (activity.name === 'HOFF') {
           hasHoff[staff.name] = true;
+          staff.schedule[period.name].pm = false;
         }
       });
     });

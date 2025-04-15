@@ -6,10 +6,12 @@ export class Lifeguard {
   private _hoffCo: string | undefined;
   private _preferPool: boolean | undefined;
   private _locked: boolean;
+  private _isLT: boolean;
 
   constructor(
     nameOrCopy: string | Lifeguard,
     schedule: Schedule = {},
+    isLT: boolean = false,
     preferPool?: boolean,
     hoffCo?: string,
     locked: boolean = false,
@@ -25,37 +27,21 @@ export class Lifeguard {
       this._preferPool = preferPool;
       this._locked = locked;
       this._hoffCo = hoffCo;
+      this._isLT = isLT;
     } else if (nameOrCopy instanceof Lifeguard) {
       // Copy constructor logic
-      this._name = nameOrCopy._name;
-      this._schedule = { ...nameOrCopy._schedule }; // Deep copy of the schedule
-      this._daycampCount = nameOrCopy._daycampCount;
-      this._partyCount = nameOrCopy._partyCount;
-      this._preferPool = nameOrCopy._preferPool;
-      this._locked = nameOrCopy._locked;
-      this._hoffCo = nameOrCopy._hoffCo;
+      this._name = nameOrCopy.name;
+      this._schedule = { ...nameOrCopy.schedule }; // Deep copy of the schedule
+      this._daycampCount = nameOrCopy.daycampCount;
+      this._partyCount = nameOrCopy.partyCount;
+      this._preferPool = nameOrCopy.preferPool;
+      this._locked = nameOrCopy.locked;
+      this._hoffCo = nameOrCopy.hoffCo;
+      this._isLT = nameOrCopy.isLT;
     } else {
       throw new Error('Invalid constructor arguments');
     }
   }
-
-  // constructor(
-  //   name: string,
-  //   schedule: Schedule = {},
-  //   preferPool?: boolean,
-  //   hoffCo?: string,
-  //   locked: boolean = false,
-  //   daycampCount: number = 0,
-  //   partyCount: number = 0
-  // ) {
-  //   this._name = name;
-  //   this._schedule = schedule;
-  //   this._daycampCount = daycampCount;
-  //   this._partyCount = partyCount;
-  //   this._preferPool = preferPool;
-  //   this._locked = locked;
-  //   this._hoffCo = hoffCo;
-  // }
 
   get name(): string {
     return this._name;
@@ -105,6 +91,14 @@ export class Lifeguard {
     this._locked = locked;
   }
 
+  get isLT(): boolean {
+    return this._isLT;
+  }
+
+  set isLT(isLT: boolean) {
+    this._isLT = isLT;
+  }
+
   get hoffCo(): string | undefined {
     return this._hoffCo;
   }
@@ -115,5 +109,5 @@ export class Lifeguard {
 }
 
 export type Schedule = {
-  [key: string]: { activity: string; locked: boolean };
+  [key: string]: { activity: string; locked?: boolean; pm?: boolean };
 };

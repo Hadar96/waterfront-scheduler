@@ -22,7 +22,8 @@
         {{ period.name == "Day camp" ? lifeguard.daycampCount: activity.name }}
     </span>
 
-    <span *ngIf="type == SlotTypes.HEAD" class="slot-content" [class.selected]="openActMenu">
+    <span *ngIf="type == SlotTypes.HEAD" class="slot-content lg-name" [class.selected]="openActMenu"
+        [ngClass]="{manager: lifeguard.isLT}">
         <i *ngIf="lifeguard.locked" class="fas fa-lock"></i>
         {{ lifeguard.name }}
     </span>

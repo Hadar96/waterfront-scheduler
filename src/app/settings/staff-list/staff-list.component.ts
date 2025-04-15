@@ -24,6 +24,7 @@ export class StaffListComponent {
       name: new FormControl(),
       zonePreference: new FormControl<boolean | undefined>(undefined),
       hoffCoPref: new FormControl(),
+      isLT: new FormControl(),
     });
 
     this.updateFormWithSelectedStaff();
@@ -35,6 +36,7 @@ export class StaffListComponent {
         name: this.selectedStaff.name,
         zonePreference: this.selectedStaff.preferPool,
         hoffCoPref: this.selectedStaff.hoffCo,
+        isLT: this.selectedStaff.isLT,
       });
     }
   }
@@ -74,8 +76,9 @@ export class StaffListComponent {
     this.selectedStaff.name = this.lifeguardForm.value.name;
     this.selectedStaff.preferPool = this.lifeguardForm.value.zonePreference;
     this.selectedStaff.hoffCo = this.lifeguardForm.value.hoffCoPref;
+    this.selectedStaff.isLT = this.lifeguardForm.value.isLT;
     this.staffList.push(this.selectedStaff);
-    
+
     // Remove duplicates
     this.staffList = this.staffList.filter(
       (staff, index, self) =>

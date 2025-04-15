@@ -88,6 +88,7 @@ export class AppComponent implements OnInit {
       const guard: Lifeguard = new Lifeguard(
         g.name,
         g.schedule,
+        g.isLT,
         g.preferPool,
         g.hoffCo,
         g.locked,

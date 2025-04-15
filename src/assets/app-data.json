@@ -139,7 +139,21 @@
       "partyCount": 0,
       "preferPool": true,
       "hoffCo": "Aviv",
-      "locked": false
+      "locked": false,
+      "isLT": true
+    },
+    {
+      "name": "Andy",
+      "schedule": {
+        "Ofarim": { "activity": "HOFF", "locked": false },
+        "Tzofim": { "activity": "Pool", "locked": false },
+        "Chaluzim": { "activity": "Lake", "locked": true },
+        "K/Bonim": { "activity": "HOFF", "locked": true },
+        "Breira": { "activity": "Pool", "locked": true },
+        "Olim": { "activity": "Lake", "locked": false }
+      },
+      "locked": false,
+      "isLT": true
     },
     {
       "name": "Aviv",

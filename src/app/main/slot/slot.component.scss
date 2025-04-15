@@ -39,6 +39,15 @@
     }
 }
 
+.lg-name {
+    background-color: #553d0080;
+}
+
+.manager {
+    background-color: #755400;
+}
+
+
 .selected {
     border-color: whitesmoke;
 }
@@ -47,4 +56,5 @@
 .disabled {
     pointer-events: none; // prevent clicks
     user-select: none;
+    // background-color: black;
 }
