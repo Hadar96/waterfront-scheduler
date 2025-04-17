@@ -27,6 +27,7 @@ import { PeriodListComponent } from './settings/period-list/period-list.componen
 import { ActivityRulesComponent } from './settings/activity-rules/activity-rules.component';
 import { SlotComponent } from './main/slot/slot.component';
 import { ScheduleTableComponent } from './main/schedule-table/schedule-table.component';
+import { PeriodSlotComponent } from './main/slot/period-slot/period-slot.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ScheduleTableComponent } from './main/schedule-table/schedule-table.com
     ActivityRulesComponent,
     SlotComponent,
     ScheduleTableComponent,
+    PeriodSlotComponent,
   ],
   imports: [
     BrowserModule,

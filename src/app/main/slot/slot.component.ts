@@ -5,8 +5,9 @@ import { Period } from 'src/app/models/period';
 import { appStore } from 'src/app/services/store';
 
 export enum SlotType {
-  HEAD = 'head',
-  ACTIVITY = 'activity',
+  STAFF,
+  PERIOD,
+  ACTIVITY,
 }
 @Component({
   selector: 'slot',
@@ -61,7 +62,7 @@ export class SlotComponent implements OnInit {
       this.updateState();
     }
 
-    if (this.type == SlotType.HEAD) {
+    if (this.type == SlotType.STAFF) {
       Object.keys(this.lifeguard.schedule).forEach((period) => {
         this.lifeguard.schedule[period].activity = activity.name;
       });
@@ -79,7 +80,7 @@ export class SlotComponent implements OnInit {
     this.isLocked = event.checked;
     if (this.type == SlotType.ACTIVITY)
       this.lifeguard.schedule[this.period.name].locked = event.checked;
-    if (this.type == SlotType.HEAD) this.lifeguard.locked = event.checked;
+    if (this.type == SlotType.STAFF) this.lifeguard.locked = event.checked;
     this.updateState();
     this.openActMenu = false;
   }
@@ -88,7 +89,7 @@ export class SlotComponent implements OnInit {
     this.isPM = event.checked;
     if (this.type == SlotType.ACTIVITY)
       this.lifeguard.schedule[this.period.name].pm = event.checked;
-    if (this.type == SlotType.HEAD) {
+    if (this.type == SlotType.STAFF) {
       for (const period in this.lifeguard.schedule)
         this.lifeguard.schedule[period].pm = event.checked;
     }
@@ -101,7 +102,7 @@ export class SlotComponent implements OnInit {
     if (this.type == SlotType.ACTIVITY)
       this.isLocked =
         this.lifeguard.schedule[this.period.name]?.locked ?? false;
-    if (this.type == SlotType.HEAD) this.isLocked = this.lifeguard.locked;
+    if (this.type == SlotType.STAFF) this.isLocked = this.lifeguard.locked;
   }
 
   private updateState() {

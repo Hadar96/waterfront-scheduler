@@ -1,0 +1,22 @@
+<div (dblclick)="openActMenu = !openActMenu" (click)="openActMenu = false" class="slot"
+    [class.locked]="period.workingPeriod && period.locked" [class.disabled]="isDisabled">
+    <span class="slot-content" [class.selected]="openActMenu">
+        {{ period.name }}
+        <br> ({{ period.start }}-{{ period.end }})
+    </span>
+</div>
+
+<!-- Activities Menu -->
+<div *ngIf="openActMenu" class="slot-menu">
+    <tr>
+        <td *ngFor="let activity of activities" (click)="excludeActivity(activity, $event)"
+            [ngClass]="{'inactive': isActAvailable(activity)}"
+            [ngStyle]="{'background-color': (activity.name == DEFAULT_ACTIVITY.name) ? 'white' : activity.color}">
+            {{ activity.name[0] }}
+        </td>
+    </tr>
+    <span class="slot-menu-actions">
+        <mat-checkbox [checked]="isLocked" (change)="lockSlot($event)">locked</mat-checkbox>
+        <i class="fas fa-ban btn" (click)="clearActivities()"></i>
+    </span>
+</div>

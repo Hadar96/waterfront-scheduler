@@ -3,12 +3,13 @@
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
-    line-height: 3;
     user-select: none;
+    background-color: #545454bf;
 }
 
 .slot-content {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
@@ -39,14 +40,6 @@
     }
 }
 
-.lg-name {
-    background-color: #553d0080;
-}
-
-.manager {
-    background-color: #755400;
-}
-
 .selected {
     border-color: whitesmoke;
 }
@@ -61,5 +54,25 @@
 .disabled {
     pointer-events: none; // prevent clicks
     user-select: none;
-    // background-color: black;
+    background-color: transparent;
+}
+
+.locked {
+    background-color: transparent;
+}
+
+.btn {
+    cursor: pointer;
+    color: whitesmoke;
+}
+
+.btn:hover {
+    opacity: 0.5;
+}
+
+.slot-menu-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }

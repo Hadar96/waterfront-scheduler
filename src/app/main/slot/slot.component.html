@@ -1,18 +1,3 @@
-<!-- <div *ngIf="type == SlotTypes.ACTIVITY" class="slot">
-    <div [style.background-color]="activity.color" (dblclick)="openActMenu = !openActMenu" class="slot-content"
-        [ngStyle]="{'color': (period.name == 'Day camp') ? 'whitesmoke': activity.color}">
-        <i *ngIf="lifeguard.schedule[period.name]?.locked" class="fas fa-lock" style="color: black;"></i>
-        {{ period.name == "Day camp" ? lifeguard.daycampCount: activity.name }}
-    </div>
-</div>
-
-<div *ngIf="type == SlotTypes.HEAD" class="slot">
-    <span (dblclick)="openActMenu = !openActMenu" class="slot-content">
-        <i *ngIf="lifeguard.locked" class="fas fa-lock"></i>
-        {{ lifeguard.name }}
-    </span>
-</div> -->
-
 <div (dblclick)="openActMenu = !openActMenu" (click)="openActMenu = false" class="slot" [class.disabled]="isDisabled">
 
     <span *ngIf="type == SlotTypes.ACTIVITY" class="slot-content" [class.selected]="openActMenu"
@@ -22,7 +7,7 @@
         {{ period.name == "Day camp" ? lifeguard.daycampCount: activity.name }}
     </span>
 
-    <span *ngIf="type == SlotTypes.HEAD" class="slot-content lg-name" [class.selected]="openActMenu"
+    <span *ngIf="type == SlotTypes.STAFF" class="slot-content lg-name" [class.selected]="openActMenu"
         [ngClass]="{manager: lifeguard.isLT}">
         <i *ngIf="lifeguard.locked" class="fas fa-lock"></i>
         {{ lifeguard.name }}

@@ -7,15 +7,14 @@
         <tr>
             <th></th>
             <th *ngFor="let lifeguard of staffList" class="lg-name slot">
-                <slot [lifeguard]="lifeguard" [type]="SlotTypes.HEAD"></slot>
+                <slot [lifeguard]="lifeguard" [type]="SlotTypes.STAFF"></slot>
             </th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let period of currDayType.periods">
             <td class="period-name">
-                {{ period.name }}
-                <br> ({{ period.start }}-{{ period.end }})
+                <period-slot [period]="period" class="slot"></period-slot>
             </td>
             <td *ngFor="let lifeguard of staffList" class="slot">
                 <slot [lifeguard]="lifeguard" [period]="period" class="slot"></slot>

@@ -7,7 +7,7 @@ export class Period {
   private _name: string;
   private _workingPeriod: boolean;
   private _locked: boolean;
-  private _excludedActions?: string[];
+  private _excludedActions: string[];
 
   constructor(
     name: string,
@@ -78,11 +78,11 @@ export class Period {
     this._workingPeriod = value;
   }
 
-  get excludedActions(): string[] | undefined {
+  get excludedActions(): string[] {
     return this._excludedActions;
   }
 
-  set excludedActions(value: string[] | undefined) {
+  set excludedActions(value: string[]) {
     this._excludedActions = value;
   }
 }
