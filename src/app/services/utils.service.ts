@@ -78,9 +78,6 @@ export class UtilsService {
     const periods = this.periods.filter(
       (p) => !p.locked && !p.excludedActions.includes('HOFF')
     );
-    const maxHoffsInPeriod = Math.round(
-      this.staffList.filter((s) => !this.isInDoff(s)).length / periods.length
-    );
     let staffLeft = this.staffList // staff members left that doesn't have HOFF yet
       .filter((s) => !s.locked)
       .filter((s) => {
@@ -91,21 +88,14 @@ export class UtilsService {
             return false;
         }
         return true;
-      })
-      .map((s) => s.name);
+      });
     const hoffPerPeriodCount = this.getHoffCounterPerPeriod(periods);
 
-    // assign HOFFs period by period
-    periods.forEach((p) => {
-      let i = hoffPerPeriodCount[p.name] ?? 0; // if there're already HOFFs in this period
-      for (; i < maxHoffsInPeriod && staffLeft.length; i++) {
-        const randStaff = this.randomizeFromArr(staffLeft);
-        const idx = this.staffList.findIndex((s) => s.name == randStaff);
-        if (idx != -1 && !this.staffList[idx].schedule[p.name].locked) {
-          this.staffList[idx].schedule[p.name].activity = 'HOFF';
-          staffLeft = staffLeft.filter((s) => s !== randStaff);
-        }
-      }
+    // assign HOFFs member by member
+    staffLeft.forEach((lg) => {
+      const randPeriod = this.randByPriority(hoffPerPeriodCount);
+      lg.schedule[randPeriod].activity = 'HOFF';
+      hoffPerPeriodCount[randPeriod]++;
     });
   }
 
@@ -218,6 +208,15 @@ export class UtilsService {
     });
 
     return counter;
+  }
+
+  /** Gets a counter object and returns a random minimal attribute */
+  private randByPriority(counter: any): string {
+    const minVal = Object.values(counter).sort()[0];
+    const minKeys: string[] = Object.keys(counter).filter(
+      (k) => counter[k] == minVal
+    );
+    return this.randomizeFromArr(minKeys);
   }
 
   private randomizeFromArr(arr: any[]): any {
