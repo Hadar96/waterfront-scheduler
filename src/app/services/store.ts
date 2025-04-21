@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Lifeguard } from '../models/lifeguard';
 import { Activity } from '../models/activity';
 import { DayType } from '../models/daytype';

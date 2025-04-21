@@ -68,6 +68,19 @@ export class UtilsService {
           else if (!temp.locked)
             s.schedule[p.name] = { ...temp, activity: DEFAULT_ACTIVITY.name };
         });
+        // reset all the irrelevant periods in the schedule (i.e "Bonim" is irrelevant if Saturday)
+        const irrelevant = Object.keys(s.schedule).filter(
+          (k) => !this.periods.map((p) => p.name).includes(k)
+        );
+        irrelevant.forEach((p) => {
+          const temp = s.schedule[p];
+          if (!temp)
+            s.schedule[p] = {
+              activity: DEFAULT_ACTIVITY.name,
+              locked: false,
+            };
+          else s.schedule[p] = { ...temp, activity: DEFAULT_ACTIVITY.name };
+        });
       });
   }
 
