@@ -3,7 +3,7 @@
 
     <mat-form-field appearance="outline">
         <mat-label>Period</mat-label>
-        <mat-select [(value)]="selected" style="color: black;" (selectionChange)="onPeriodSelected($event.value)">
+        <mat-select [(value)]="selected" (selectionChange)="onPeriodSelected($event.value)">
             <mat-option *ngFor="let period of periods" [value]="period">
                 {{ period.name + ' (' + period.start + ' - ' + period.end + ')' }}
             </mat-option>

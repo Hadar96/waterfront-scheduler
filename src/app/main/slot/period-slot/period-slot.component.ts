@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Activity } from 'src/app/models/activity';
+import { Activity, DEFAULT_ACTIVITY } from 'src/app/models/activity';
 import { Lifeguard } from 'src/app/models/lifeguard';
 import { Period } from 'src/app/models/period';
 import { appStore } from 'src/app/services/store';
@@ -48,7 +48,7 @@ export class PeriodSlotComponent implements OnInit {
     appStore.updateState({
       lifeguards: appStore.getSnapshot().lifeguards.map((l) => {
         if (l.schedule[this.period.name])
-          l.schedule[this.period.name].activity = '';
+          l.schedule[this.period.name].activity = DEFAULT_ACTIVITY.name;
         return new Lifeguard(l);
       }),
     });

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { appStore } from '../services/store';
 import { DayType } from '../models/daytype';
-import { Activity } from '../models/activity';
+import { Activity, DEFAULT_ACTIVITY } from '../models/activity';
 import { DbService } from '../services/db.service';
 import { UtilsService } from '../services/utils.service';
 import { Lifeguard } from '../models/lifeguard';
@@ -77,5 +77,18 @@ export class MainComponent {
     await this.xls.exportColoredScheduleWithExcelJS();
     // this.xls.exportTableToExcel('schedule-table');
     // this.xls.exportToColoredSchedule();
+  }
+
+  updateDaycampCounter() {
+    const staff = appStore.getSnapshot().lifeguards;
+    staff
+      .filter(
+        (s) =>
+          s.schedule['Day camp'] &&
+          s.schedule['Day camp'].activity != DEFAULT_ACTIVITY.name &&
+          s.schedule['Day camp'].activity != 'DOFF'
+      )
+      .forEach((s) => s.daycampCount++);
+    appStore.updateState({ lifeguards: staff });
   }
 }
