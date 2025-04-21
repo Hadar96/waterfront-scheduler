@@ -1,21 +1,21 @@
-<div class="header">
+    <div class="header">
     <button mat-icon-button [routerLink]="'/settings'">
-        <mat-icon>settings</mat-icon>
-    </button>
+            <mat-icon>settings</mat-icon>
+        </button>
 
-    <span class="date">
-        {{ today | date:'fullDate' }}
-    </span>
+        <span class="date">
+            {{ today | date:'fullDate' }}
+        </span>
 
-    <table class="act-menu">
-        <td *ngFor="let activity of activities" class="act-menu-item" [ngClass]="{'inactive': !activity.available}"
-            [style.--bg-color]="activity.color" (click)="changeActStatus(activity)">
-            {{ activity.name }}
-        </td>
-    </table>
-</div> <br>
+        <table class="act-menu">
+            <td *ngFor="let activity of activities" class="act-menu-item" [ngClass]="{'inactive': !activity.available}"
+                [style.--bg-color]="activity.color" (click)="changeActStatus(activity)">
+                {{ activity.name }}
+            </td>
+        </table>
+    </div> <br>
 
-<schedule-table></schedule-table>
+    <schedule-table></schedule-table>
 
 <br>
 <div class="footer">
@@ -28,17 +28,17 @@
         </mat-select>
     </mat-form-field>
 
-    <button mat-icon-button style="color:rgb(85, 226, 85)" (click)="exportExcel()">
+    <!-- <button mat-icon-button style="color:rgb(85, 226, 85)" (click)="exportImage()">
         <i class="fas fa-file-excel"></i>
-    </button>
-    <button mat-icon-button style="color: gold;" (click)="saveAllChanges()">
-        <i class="fas fa-save"></i>
-    </button>
+    </button> -->
     <button mat-icon-button style="color: lightcoral;" (click)="generateSchedule()">
         <i class="fas fa-play-circle"></i>
     </button>
     <button mat-icon-button (click)="lockAll()">
         <i *ngIf="!isAllLocked" class="fas fa-table-cells-row-lock"></i>
         <i *ngIf="isAllLocked" class="fas fa-table-cells-row-unlock"></i>
+    </button>
+    <button mat-icon-button style="color: gold;" (click)="saveAllChanges()">
+        <i class="fas fa-save"></i>
     </button>
 </div>

@@ -131,7 +131,7 @@
         "Ofarim": { "activity": "HOFF", "locked": false },
         "Tzofim": { "activity": "Pool", "locked": false },
         "Chaluzim": { "activity": "Lake", "locked": true },
-        "K/Bonim": { "activity": "HOFF", "locked": true },
+        "K/Bonim": { "activity": "Pool", "locked": true },
         "Breira": { "activity": "Pool", "locked": true },
         "Olim": { "activity": "Lake", "locked": false }
       },
@@ -158,7 +158,7 @@
     {
       "name": "Aviv",
       "schedule": {
-        "Chaverim": { "activity": "HOFF", "locked": false },
+        "Chaverim": { "activity": "Lake", "locked": false },
         "Ofarim": { "activity": "Pool", "locked": false },
         "Tzofim": { "activity": "Lake", "locked": false },
         "Chaluzim": { "activity": "Pool", "locked": false },
@@ -182,6 +182,46 @@
         "Breira": { "activity": "Pool", "locked": false },
         "Olim": { "activity": "HOFF", "locked": false }
       },
+      "daycampCount": 0,
+      "partyCount": 0,
+      "preferPool": false,
+      "locked": false
+    },
+    {
+      "name": "Olaf2",
+      "schedule": {},
+      "daycampCount": 0,
+      "partyCount": 0,
+      "preferPool": false,
+      "locked": false
+    },
+    {
+      "name": "Olaf5",
+      "schedule": {},
+      "daycampCount": 0,
+      "partyCount": 0,
+      "preferPool": false,
+      "locked": false
+    },
+    {
+      "name": "Olaf4",
+      "schedule": {},
+      "daycampCount": 0,
+      "partyCount": 0,
+      "preferPool": false,
+      "locked": false
+    },
+    {
+      "name": "Olaf3",
+      "schedule": {},
+      "daycampCount": 0,
+      "partyCount": 0,
+      "preferPool": false,
+      "locked": false
+    },
+    {
+      "name": "Lotem",
+      "schedule": {},
       "daycampCount": 0,
       "partyCount": 0,
       "preferPool": false,

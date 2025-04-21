@@ -10,8 +10,7 @@
 <div *ngIf="openActMenu" class="slot-menu">
     <tr>
         <td *ngFor="let activity of activities" (click)="excludeActivity(activity, $event)"
-            [ngClass]="{'inactive': isActAvailable(activity)}"
-            [ngStyle]="{'background-color': (activity.name == DEFAULT_ACTIVITY.name) ? 'white' : activity.color}">
+            [ngClass]="{'inactive': isActAvailable(activity)}" [ngStyle]="{'background-color': activity.color}">
             {{ activity.name[0] }}
         </td>
     </tr>

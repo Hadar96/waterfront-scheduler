@@ -52,12 +52,13 @@ export class SlotComponent implements OnInit {
 
     if (this.type == SlotType.ACTIVITY) {
       const schedule = this.lifeguard.schedule[this.period.name];
-      if (schedule)
+      if (schedule) {
         this.lifeguard.schedule[this.period.name].activity = activity.name;
-      else
+        this.lifeguard.schedule[this.period.name].locked = true;
+      } else
         this.lifeguard.schedule[this.period.name] = {
           activity: activity.name,
-          locked: false,
+          locked: true,
         };
       this.updateState();
     }
@@ -66,6 +67,8 @@ export class SlotComponent implements OnInit {
       Object.keys(this.lifeguard.schedule).forEach((period) => {
         this.lifeguard.schedule[period].activity = activity.name;
       });
+      this.lifeguard.locked = true;
+
       const index = this.staffList.findIndex(
         (l) => l.name === this.lifeguard.name
       );

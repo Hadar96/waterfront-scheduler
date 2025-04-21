@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Activity, DEFAULT_ACTIVITY } from 'src/app/models/activity';
+import { Activity } from 'src/app/models/activity';
 import { Lifeguard } from 'src/app/models/lifeguard';
 import { Period } from 'src/app/models/period';
 import { appStore } from 'src/app/services/store';
@@ -11,13 +11,10 @@ import { appStore } from 'src/app/services/store';
 })
 export class PeriodSlotComponent implements OnInit {
   @Input() period: Period = {} as Period;
-  activities: Activity[] = appStore
-    .getSnapshot()
-    .activities.concat([DEFAULT_ACTIVITY]);
+  activities: Activity[] = appStore.getSnapshot().activities;
   openActMenu: boolean = false;
   isLocked: boolean = false;
   isDisabled: boolean = false;
-  DEFAULT_ACTIVITY = DEFAULT_ACTIVITY;
 
   constructor() {}
 
