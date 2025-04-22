@@ -30,23 +30,11 @@ export class UtilsService {
   }
 
   generateSchedule() {
-    /*
-    1. Reset all schedules of staff - except the locked
-        Set for every period/slot DEFAULT_ACTIVITY
-    2. Assign HOFFs - 1 for every staff members.
-        In every period assign (staff num / num of periods allowed for hoff) members to that activity
-    3. Fill the rest of schedule period by period
-        a) Loop the periods list - except locked
-            I) For every period create a counter for activities
-            II) If maxed out activity - filter it ; if all maxed out - assign "Bunk time"
-        b) Select staff member to assign to
-            Loop the staff list or randomize member
-        c) Filter available activities - availability, excluded, max/hasn't reached min
-        d) Randomize activity
-    */
-
+    // Reset all schedules of staff - except the locked
     this.resetSchedules();
+    // Assign HOFFs - 1 for every staff members
     this.assignHoffs();
+    // Assign period by period according to rules
     this.assignActivities();
 
     this.staffList = this.staffList.map((staff) => new Lifeguard(staff));
@@ -116,11 +104,11 @@ export class UtilsService {
   private assignActivities() {
     const isStaffAvailable = (lg: Lifeguard, p: Period): boolean =>
       !lg.locked && lg.schedule[p.name].activity == DEFAULT_ACTIVITY.name;
-
-    const periods = this.periods.filter((p) => !p.locked);
     const randStaff = this.createUniqueRandomPicker(
       this.staffList.filter((s) => !s.locked)
     );
+
+    const periods = this.periods.filter((p) => !p.locked);
 
     periods.forEach((p) => {
       // what are the available activities to draw for the current period?
@@ -134,12 +122,13 @@ export class UtilsService {
       let currStaff = randStaff(true);
       while (currStaff) {
         if (isStaffAvailable(currStaff, p)) {
-          const actName = this.randomizeFromArr(
-            this.getPossibleActsInPeriod(
-              activities.map((a) => a.name),
-              actCounter
-            )
+          const optionalActs = this.getPossibleActsInPeriod(
+            activities.map((a) => a.name),
+            actCounter
           );
+          const actName =
+            this.getByPreferation(currStaff, optionalActs) ||
+            this.randomizeFromArr(optionalActs);
           // Assign the lifeguard to activity in current period
           currStaff.schedule[p.name].activity = actName;
           actCounter[actName] != undefined && actCounter[actName].curr++;
@@ -221,6 +210,13 @@ export class UtilsService {
     });
 
     return counter;
+  }
+
+  private getByPreferation(lg: Lifeguard, acts: string[]): string | undefined {
+    if (lg.preferPool == undefined) return undefined;
+    if (lg.preferPool && acts.includes('Pool')) return 'Pool';
+    if (!lg.preferPool && acts.includes('Lake')) return 'Lake';
+    return undefined;
   }
 
   /** Gets a counter object and returns a random minimal attribute */
