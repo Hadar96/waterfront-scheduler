@@ -4,19 +4,22 @@ export class Activity {
   private _min?: number;
   private _max?: number;
   private _available: boolean;
+  private _allowLT: boolean;
 
   constructor(
     name: string,
     color: string = '#ffffff',
     min?: number,
     max?: number,
-    available: boolean = true
+    allowLT: boolean = true,
+    available: boolean = true,
   ) {
     this._name = name;
     this._color = color;
     this._min = min;
     this._max = max;
     this._available = available;
+    this._allowLT = allowLT;
   }
 
   get name(): string {
@@ -57,6 +60,14 @@ export class Activity {
 
   set available(value: boolean) {
     this._available = value;
+  }
+
+  get allowLT(): boolean {
+    return this._allowLT;
+  }
+
+  set allowLT(value: boolean) {
+    this._allowLT = value;
   }
 }
 

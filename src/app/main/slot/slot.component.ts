@@ -93,8 +93,10 @@ export class SlotComponent implements OnInit {
     if (this.type == SlotType.ACTIVITY)
       this.lifeguard.schedule[this.period.name].pm = event.checked;
     if (this.type == SlotType.STAFF) {
-      for (const period in this.lifeguard.schedule)
-        this.lifeguard.schedule[period].pm = event.checked;
+      for (const period in this.lifeguard.schedule) {
+        if (this.lifeguard.schedule[period].activity != 'HOFF')
+          this.lifeguard.schedule[period].pm = event.checked;
+      }
     }
     this.updateState();
     this.openActMenu = false;

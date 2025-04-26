@@ -25,6 +25,7 @@ export class ActionListComponent {
       color: new FormControl(),
       min: new FormControl(),
       max: new FormControl(),
+      allowLT: new FormControl(),
     });
 
     this.updateFormWithSelected();
@@ -37,6 +38,7 @@ export class ActionListComponent {
         color: this.selectedAct.color,
         min: this.selectedAct.min,
         max: this.selectedAct.max,
+        allowLT: this.selectedAct.allowLT,
       });
     }
   }
@@ -77,6 +79,7 @@ export class ActionListComponent {
     this.selectedAct.color = this.activityForm.value.color;
     this.selectedAct.min = this.activityForm.value.min;
     this.selectedAct.max = this.activityForm.value.max;
+    this.selectedAct.allowLT = this.activityForm.value.allowLT;
     this.actList.push(this.selectedAct);
 
     // Remove duplicates

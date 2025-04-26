@@ -7,11 +7,13 @@ export class Lifeguard {
   private _preferPool: boolean | undefined;
   private _locked: boolean;
   private _isLT: boolean;
+  private _isBoss: boolean;
 
   constructor(
     nameOrCopy: string | Lifeguard,
     schedule: Schedule = {},
     isLT: boolean = false,
+    isBoss: boolean = false,
     preferPool?: boolean,
     hoffCo?: string,
     locked: boolean = false,
@@ -28,6 +30,7 @@ export class Lifeguard {
       this._locked = locked;
       this._hoffCo = hoffCo;
       this._isLT = isLT;
+      this._isBoss = isBoss;
     } else if (nameOrCopy instanceof Lifeguard) {
       // Copy constructor logic
       this._name = nameOrCopy.name;
@@ -38,6 +41,7 @@ export class Lifeguard {
       this._locked = nameOrCopy.locked;
       this._hoffCo = nameOrCopy.hoffCo;
       this._isLT = nameOrCopy.isLT;
+      this._isBoss = nameOrCopy.isBoss;
     } else {
       throw new Error('Invalid constructor arguments');
     }
@@ -97,6 +101,14 @@ export class Lifeguard {
 
   set isLT(isLT: boolean) {
     this._isLT = isLT;
+  }
+
+  get isBoss(): boolean {
+    return this._isBoss;
+  }
+
+  set isBoss(isBoss: boolean) {
+    this._isBoss = isBoss;
   }
 
   get hoffCo(): string | undefined {

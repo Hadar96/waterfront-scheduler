@@ -44,6 +44,9 @@
                 <input matInput formControlName="max" type="number" />
             </mat-form-field>
 
+            <br>
+            <mat-checkbox formControlName="allowLT">Is LT allowed?</mat-checkbox>
+
             <div style="margin-top: 15px;">
                 <button mat-raised-button color="primary" type="button" (click)="onSubmit()">Save</button>
                 <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancel</button>

@@ -33,6 +33,8 @@ export class UtilsService {
     this.assignHoffs();
     // Assign period by period according to rules
     this.assignActivities();
+    // Assign a manager for every LT-allowed activity
+    this.assignManagers();
 
     this.staffList = this.staffList.map((staff) => new Lifeguard(staff));
     appStore.updateState({ lifeguards: this.staffList });
@@ -53,7 +55,11 @@ export class UtilsService {
                 locked: false,
               };
             else if (!temp.locked)
-              s.schedule[p.name] = { ...temp, activity: DEFAULT_ACTIVITY.name };
+              s.schedule[p.name] = {
+                ...temp,
+                activity: DEFAULT_ACTIVITY.name,
+                pm: false,
+              };
           });
         // reset all the irrelevant periods in the schedule (i.e "Bonim" is irrelevant if Saturday)
         const irrelevant = Object.keys(s.schedule).filter(
@@ -104,7 +110,7 @@ export class UtilsService {
     const isStaffAvailable = (lg: Lifeguard, p: Period): boolean =>
       !lg.locked && lg.schedule[p.name].activity == DEFAULT_ACTIVITY.name;
     const randStaff = this.createUniqueRandomPicker(
-      this.staffList.filter((s) => !s.locked)
+      this.staffList.filter((s) => !s.locked && !s.isLT)
     );
 
     const periods = this.periods.filter((p) => !p.locked);
@@ -137,6 +143,50 @@ export class UtilsService {
     });
   }
 
+  /** Assign only LTs - at least 1 LT (as manager) for each activity allowed for LTs */
+  private assignManagers() {
+    const isStaffAvailable = (lg: Lifeguard, p: Period): boolean =>
+      !lg.locked && lg.schedule[p.name].activity == DEFAULT_ACTIVITY.name;
+    const randStaff = this.createUniqueRandomPicker(
+      this.staffList.filter((s) => !s.locked && s.isLT)
+    );
+
+    const periods = this.periods.filter((p) => !p.locked);
+
+    periods.forEach((p) => {
+      // what are the available activities to draw for the current period?
+      let activities = this.activities
+        .filter((a) => a.available)
+        .filter((a) => a.name !== 'HOFF')
+        .filter((a) => !p.excludedActions.includes(a.name))
+        .filter((a) => a.allowLT);
+      const actCounter = this.resetActCounter(activities, true);
+
+      // Draw a random LT
+      let currLT = randStaff(true);
+      while (currLT) {
+        if (isStaffAvailable(currLT, p)) {
+          const optionalActs = this.getPossibleActsInPeriod(
+            activities.map((a) => a.name),
+            actCounter
+          );
+          const actName = this.randomizeFromArr(optionalActs);
+          currLT.schedule[p.name].activity = actName;
+          actCounter[actName] != undefined && actCounter[actName].curr++;
+
+          if (currLT.isBoss) {
+            currLT.schedule[p.name].pm = true;
+            actCounter[actName].hasPM = true;
+          } else if (!actCounter[actName].hasPM) {
+            currLT.schedule[p.name].pm = true;
+            actCounter[actName].hasPM = true;
+          }
+        }
+        currLT = randStaff();
+      }
+    });
+  }
+
   //#region Helper Methods
 
   /** filter the possible activities according to the periodical activities counter */
@@ -157,7 +207,8 @@ export class UtilsService {
     return [DEFAULT_ACTIVITY.name];
   }
 
-  /** Returns a function that randomize a unique item from `items` */
+  /** Returns a function that randomize a unique item from `items`.
+   * The boss will always be the first to be drawn */
   createUniqueRandomPicker<T>(items: T[]) {
     let picked = new Set<T>();
 
@@ -169,6 +220,12 @@ export class UtilsService {
       const remaining = items.filter((item) => !picked.has(item));
       if (remaining.length === 0) return undefined;
 
+      const boss = remaining.find((i: any) => i.isBoss);
+      if (boss) {
+        picked.add(boss);
+        return boss;
+      }
+
       const randomItem =
         remaining[Math.floor(Math.random() * remaining.length)];
       picked.add(randomItem);
@@ -176,11 +233,13 @@ export class UtilsService {
     };
   }
 
-  private resetActCounter(activities: Activity[]) {
+  private resetActCounter(activities: Activity[], modeLT = false) {
     return activities.reduce((acc, activity) => {
-      acc[activity.name] = { curr: 0, min: activity.min, max: activity.max };
+      acc[activity.name] = modeLT
+        ? { curr: 0, min: 1, max: undefined, hasPM: false }
+        : { curr: 0, min: activity.min, max: activity.max };
       return acc;
-    }, {} as { [key: string]: { curr: number; min: number | undefined; max: number | undefined } });
+    }, {} as { [key: string]: { curr: number; min: number | undefined; max: number | undefined; hasPM?: boolean } });
   }
 
   /** Returns the amount of HOFFs assigned to lifeguards in each period */

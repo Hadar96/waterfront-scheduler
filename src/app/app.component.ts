@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
       .getData()
       .pipe(
         delay(1000),
-        map(data => this.convertToStoreState(data)),
+        map((data) => this.convertToStoreState(data)),
         finalize(() => (this.isLoading = false))
       )
       .subscribe(
@@ -56,10 +56,7 @@ export class AppComponent implements OnInit {
     const daytypes: DayType[] = [];
     rawTypes.forEach((rawType: any) => {
       const periods: Period[] = this.convertPeriods(rawType.periods);
-      const daytype: DayType = new DayType(
-        rawType.name,
-        periods
-      );
+      const daytype: DayType = new DayType(rawType.name, periods);
       daytypes.push(daytype);
     });
     return daytypes;
@@ -88,6 +85,7 @@ export class AppComponent implements OnInit {
         g.name,
         g.schedule,
         g.isLT,
+        g.isBoss,
         g.preferPool,
         g.hoffCo,
         g.locked,
@@ -102,7 +100,14 @@ export class AppComponent implements OnInit {
   private convertActivities(raw: any): any {
     const actions: Activity[] = [];
     raw.forEach((a: any) => {
-      const action: Activity = new Activity(a.name, a.color, a.min, a.max);
+      const action: Activity = new Activity(
+        a.name,
+        a.color,
+        a.min,
+        a.max,
+        a.allowLT,
+        a.available
+      );
       actions.push(action);
     });
     return actions;
