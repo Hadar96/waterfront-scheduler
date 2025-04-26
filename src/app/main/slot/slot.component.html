@@ -16,7 +16,7 @@
 </div>
 
 <!-- Activities Menu -->
-<div *ngIf="openActMenu" class="slot-menu">
+<div *ngIf="openActMenu" class="slot-menu" [class.lt]="lifeguard.isLT">
     <tr>
         <td *ngFor="let activity of activities" (click)="changeActivity(activity, $event)"
             [ngStyle]="{'background-color': (activity.name == DEFAULT_ACTIVITY.name) ? 'white' : activity.color}">

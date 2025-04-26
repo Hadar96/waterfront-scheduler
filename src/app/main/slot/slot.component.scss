@@ -24,6 +24,7 @@
     z-index: 1;
     border: solid whitesmoke 1px;
     padding: 1%;
+    white-space: nowrap;
     background-color: #000020;
     color: black;
 
@@ -37,6 +38,10 @@
             width: 15px;
         }
     }
+}
+
+.slot-menu.lt {
+    translate: -70%;
 }
 
 .lg-name {

@@ -46,16 +46,18 @@ export class UtilsService {
     this.staffList
       .filter((s) => !s.locked)
       .forEach((s) => {
-        this.periods.forEach((p) => {
-          const temp = s.schedule[p.name];
-          if (!temp)
-            s.schedule[p.name] = {
-              activity: DEFAULT_ACTIVITY.name,
-              locked: false,
-            };
-          else if (!temp.locked)
-            s.schedule[p.name] = { ...temp, activity: DEFAULT_ACTIVITY.name };
-        });
+        this.periods
+          .filter((p) => p.workingPeriod)
+          .forEach((p) => {
+            const temp = s.schedule[p.name];
+            if (!temp)
+              s.schedule[p.name] = {
+                activity: DEFAULT_ACTIVITY.name,
+                locked: false,
+              };
+            else if (!temp.locked)
+              s.schedule[p.name] = { ...temp, activity: DEFAULT_ACTIVITY.name };
+          });
         // reset all the irrelevant periods in the schedule (i.e "Bonim" is irrelevant if Saturday)
         const irrelevant = Object.keys(s.schedule).filter(
           (k) => !this.periods.map((p) => p.name).includes(k)
