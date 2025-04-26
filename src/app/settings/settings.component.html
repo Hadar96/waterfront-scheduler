@@ -1,13 +1,13 @@
 <div class="settings-toolbar">
-    <button mat-button class="settings-btn" [routerLink]="'/'">
-        <mat-icon>home</mat-icon>
+    <button mat-icon-button class="settings-btn" [routerLink]="'/'">
+        <i class="fas fa-home"></i>
     </button>
-    <span>
-        <button mat-button color="primary" class="settings-btn" (click)="saveAllChanges()">
-            <mat-icon>save</mat-icon>
+    <span class="save-restore-btns">
+        <button mat-icon-button color="primary" class="settings-btn" (click)="saveAllChanges()">
+            <i class="fas fa-save"></i>
         </button>
-        <button mat-button color="warn" class="settings-btn" (click)="restoreData()">
-            <mat-icon>settings_backup_restore</mat-icon>
+        <button mat-icon-button color="warn" class="settings-btn" (click)="restoreData()">
+            <i class="fas fa-file-circle-xmark"></i>
         </button>
     </span>
 </div>

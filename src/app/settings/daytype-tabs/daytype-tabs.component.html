@@ -1,18 +1,20 @@
-<mat-tab-group [selectedIndex]="selectedIndex" (selectedTabChange)="onTabChange($event)">
-    <mat-tab *ngFor="let dayType of daytypeList$ | async; let i = index" [label]="dayType.name">
-        <form [formGroup]="daytypeForm">
-            <mat-form-field> <input matInput formControlName="name" /> </mat-form-field>
-            <period-list [periods]="selectedType.periods" (periodsChange)="onPeriodsChange($event)"></period-list>
+<div class="custom-tab-header">
+    <mat-tab-group [selectedIndex]="selectedIndex" (selectedTabChange)="onTabChange($event)">
+        <mat-tab *ngFor="let dayType of typeList; let i = index" [label]="dayType.name">
+            <form [formGroup]="daytypeForm">
+                <mat-form-field> <input matInput formControlName="name" /> </mat-form-field>
+                <period-list [periods]="selectedType.periods" (periodsChange)="onPeriodsChange($event)"></period-list>
+            </form>
+        </mat-tab>
+    </mat-tab-group>
 
-            <div style="margin-top: 15px;">
-                <button mat-icon-button color="primary" (click)="saveTab()"><mat-icon>save</mat-icon></button>
-                <button mat-icon-button color="warn" (click)="deleteTab()">
-                    <mat-icon>delete</mat-icon>
-                </button>
-                <button mat-icon-button color="accent" (click)="addTab()">
-                    <mat-icon>add</mat-icon>
-                </button><!-- <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancel edits</button> -->
-            </div>
-        </form>
-    </mat-tab>
-</mat-tab-group>
+    <span class="add-tab-button">
+        <button mat-icon-button color="accent" (click)="addTab()">
+            <i class="fas fa-plus"></i>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteTab()">
+            <i class="fas fa-trash"></i>
+        </button>
+        <button mat-icon-button color="primary" (click)="saveTab()"><i class="fas fa-save"></i></button>
+    </span>
+</div>

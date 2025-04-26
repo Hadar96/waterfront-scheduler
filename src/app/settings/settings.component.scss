@@ -48,3 +48,13 @@
     padding: 12px;
     border-radius: 8px;
 }
+
+.settings-btn-section {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 15px;
+}
+
+.save-restore-btns>* {
+    margin-left: 20px;
+}

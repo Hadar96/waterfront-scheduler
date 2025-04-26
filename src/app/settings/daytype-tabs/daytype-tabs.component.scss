@@ -1,0 +1,17 @@
+.custom-tab-header {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.add-tab-button {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    // top: 0px;
+    right: -60px;
+
+    button {
+        margin-bottom: 50%;
+    }
+}

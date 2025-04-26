@@ -1,5 +1,5 @@
 <div>
-    <span>Edit staff:</span>
+    <!-- <span>Edit staff:</span> -->
 
     <mat-form-field appearance="outline">
         <mat-label>Staff</mat-label>
@@ -12,13 +12,13 @@
 
     <span>
         <button mat-icon-button color="primary" (click)="editStaff()" class="menu-btn">
-            <mat-icon>edit</mat-icon>
+            <i class="fas fa-pen"></i>
         </button>
         <button mat-icon-button color="warn" (click)="deleteStaff()" class="menu-btn">
-            <mat-icon>delete</mat-icon>
+            <i class="fas fa-trash"></i>
         </button>
         <button mat-icon-button color="accent" (click)="addStaff()" class="menu-btn">
-            <mat-icon>add</mat-icon>
+            <i class="fas fa-plus"></i>
         </button>
     </span>
 
@@ -48,7 +48,7 @@
             </div>
             <mat-checkbox formControlName="isLT">Pool Manager?</mat-checkbox>
 
-            <div style="margin-top: 15px;">
+            <div class="settings-btn-section">
                 <button mat-raised-button color="primary" type="button" class="menu-btn"
                     (click)="onSubmit()">Save</button>
                 <button mat-raised-button color="warn" type="button" class="menu-btn" (click)="cancel()">Cancel</button>

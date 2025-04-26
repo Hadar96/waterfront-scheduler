@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { Observable } from 'rxjs';
 import { DayType } from 'src/app/models/daytype';
 import { appStore } from 'src/app/services/store';
 import { Period } from 'src/app/models/period';
@@ -12,14 +11,12 @@ import { Period } from 'src/app/models/period';
   styleUrls: ['./daytype-tabs.component.scss'],
 })
 export class DaytypeTabsComponent {
-  daytypeList$: Observable<DayType[]>;
   typeList: DayType[];
   selectedType: DayType;
   daytypeForm: FormGroup;
   selectedIndex: number = 0;
 
   constructor() {
-    this.daytypeList$ = appStore.getAllDayTypes();
     this.typeList = appStore.getSnapshot().daytypes;
     this.selectedType = this.typeList[this.selectedIndex];
     this.daytypeForm = new FormGroup({

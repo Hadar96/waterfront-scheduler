@@ -1,5 +1,5 @@
 <div>
-    <span>Edit activities:</span>
+    <!-- <span>Edit activities:</span> -->
 
     <mat-form-field appearance="outline">
         <mat-label>Activity</mat-label>
@@ -11,14 +11,14 @@
     </mat-form-field>
 
     <span>
-        <button mat-icon-button color="primary" (click)="editAct()" style="border: 1px solid;">
-            <mat-icon>edit</mat-icon>
+        <button mat-icon-button color="primary" (click)="editAct()">
+            <i class="fas fa-pen"></i>
         </button>
-        <button mat-icon-button color="warn" (click)="deleteAct()" style="border: 1px solid;">
-            <mat-icon>delete</mat-icon>
+        <button mat-icon-button color="warn" (click)="deleteAct()">
+            <i class="fas fa-trash"></i>
         </button>
-        <button mat-icon-button color="accent" (click)="addAct()" style="border: 1px solid;">
-            <mat-icon>add</mat-icon>
+        <button mat-icon-button color="accent" (click)="addAct()">
+            <i class="fas fa-plus"></i>
         </button>
     </span>
 
@@ -47,7 +47,7 @@
             <br>
             <mat-checkbox formControlName="allowLT">Is LT allowed?</mat-checkbox>
 
-            <div style="margin-top: 15px;">
+            <div class="settings-btn-section">
                 <button mat-raised-button color="primary" type="button" (click)="onSubmit()">Save</button>
                 <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancel</button>
             </div>
