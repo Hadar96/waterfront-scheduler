@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Lifeguard, Schedule } from '../models/lifeguard';
 import { Activity, DEFAULT_ACTIVITY } from '../models/activity';
 import { appStore } from './store';
-import { ActRule } from '../settings/activity-rules/activity-rules.component';
 import { Period } from '../models/period';
 
 @Injectable({
@@ -14,11 +13,9 @@ export class UtilsService {
     .getSnapshot()
     .activities.filter((a) => a.available);
   periods: Period[] = appStore.getSnapshot().currentDayType.periods;
-  rules: ActRule[] = appStore.getSnapshot().currentDayType.actRules;
 
   constructor() {
     appStore.getCurrentDayType().subscribe((dayType) => {
-      this.rules = dayType.actRules;
       this.periods = dayType.periods;
     });
     appStore.getLifeguards().subscribe((lifeguards) => {
@@ -181,12 +178,7 @@ export class UtilsService {
 
   private resetActCounter(activities: Activity[]) {
     return activities.reduce((acc, activity) => {
-      const rule = this.rules.find((r) => r.name == activity.name) || {
-        name: activity.name,
-        min: undefined,
-        max: undefined,
-      };
-      acc[activity.name] = { curr: 0, min: rule.min, max: rule.max };
+      acc[activity.name] = { curr: 0, min: activity.min, max: activity.max };
       return acc;
     }, {} as { [key: string]: { curr: number; min: number | undefined; max: number | undefined } });
   }
@@ -237,89 +229,6 @@ export class UtilsService {
 
   private isInDoff(lg: Lifeguard): boolean {
     return lg.locked && Object.values(lg.schedule)[0].activity == 'DOFF';
-  }
-
-  //#endregion
-
-  //#region PREVIOUS METHODS
-
-  generateScheduleOLD() {
-    const rulesCount = this.rules.reduce(
-      (acc: { [key: string]: { max: number; min: number } }, rule) => {
-        acc[rule.name] = { max: rule.max ?? 0, min: rule.min ?? 0 };
-        return acc;
-      },
-      {}
-    );
-    const hasHoff = this.staffList.reduce(
-      (acc: { [key: string]: boolean }, staff) => {
-        let flag = false;
-        if (staff.schedule) {
-          for (const period in staff.schedule) {
-            if (
-              staff.schedule[period].activity === 'HOFF' &&
-              staff.schedule[period].locked
-            ) {
-              flag = true;
-              break;
-            }
-          }
-        }
-        acc[staff.name] = flag;
-        return acc;
-      },
-      {}
-    );
-
-    this.periods.forEach((period) => {
-      if (period.locked) return;
-
-      let periodicalActivityCount = this.resetActivityCount();
-      this.staffList.forEach((staff) => {
-        if (staff.schedule) {
-          const periodAssign = staff.schedule[period.name];
-          if (periodAssign && (periodAssign.locked || staff.locked))
-            periodicalActivityCount[periodAssign.activity]++;
-        }
-      });
-
-      this.staffList.forEach((staff) => {
-        if (staff.locked || staff.schedule[period.name]?.locked) return;
-
-        const allowHoff =
-          !hasHoff[staff.name] &&
-          periodicalActivityCount['HOFF'] < rulesCount['HOFF'].max;
-
-        const activity = this.randomizeActivity(allowHoff);
-        staff.schedule[period.name] = staff.schedule[period.name]
-          ? { ...staff.schedule[period.name], activity: activity.name }
-          : { activity: activity.name, locked: false };
-        periodicalActivityCount[activity.name]++;
-
-        if (activity.name === 'HOFF') {
-          hasHoff[staff.name] = true;
-          staff.schedule[period.name].pm = false;
-        }
-      });
-    });
-
-    this.staffList = this.staffList.map((staff) => new Lifeguard(staff));
-    appStore.updateState({ lifeguards: this.staffList });
-  }
-
-  private randomizeActivity(allowHoff: boolean = true): Activity {
-    const allowedActivities = allowHoff
-      ? this.activities
-      : this.activities.filter((act) => act.name !== 'HOFF');
-
-    return this.randomizeFromArr(allowedActivities);
-  }
-
-  private resetActivityCount(): { [key: string]: number } {
-    return this.activities.reduce((acc, activity) => {
-      acc[activity.name] = 0;
-      return acc;
-    }, {} as { [key: string]: number });
   }
 
   //#endregion

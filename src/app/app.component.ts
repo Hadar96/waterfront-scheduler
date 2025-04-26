@@ -58,8 +58,7 @@ export class AppComponent implements OnInit {
       const periods: Period[] = this.convertPeriods(rawType.periods);
       const daytype: DayType = new DayType(
         rawType.name,
-        periods,
-        rawType.actRules
+        periods
       );
       daytypes.push(daytype);
     });

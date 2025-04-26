@@ -4,7 +4,6 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Observable } from 'rxjs';
 import { DayType } from 'src/app/models/daytype';
 import { appStore } from 'src/app/services/store';
-import { ActRule } from '../activity-rules/activity-rules.component';
 import { Period } from 'src/app/models/period';
 
 @Component({
@@ -28,11 +27,6 @@ export class DaytypeTabsComponent {
     });
 
     this.updateFormWithSelected();
-  }
-
-  onRulesChange(updatedRules: ActRule[]) {
-    this.selectedType.actRules = updatedRules;
-    this.updateSelectedTypeInList();
   }
 
   onPeriodsChange(updatedPeriods: Period[]) {

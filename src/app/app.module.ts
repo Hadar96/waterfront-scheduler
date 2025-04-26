@@ -24,7 +24,6 @@ import { StaffListComponent } from './settings/staff-list/staff-list.component';
 import { ActionListComponent } from './settings/action-list/action-list.component';
 import { DaytypeTabsComponent } from './settings/daytype-tabs/daytype-tabs.component';
 import { PeriodListComponent } from './settings/period-list/period-list.component';
-import { ActivityRulesComponent } from './settings/activity-rules/activity-rules.component';
 import { SlotComponent } from './main/slot/slot.component';
 import { ScheduleTableComponent } from './main/schedule-table/schedule-table.component';
 import { PeriodSlotComponent } from './main/slot/period-slot/period-slot.component';
@@ -38,7 +37,6 @@ import { PeriodSlotComponent } from './main/slot/period-slot/period-slot.compone
     ActionListComponent,
     DaytypeTabsComponent,
     PeriodListComponent,
-    ActivityRulesComponent,
     SlotComponent,
     ScheduleTableComponent,
     PeriodSlotComponent,

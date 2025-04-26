@@ -46,10 +46,6 @@
           "name": "Pool party",
           "locked": true
         }
-      ],
-      "actRules": [
-        { "name": "Pool", "max": 10, "min": 6 },
-        { "name": "Lake", "max": 10, "min": 6 }
       ]
     },
     {
@@ -68,10 +64,6 @@
         { "start": "1300", "end": "1340", "name": "Day camp", "locked": true },
         { "start": "1400", "end": "1450", "name": "Chaverim" },
         { "start": "1500", "end": "1550", "name": "K/Bolim" }
-      ],
-      "actRules": [
-        { "name": "Pool", "max": 10, "min": 6 },
-        { "name": "Lake", "max": 10, "min": 6 }
       ]
     },
     {
@@ -87,8 +79,7 @@
           "name": "Pool party",
           "locked": true
         }
-      ],
-      "actRules": [{ "name": "Pool", "max": 10, "min": 5 }]
+      ]
     }
   ],
   "activities": [

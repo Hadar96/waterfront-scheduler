@@ -23,6 +23,8 @@ export class ActionListComponent {
     this.activityForm = new FormGroup({
       name: new FormControl(),
       color: new FormControl(),
+      min: new FormControl(),
+      max: new FormControl(),
     });
 
     this.updateFormWithSelected();
@@ -33,12 +35,14 @@ export class ActionListComponent {
       this.activityForm.patchValue({
         name: this.selectedAct.name,
         color: this.selectedAct.color,
+        min: this.selectedAct.min,
+        max: this.selectedAct.max,
       });
     }
   }
 
   addAct() {
-    this.selectedAct = new Activity("");
+    this.selectedAct = new Activity('');
     this.showForm = true;
     this.updateFormWithSelected(); // Update the form with the new staff
   }
@@ -71,12 +75,13 @@ export class ActionListComponent {
   onSubmit() {
     this.selectedAct.name = this.activityForm.value.name;
     this.selectedAct.color = this.activityForm.value.color;
+    this.selectedAct.min = this.activityForm.value.min;
+    this.selectedAct.max = this.activityForm.value.max;
     this.actList.push(this.selectedAct);
 
     // Remove duplicates
     this.actList = this.actList.filter(
-      (act, index, self) =>
-        index === self.findIndex((a) => a.name === act.name)
+      (act, index, self) => index === self.findIndex((a) => a.name === act.name)
     );
 
     // Update the app state

@@ -34,6 +34,16 @@
                 <input matInput formControlName="color" type="color" />
             </mat-form-field>
 
+            <br>
+            <mat-form-field appearance="outline">
+                <mat-label>At least:</mat-label>
+                <input matInput formControlName="min" type="number" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>At most:</mat-label>
+                <input matInput formControlName="max" type="number" />
+            </mat-form-field>
+
             <div style="margin-top: 15px;">
                 <button mat-raised-button color="primary" type="button" (click)="onSubmit()">Save</button>
                 <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancel</button>

@@ -6,13 +6,11 @@ export class DayType {
   private _name: string;
   private _id: number;
   private _periods: Period[];
-  private _actRules: any[] = [];
 
-  constructor(name: string, periods: Period[] = [], actRules = []) {
+  constructor(name: string, periods: Period[] = []) {
     this._id = ++DayType._autoId;
     this._name = name;
     this._periods = periods;
-    this._actRules = actRules;
   }
 
   // Getter and Setter for Name
@@ -40,14 +38,5 @@ export class DayType {
 
   set periods(value: Period[]) {
     this._periods = value;
-  }
-
-  // Getter and Setter for Periods
-  get actRules(): any[] {
-    return this._actRules;
-  }
-
-  set actRules(value: any[]) {
-    this._actRules = value;
   }
 }

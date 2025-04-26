@@ -3,7 +3,6 @@
         <form [formGroup]="daytypeForm">
             <mat-form-field> <input matInput formControlName="name" /> </mat-form-field>
             <period-list [periods]="selectedType.periods" (periodsChange)="onPeriodsChange($event)"></period-list>
-            <activity-rules [rules]="selectedType.actRules" (rulesChange)="onRulesChange($event)"></activity-rules>
 
             <div style="margin-top: 15px;">
                 <button mat-icon-button color="primary" (click)="saveTab()"><mat-icon>save</mat-icon></button>
