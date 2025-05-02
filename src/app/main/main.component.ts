@@ -74,6 +74,7 @@ export class MainComponent {
   }
 
   async exportExcel() {
+    // await this.xls.exportPinkTable();
     await this.xls.exportColoredScheduleWithExcelJS();
     // this.xls.exportTableToExcel('schedule-table');
     // this.xls.exportToColoredSchedule();

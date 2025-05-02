@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as XLSX from 'xlsx';
-// import * as ExcelJS from 'exceljs';
 // @ts-ignore
 import ExcelJS from 'exceljs/dist/exceljs.bare';
 import { saveAs } from 'file-saver';
@@ -12,7 +10,108 @@ import { appStore } from './store';
 export class ExcelExportService {
   constructor() {}
 
-  async exportColoredScheduleWithExcelJS() {
+  async exportColoredScheduleWithExcelJS(): Promise<void> {
+    const staffList = appStore.getSnapshot().lifeguards;
+    const periods = appStore.getSnapshot().currentDayType.periods;
+    const activities = appStore.getSnapshot().activities;
+
+    const getColorForActivity = (name: string): string => {
+      return activities.find((a) => a.name === name)?.color ?? '#FFFFFF';
+    };
+
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Schedule');
+
+    // Header row
+    const headerRow = ['', ...staffList.map((s) => s.name)];
+    worksheet.addRow(headerRow);
+
+    // Style header
+    const header = worksheet.getRow(1);
+    header.eachCell((cell: any) => {
+      cell.font = { bold: true };
+      cell.alignment = {
+        horizontal: 'center',
+        vertical: 'middle',
+        wrapText: true,
+      };
+      cell.fill = {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: 'FFDDDDDD' },
+      };
+      cell.border = {
+        top: { style: 'thin' },
+        bottom: { style: 'thin' },
+        left: { style: 'thin' },
+        right: { style: 'thin' },
+      };
+    });
+
+    // Data rows
+    for (const period of periods) {
+      const rowData = [
+        `${period.name}\n(${period.start}-${period.end})`,
+        ...staffList.map((s) => s.schedule[period.name]?.activity ?? ''),
+      ];
+      const row = worksheet.addRow(rowData);
+      row.height = 30;
+
+      row.eachCell((cell: any, colNumber: any) => {
+        cell.alignment = {
+          vertical: 'middle',
+          horizontal: 'center',
+          wrapText: true,
+        };
+        cell.border = {
+          top: { style: 'thin' },
+          bottom: { style: 'thin' },
+          left: { style: 'thin' },
+          right: { style: 'thin' },
+        };
+
+        if (colNumber === 1) return; // don't color period names
+
+        const activity = cell.value?.toString() ?? '';
+        if (!activity.trim()) return;
+
+        const hexColor = getColorForActivity(activity)
+          .replace('#', '')
+          .toUpperCase();
+        const argb = `FF${hexColor}`; // Ensure alpha channel
+
+        cell.fill = {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: { argb },
+        };
+      });
+    }
+
+    // Auto width for all columns
+    worksheet.columns.forEach((col: any) => {
+      let maxLength = 10;
+      col.eachCell({ includeEmpty: true }, (cell: any) => {
+        const val = cell.value?.toString() ?? '';
+        maxLength = Math.max(maxLength, val.length);
+      });
+      col.width = maxLength + 2;
+    });
+
+    // Export file
+    const buffer = await workbook.xlsx.writeBuffer();
+    const date = new Date();
+    const ddmm = `${date.getDate().toString().padStart(2, '0')}${(
+      date.getMonth() + 1
+    )
+      .toString()
+      .padStart(2, '0')}`;
+    const fileName = `wf-schedule_${ddmm}.xlsx`;
+
+    saveAs(new Blob([buffer]), fileName);
+  }
+
+  async exportColoredScheduleWithExcelJSOLD() {
     const staffList = appStore.getSnapshot().lifeguards;
     const periods = appStore.getSnapshot().currentDayType.periods;
     const activities = appStore.getSnapshot().activities;
