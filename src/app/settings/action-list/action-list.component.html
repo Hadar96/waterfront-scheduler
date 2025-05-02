@@ -22,6 +22,10 @@
         </button>
     </span>
 
+    <span class="setting-sum">
+        Total activities: {{actList.length}}
+    </span>
+
     <div *ngIf="showForm">
         <form [formGroup]="activityForm">
             <mat-form-field appearance="outline">

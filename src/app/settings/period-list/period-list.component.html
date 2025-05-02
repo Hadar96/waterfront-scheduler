@@ -28,6 +28,8 @@
                 <mat-label>Name</mat-label>
                 <input matInput formControlName="name" />
             </mat-form-field>
+            <mat-checkbox formControlName="workingPeriod">Working Period</mat-checkbox>
+            <br>
             <mat-form-field appearance="outline">
                 <mat-label>Start at</mat-label>
                 <input matInput formControlName="start" />
@@ -36,7 +38,6 @@
                 <mat-label>End at</mat-label>
                 <input matInput formControlName="end" />
             </mat-form-field>
-            <mat-checkbox formControlName="workingPeriod">Working Period</mat-checkbox>
 
             <div class="settings-btn-section">
                 <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Save</button>

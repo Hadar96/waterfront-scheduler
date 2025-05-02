@@ -1,1 +1,9 @@
 @import "../settings.component.scss";
+
+::ng-deep.mat-mdc-tab-body.mat-mdc-tab-body-active {
+    overflow: hidden !important;
+}
+
+::ng-deep.mat-mdc-tab-body-content {
+    overflow: hidden !important;
+}
