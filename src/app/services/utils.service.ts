@@ -47,6 +47,7 @@ export class UtilsService {
       .forEach((s) => {
         this.periods
           .filter((p) => p.workingPeriod)
+          .filter((p) => !p.locked)
           .forEach((p) => {
             const temp = s.schedule[p.name];
             if (!temp)
@@ -107,14 +108,11 @@ export class UtilsService {
 
   /** Assign the rest of available activities period by period */
   private assignActivities() {
-    const isStaffAvailable = (lg: Lifeguard, p: Period): boolean =>
-      !lg.locked && lg.schedule[p.name].activity == DEFAULT_ACTIVITY.name;
     const randStaff = this.createUniqueRandomPicker(
       this.staffList.filter((s) => !s.locked && !s.isLT)
     );
 
     const periods = this.periods.filter((p) => !p.locked);
-
     periods.forEach((p) => {
       // what are the available activities to draw for the current period?
       let activities = this.activities
@@ -126,7 +124,7 @@ export class UtilsService {
       // Draw a random staff member
       let currStaff = randStaff(true);
       while (currStaff) {
-        if (isStaffAvailable(currStaff, p)) {
+        if (this.isStaffAvailable(currStaff, p)) {
           const optionalActs = this.getPossibleActsInPeriod(
             activities.map((a) => a.name),
             actCounter
@@ -145,14 +143,11 @@ export class UtilsService {
 
   /** Assign only LTs - at least 1 LT (as manager) for each activity allowed for LTs */
   private assignManagers() {
-    const isStaffAvailable = (lg: Lifeguard, p: Period): boolean =>
-      !lg.locked && lg.schedule[p.name].activity == DEFAULT_ACTIVITY.name;
     const randStaff = this.createUniqueRandomPicker(
       this.staffList.filter((s) => !s.locked && s.isLT)
     );
 
     const periods = this.periods.filter((p) => !p.locked);
-
     periods.forEach((p) => {
       // what are the available activities to draw for the current period?
       let activities = this.activities
@@ -165,7 +160,7 @@ export class UtilsService {
       // Draw a random LT
       let currLT = randStaff(true);
       while (currLT) {
-        if (isStaffAvailable(currLT, p)) {
+        if (this.isStaffAvailable(currLT, p)) {
           const optionalActs = this.getPossibleActsInPeriod(
             activities.map((a) => a.name),
             actCounter
@@ -205,6 +200,15 @@ export class UtilsService {
     if (rest.length) return rest;
 
     return [DEFAULT_ACTIVITY.name];
+  }
+
+  /** checks if the lifeguard isn't locked AND isn't locked at this period AND isn't assigend already */
+  private isStaffAvailable(lg: Lifeguard, p: Period): boolean {
+    return (
+      !lg.locked &&
+      !lg.schedule[p.name].locked &&
+      lg.schedule[p.name].activity == DEFAULT_ACTIVITY.name
+    );
   }
 
   /** Returns a function that randomize a unique item from `items`.
