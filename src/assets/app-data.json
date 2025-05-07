@@ -85,13 +85,13 @@
   "activities": [
     {
       "name": "Pool",
-      "color": "#000080",
+      "color": "#6d9eeb",
       "min": 5,
       "max": 8
     },
     {
       "name": "Lake",
-      "color": "#006400",
+      "color": "#6aa84f",
       "min": 6,
       "max": 10
     },
@@ -105,7 +105,7 @@
     },
     {
       "name": "Bunk time",
-      "color": "#ff0000",
+      "color": "#cc4125",
       "allowLT": false
     },
     {
