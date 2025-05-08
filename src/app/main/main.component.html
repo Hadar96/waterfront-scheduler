@@ -34,10 +34,15 @@
     <button mat-icon-button style="color: lightcoral;" (click)="generateSchedule()">
         <i class="fas fa-play-circle"></i>
     </button>
-    <button mat-icon-button (click)="lockAll()">
-        <i *ngIf="!isAllLocked" class="fas fa-table-cells-row-lock"></i>
-        <i *ngIf="isAllLocked" class="fas fa-table-cells-row-unlock"></i>
-    </button>
+    <span style="display: flex; flex-direction: column;">
+        <button mat-icon-button (click)="lockAll()">
+            <i *ngIf="!isAllLocked" class="fas fa-table-cells-row-lock"></i>
+            <i *ngIf="isAllLocked" class="fas fa-table-cells-row-unlock"></i>
+        </button>
+        <button mat-icon-button style="color: silver;" (click)="clearAll()">
+            <i class="fas fa-calendar-xmark"></i>
+        </button>
+    </span>
     <span style="display: flex; flex-direction: column;">
         <button mat-icon-button style="color: gold;" (click)="saveAllChanges()">
             <i class="fas fa-save"></i>

@@ -41,7 +41,7 @@ export class UtilsService {
   }
 
   /** Resets the relevant periods (of the current daytype) for all staff. Skips locked slots/staff. */
-  private resetSchedules() {
+  resetSchedules(updateStore: boolean = false) {
     this.staffList
       .filter((s) => !s.locked)
       .forEach((s) => {
@@ -76,6 +76,11 @@ export class UtilsService {
           else s.schedule[p] = { ...temp, activity: DEFAULT_ACTIVITY.name };
         });
       });
+
+    if (updateStore) {
+      this.staffList = this.staffList.map((staff) => new Lifeguard(staff));
+      appStore.updateState({ lifeguards: this.staffList });
+    }
   }
 
   /** Assign 1 HOFF for each staff member. Balances the HOFFs during the day */
@@ -259,6 +264,7 @@ export class UtilsService {
       if (!s.schedule) return;
       for (const p in s.schedule) {
         if (
+          periods.find((p1) => p1.name == p) &&
           s.schedule[p].activity == 'HOFF' &&
           (s.schedule[p].locked || s.locked)
         )

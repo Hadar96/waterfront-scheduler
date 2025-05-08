@@ -66,6 +66,7 @@ export class MainComponent {
     this.isAllLocked = !this.isAllLocked;
     const staff = appStore.getSnapshot().lifeguards;
     staff.forEach((lg: Lifeguard) => {
+      lg.locked = this.isAllLocked;
       Object.keys(lg.schedule).forEach((period) => {
         lg.schedule[period].locked = this.isAllLocked;
       });
@@ -73,11 +74,12 @@ export class MainComponent {
     appStore.updateState({ lifeguards: staff });
   }
 
+  clearAll() {
+    this.utils.resetSchedules(true);
+  }
+
   async exportExcel() {
-    // await this.xls.exportPinkTable();
     await this.xls.exportColoredScheduleWithExcelJS();
-    // this.xls.exportTableToExcel('schedule-table');
-    // this.xls.exportToColoredSchedule();
   }
 
   updateDaycampCounter() {

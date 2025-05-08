@@ -1,6 +1,17 @@
+schedule-table {}
+
 .header {
     display: flex;
+    width: 100vw;
     justify-content: space-between;
+    background-color: #000913;
+}
+
+.footer {
+    display: flex;
+    // position: fixed;
+    width: 100vw;
+    justify-content: space-around;
 }
 
 .date {
@@ -13,6 +24,7 @@
 .act-menu {
     display: flex;
     margin-right: 2%;
+    align-items: center;
 }
 
 .act-menu-item {
@@ -34,9 +46,4 @@
     opacity: 0.5;
     text-decoration: line-through;
     color: gray;
-}
-
-.footer {
-    display: flex;
-    justify-content: space-around;
 }

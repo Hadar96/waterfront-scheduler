@@ -1,26 +1,25 @@
 table {
-    width: 99%;
-    margin: auto;
+    // width: 99%;
+    margin: 0 10px;
     table-layout: fixed;
     border-collapse: collapse;
     text-align: center;
+    width: max-content;
 }
 
 th,
 td {
+    width: 65px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     border: solid silver 1px;
 }
 
-.lg-name {
-    word-break: break-all;
-    word-wrap: break-word;
-}
-
 .period-name {
-    /*width: 5%;*/
+    width: 100px;
 }
 
 .slot {
-    /*  display: table-cell;*/
     height: 100%;
 }
