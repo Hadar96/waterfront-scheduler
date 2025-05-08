@@ -1,0 +1,212 @@
+{
+  "currentDayType": "Weekday",
+  "daytypes": [
+    {
+      "name": "Weekday",
+      "periods": [
+        { "id": 1, "start": "0930", "end": "1020", "name": "Chaverim" },
+        { "id": 2, "start": "1030", "end": "1120", "name": "Ofarim" },
+        { "id": 3, "start": "1130", "end": "1220", "name": "Tzofim" },
+        {
+          "id": 4,
+          "start": "1230",
+          "end": "1315",
+          "name": "Lunch",
+          "locked": true,
+          "workingPeriod": false
+        },
+        {
+          "id": 5,
+          "start": "1300",
+          "end": "1345",
+          "name": "Day camp",
+          "locked": true
+        },
+        { "id": 6, "start": "1415", "end": "1505", "name": "Chaluzim" },
+        { "id": 7, "start": "1515", "end": "1605", "name": "K/Bonim" },
+        {
+          "id": 8,
+          "start": "1605",
+          "end": "1700",
+          "name": "Breira"
+        },
+        { "id": 9, "start": "1710", "end": "1805", "name": "Olim" },
+        {
+          "id": 10,
+          "start": "1815",
+          "end": "1900",
+          "name": "Dinner",
+          "locked": true,
+          "workingPeriod": false
+        },
+        {
+          "id": 11,
+          "start": "1900",
+          "end": "2000",
+          "name": "Pool party",
+          "locked": true
+        }
+      ]
+    },
+    {
+      "name": "Friday",
+      "periods": [
+        { "start": "0930", "end": "1020", "name": "Ofarim" },
+        { "start": "1030", "end": "1120", "name": "Chaluzim" },
+        { "start": "1130", "end": "1220", "name": "Tzofim" },
+        {
+          "start": "1230",
+          "end": "1315",
+          "name": "Lunch",
+          "locked": true,
+          "workingPeriod": false
+        },
+        { "start": "1300", "end": "1340", "name": "Day camp", "locked": true },
+        { "start": "1400", "end": "1450", "name": "Chaverim" },
+        { "start": "1500", "end": "1550", "name": "K/Bolim" }
+      ]
+    },
+    {
+      "name": "Saturday",
+      "periods": [
+        { "id": 1, "start": "1410", "end": "1510", "name": "Bunk activity" },
+        { "id": 2, "start": "1510", "end": "1600", "name": "Breira 1" },
+        { "id": 3, "start": "1600", "end": "1650", "name": "Breira 2" },
+        {
+          "id": 4,
+          "start": "1900",
+          "end": "2000",
+          "name": "Pool party",
+          "locked": true
+        }
+      ]
+    }
+  ],
+  "activities": [
+    {
+      "name": "Pool",
+      "color": "#6d9eeb",
+      "min": 5,
+      "max": 8
+    },
+    {
+      "name": "Lake",
+      "color": "#6aa84f",
+      "min": 6,
+      "max": 10
+    },
+    {
+      "name": "HOFF",
+      "color": "#ffff00"
+    },
+    {
+      "name": "DOFF",
+      "color": "#ffa500"
+    },
+    {
+      "name": "Bunk time",
+      "color": "#cc4125",
+      "allowLT": false
+    },
+    {
+      "name": "Teaching",
+      "color": "#00ffff"
+    }
+  ],
+  "lifeguards": [
+    {
+      "name": "Hadar",
+      "schedule": {},
+      "hoffCo": "Aviv",
+      "isLT": true
+    },
+    {
+      "name": "Andy",
+      "schedule": {},
+      "isLT": true,
+      "isBoss": true
+    },
+    {
+      "name": "Chantelle",
+      "schedule": {},
+      "isLT": true
+    },
+    {
+      "name": "Aviv",
+      "schedule": {},
+      "hoffCo": "Hadar"
+    },
+    {
+      "name": "Aaron",
+      "schedule": {}
+    },
+    {
+      "name": "Adrian",
+      "schedule": {}
+    },
+    {
+      "name": "Amelia",
+      "schedule": {}
+    },
+    {
+      "name": "Lotem",
+      "schedule": {}
+    },
+    {
+      "name": "Axel",
+      "schedule": {}
+    },
+    {
+      "name": "Camila",
+      "schedule": {}
+    },
+    {
+      "name": "Charlie",
+      "schedule": {}
+    },
+    {
+      "name": "Daliah",
+      "schedule": {}
+    },
+    {
+      "name": "Ezra",
+      "schedule": {}
+    },
+    {
+      "name": "Irene",
+      "schedule": {}
+    },
+    {
+      "name": "Boyar",
+      "schedule": {}
+    },
+    {
+      "name": "Katie",
+      "schedule": {}
+    },
+    {
+      "name": "Martin C.",
+      "schedule": {}
+    },
+    {
+      "name": "Martin P.",
+      "schedule": {}
+    },
+    {
+      "name": "Mauricio",
+      "schedule": {}
+    },
+    {
+      "name": "Niall",
+      "schedule": {}
+    },
+    {
+      "name": "Tamir",
+      "schedule": {}
+    },
+    {
+      "name": "Ruby",
+      "schedule": {}
+    }
+  ]
+}
