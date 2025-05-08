@@ -105,7 +105,11 @@ export class UtilsService {
 
     // assign HOFFs member by member
     staffLeft.forEach((lg) => {
-      const randPeriod = this.randByPriority(hoffPerPeriodCount);
+      let randPeriod = this.randByPriority(hoffPerPeriodCount);
+      while (lg.schedule[randPeriod].locked) {
+        // if the period in the lg's schedule is locked (i.e unavailable), draw another one
+        randPeriod = this.randByPriority(hoffPerPeriodCount);
+      }
       lg.schedule[randPeriod].activity = 'HOFF';
       hoffPerPeriodCount[randPeriod]++;
     });
