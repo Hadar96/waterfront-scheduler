@@ -3,6 +3,7 @@ schedule-table {}
 .header {
     display: flex;
     width: 100vw;
+    min-width: 600px;
     justify-content: space-between;
     background-color: #000913;
 }
@@ -11,6 +12,7 @@ schedule-table {}
     display: flex;
     // position: fixed;
     width: 100vw;
+    min-width: 600px;
     justify-content: space-around;
 }
 
@@ -19,6 +21,7 @@ schedule-table {}
     align-items: center;
     font-size: 150%;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .act-menu {
