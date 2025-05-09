@@ -1,10 +1,11 @@
 table {
-    // width: 99%;
-    margin: 0 10px;
-    table-layout: fixed;
+    table-layout: auto;
     border-collapse: collapse;
     text-align: center;
+    min-width: 99%;
     width: max-content;
+    margin: auto;
+    // margin: 0 10px;
 }
 
 th,
@@ -17,7 +18,7 @@ td {
 }
 
 .period-name {
-    width: 100px;
+    width: 105px;
 }
 
 .slot {
