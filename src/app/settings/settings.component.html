@@ -1,22 +1,31 @@
-<div class="settings-toolbar">
-    <button mat-icon-button class="settings-btn" [routerLink]="'/'">
-        <i class="fas fa-home"></i>
-    </button>
-    <span class="save-restore-btns">
-        <button mat-icon-button color="primary" class="settings-btn" (click)="saveAllChanges()">
-            <i class="fas fa-save"></i>
-        </button>
-        <button mat-icon-button color="warn" class="settings-btn" (click)="restoreData()">
-            <i class="fas fa-file-circle-xmark"></i>
-        </button>
-    </span>
-</div>
+<div class="settings-container">
 
-<div class="settings-sections">
-    <staff-list class="settings-section"></staff-list>
-    <action-list class="settings-section"></action-list>
-    <daytype-tabs class="settings-section"></daytype-tabs>
-</div>
+    <div class="settings-toolbar">
+        <button mat-icon-button class="settings-btn" [routerLink]="'/'">
+            <i class="fas fa-home"></i>
+        </button>
+        <span class="save-restore-btns">
+            <button mat-icon-button style="color: cornflowerblue" class="settings-btn" (click)="saveAllChanges()">
+                <i class="fas fa-save"></i>
+            </button>
+            <button mat-icon-button color="warn" class="settings-btn" (click)="restoreData()">
+                <i class="fas fa-file-circle-xmark"></i>
+            </button>
+        </span>
+    </div>
 
-<div class="settings-actions">
+    <div class="settings-sections">
+        <div class="switches-div">
+            <mat-slide-toggle [checked]="switchesState.hoff" (change)="toggleSwitchBtn(SwitchOptions.HOFF, $event)">
+                HOFF Buddy</mat-slide-toggle>
+            <mat-slide-toggle [checked]="switchesState.smart" (change)="toggleSwitchBtn(SwitchOptions.SMART, $event)">
+                Smart assigning</mat-slide-toggle>
+            <mat-slide-toggle [checked]="switchesState.lt" (change)="toggleSwitchBtn(SwitchOptions.LT, $event)">
+                Assign LT separately</mat-slide-toggle>
+        </div>
+        <staff-list class="settings-section"></staff-list>
+        <action-list class="settings-section"></action-list>
+        <daytype-tabs class="settings-section"></daytype-tabs>
+    </div>
+
 </div>

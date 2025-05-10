@@ -1,3 +1,7 @@
+.settings-container {
+    margin: 10px
+}
+
 .settings-toolbar,
 .settings-actions {
     display: flex;
@@ -37,4 +41,14 @@
 
 .setting-sum {
     color: #7f8489;
+}
+
+.switches-div {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    mat-slide-toggle {
+        margin-top: 10px;
+    }
 }

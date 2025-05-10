@@ -9,6 +9,7 @@ export interface AppState {
   activities: Activity[];
   daytypes: DayType[];
   currentDayType: DayType;
+  switchesState?: any;
 }
 
 const initialState: AppState = {
@@ -16,6 +17,11 @@ const initialState: AppState = {
   activities: [],
   daytypes: [],
   currentDayType: {} as DayType,
+  switchesState: {
+    hoff: true,
+    smart: true,
+    lt: true,
+  },
 };
 
 export class AppStore {

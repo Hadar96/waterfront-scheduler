@@ -57,6 +57,8 @@ export class SlotComponent implements OnInit {
         this.lifeguard.schedule[this.period.name].locked = true;
         if (activity.name === 'HOFF')
           this.lifeguard.schedule[this.period.name].pm = false;
+        if (activity.name === DEFAULT_ACTIVITY.name)
+          this.lifeguard.schedule[this.period.name].locked = false;
       } else
         this.lifeguard.schedule[this.period.name] = {
           activity: activity.name,
