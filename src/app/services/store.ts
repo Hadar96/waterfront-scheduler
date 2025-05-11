@@ -21,6 +21,7 @@ const initialState: AppState = {
     hoff: true,
     smart: true,
     lt: true,
+    actPref: true,
   },
 };
 
@@ -70,6 +71,10 @@ export class AppStore {
 
   getAllDayTypes() {
     return this.state$.asObservable().pipe(map((state) => state.daytypes));
+  }
+
+  getSwitchesState() {
+    return this.state$.asObservable().pipe(map((state) => state.switchesState));
   }
 
   private sortStaff(staff: Lifeguard[]): Lifeguard[] {

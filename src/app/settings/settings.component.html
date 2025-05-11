@@ -17,11 +17,14 @@
     <div class="settings-sections">
         <div class="switches-div">
             <mat-slide-toggle [checked]="switchesState.hoff" (change)="toggleSwitchBtn(SwitchOptions.HOFF, $event)">
-                HOFF Buddy</mat-slide-toggle>
+                Attach HOFF buddies</mat-slide-toggle>
             <mat-slide-toggle [checked]="switchesState.smart" (change)="toggleSwitchBtn(SwitchOptions.SMART, $event)">
                 Smart assigning</mat-slide-toggle>
             <mat-slide-toggle [checked]="switchesState.lt" (change)="toggleSwitchBtn(SwitchOptions.LT, $event)">
                 Assign LT separately</mat-slide-toggle>
+            <mat-slide-toggle [checked]="switchesState.actPref"
+                (change)="toggleSwitchBtn(SwitchOptions.ACT_PREF, $event)">
+                Activity preferences</mat-slide-toggle>
         </div>
         <staff-list class="settings-section"></staff-list>
         <action-list class="settings-section"></action-list>

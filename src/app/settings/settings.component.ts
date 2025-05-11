@@ -6,6 +6,7 @@ enum SwitchOptions {
   HOFF,
   SMART,
   LT,
+  ACT_PREF
 }
 
 @Component({
@@ -33,6 +34,9 @@ export class SettingsComponent implements OnInit {
         break;
       case SwitchOptions.LT:
         this.switchesState.lt = event.checked;
+        break;
+      case SwitchOptions.ACT_PREF:
+        this.switchesState.actPref = event.checked;
         break;
 
       default:
