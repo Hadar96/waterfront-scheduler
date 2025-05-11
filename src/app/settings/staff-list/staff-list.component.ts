@@ -15,6 +15,7 @@ export class StaffListComponent {
   selectedStaff: Lifeguard;
   showForm: boolean = false;
   lifeguardForm: FormGroup;
+  switchesState: any;
 
   constructor() {
     this.staffList$ = appStore.getLifeguards();
@@ -26,6 +27,7 @@ export class StaffListComponent {
       hoffCoPref: new FormControl(),
       isLT: new FormControl(),
     });
+    this.switchesState = appStore.getSnapshot().switchesState;
 
     this.updateFormWithSelectedStaff();
   }
@@ -84,6 +86,14 @@ export class StaffListComponent {
       (staff, index, self) =>
         index === self.findIndex((s) => s.name === staff.name)
     );
+
+    // Set HOFF buddies -> if A chose B, then B should also have A as a buddy
+    if (this.lifeguardForm.value.hoffCoPref) {
+      const buddy = this.staffList.find(
+        (s) => s.name === this.lifeguardForm.value.hoffCoPref
+      );
+      if (buddy) buddy.hoffCo = this.selectedStaff.name;
+    }
 
     // Update the app state
     appStore.updateState({
