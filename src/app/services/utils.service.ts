@@ -13,6 +13,7 @@ export class UtilsService {
     .getSnapshot()
     .activities.filter((a) => a.available);
   periods: Period[] = appStore.getSnapshot().currentDayType.periods;
+  settings: any = appStore.getSnapshot().switchesState;
 
   constructor() {
     appStore.getCurrentDayType().subscribe((dayType) => {
@@ -24,6 +25,9 @@ export class UtilsService {
     appStore.getActivities().subscribe((activities) => {
       this.activities = activities.filter((activity) => activity.available);
     });
+    appStore.getSwitchesState().subscribe((switchesState) => {
+      this.settings = switchesState;
+    });
   }
 
   generateSchedule() {
@@ -34,7 +38,7 @@ export class UtilsService {
     // Assign period by period according to rules
     this.assignActivities();
     // Assign a manager for every LT-allowed activity
-    this.assignManagers();
+    if (this.settings.lt) this.assignManagers();
 
     this.staffList = this.staffList.map((staff) => new Lifeguard(staff));
     appStore.updateState({ lifeguards: this.staffList });
@@ -118,7 +122,9 @@ export class UtilsService {
   /** Assign the rest of available activities period by period */
   private assignActivities() {
     const randStaff = this.createUniqueRandomPicker(
-      this.staffList.filter((s) => !s.locked && !s.isLT)
+      this.staffList
+        .filter((s) => !s.locked)
+        .filter((s) => (this.settings.lt ? !s.isLT : true))
     );
 
     const periods = this.periods.filter((p) => !p.locked);
@@ -280,7 +286,7 @@ export class UtilsService {
   }
 
   private getByPreferation(lg: Lifeguard, acts: string[]): string | undefined {
-    if (lg.preferPool == undefined) return undefined;
+    if (!this.settings.actPref || lg.preferPool == undefined) return undefined;
     if (lg.preferPool && acts.includes('Pool')) return 'Pool';
     if (!lg.preferPool && acts.includes('Lake')) return 'Lake';
     return undefined;
