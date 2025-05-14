@@ -23,19 +23,22 @@
     position: absolute;
     z-index: 1;
     border: solid whitesmoke 1px;
-    padding: 1%;
+    width: 250px;
+    padding: 10px 5px;
     white-space: nowrap;
     background-color: #000020;
     color: black;
 
     tr {
+        margin: auto;
         line-height: normal;
 
         td {
             cursor: pointer;
             border: 1px solid black;
-            height: 15px;
-            width: 15px;
+            height: 30px;
+            width: 30px;
+            line-height: 2;
         }
     }
 }
@@ -51,7 +54,7 @@
 
 
 .slot-menu.lt {
-    translate: -70%;
+    translate: -195px;
 }
 
 .lg-name {
@@ -76,5 +79,12 @@
 .disabled {
     pointer-events: none; // prevent clicks
     user-select: none;
-    // background-color: black;
+}
+
+.slot-menu-actions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
 }

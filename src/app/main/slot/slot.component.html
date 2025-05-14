@@ -23,6 +23,8 @@
             {{ activity.name[0] }}
         </td>
     </tr>
-    <mat-checkbox [checked]="isLocked" (change)="lockSlot($event)">locked</mat-checkbox>
-    <mat-checkbox [checked]="isPM" (change)="setManager($event)">manager</mat-checkbox>
+    <span class="slot-menu-actions">
+        <mat-checkbox [checked]="isLocked" (change)="lockSlot($event)">locked</mat-checkbox>
+        <mat-checkbox [checked]="isPM" (change)="setManager($event)">manager</mat-checkbox>
+    </span>
 </div>

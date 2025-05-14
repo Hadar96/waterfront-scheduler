@@ -3,7 +3,8 @@
 
     <mat-form-field appearance="outline">
         <mat-label>Activity</mat-label>
-        <mat-select [(value)]="selectedAct" style="color: black;" [ngStyle]="{'background-color': selectedAct.color}">
+        <mat-select [(value)]="selectedAct" style="color: black; text-align: center;"
+            [ngStyle]="{'background-color': selectedAct.color}">
             <mat-option *ngFor="let act of (actList$ | async)" [value]="act">
                 {{ act.name }}
             </mat-option>
