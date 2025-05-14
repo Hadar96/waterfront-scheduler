@@ -9,7 +9,12 @@ export interface AppState {
   activities: Activity[];
   daytypes: DayType[];
   currentDayType: DayType;
-  switchesState?: any;
+  switchesState?: {
+    hoff: boolean;
+    smart: boolean;
+    lt: boolean;
+    actPref: boolean;
+  };
 }
 
 const initialState: AppState = {

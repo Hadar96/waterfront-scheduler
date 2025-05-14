@@ -57,8 +57,10 @@ export class SlotComponent implements OnInit {
         this.lifeguard.schedule[this.period.name].locked = true;
         if (activity.name === 'HOFF')
           this.lifeguard.schedule[this.period.name].pm = false;
-        if (activity.name === DEFAULT_ACTIVITY.name)
+        if (activity.name === DEFAULT_ACTIVITY.name) {
           this.lifeguard.schedule[this.period.name].locked = false;
+          this.lifeguard.schedule[this.period.name].pm = false;
+        }
       } else
         this.lifeguard.schedule[this.period.name] = {
           activity: activity.name,
@@ -71,7 +73,7 @@ export class SlotComponent implements OnInit {
       Object.keys(this.lifeguard.schedule).forEach((period) => {
         this.lifeguard.schedule[period].activity = activity.name;
       });
-      this.lifeguard.locked = true;
+      this.lifeguard.locked = activity.name !== DEFAULT_ACTIVITY.name; // Lock if not default
 
       const index = this.staffList.findIndex(
         (l) => l.name === this.lifeguard.name

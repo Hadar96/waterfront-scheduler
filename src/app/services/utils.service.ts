@@ -13,7 +13,7 @@ export class UtilsService {
     .getSnapshot()
     .activities.filter((a) => a.available);
   periods: Period[] = appStore.getSnapshot().currentDayType.periods;
-  settings: any = appStore.getSnapshot().switchesState;
+  settings = appStore.getSnapshot().switchesState;
 
   constructor() {
     appStore.getCurrentDayType().subscribe((dayType) => {
@@ -38,7 +38,7 @@ export class UtilsService {
     // Assign period by period according to rules
     this.assignActivities();
     // Assign a manager for every LT-allowed activity
-    if (this.settings.lt) this.assignManagers();
+    if (this.settings?.lt) this.assignManagers();
 
     this.staffList = this.staffList.map((staff) => new Lifeguard(staff));
     appStore.updateState({ lifeguards: this.staffList });
@@ -94,18 +94,31 @@ export class UtilsService {
     const periods = this.periods.filter(
       (p) => !p.locked && !p.excludedActions.includes('HOFF')
     );
+    let preAssignedHoffs: any = {};
     let staffLeft = this.staffList // staff members left that doesn't have HOFF yet
       .filter((s) => !s.locked)
       .filter((s) => {
         if (!s.schedule) return true;
         for (const p in s.schedule) {
           // check for a pre-assigned HOFF in the member's schedule
-          if (s.schedule[p].activity == 'HOFF' && s.schedule[p].locked)
+          if (s.schedule[p].activity == 'HOFF' && s.schedule[p].locked) {
+            preAssignedHoffs[s.name] = p;
             return false;
+          }
         }
         return true;
       });
-    const hoffPerPeriodCount = this.getHoffCounterPerPeriod(periods);
+    let hoffPerPeriodCount = this.getHoffCounterPerPeriod(periods);
+
+    // assign HOFFs first to staff with HOFF buddies (if switch is on)
+    if (this.settings?.hoff) {
+      hoffPerPeriodCount = this.assignHoffsToBuddies(
+        staffLeft.filter((s) => s.hoffCo),
+        hoffPerPeriodCount,
+        preAssignedHoffs
+      );
+      staffLeft = staffLeft.filter((s) => !s.hoffCo);
+    }
 
     // assign HOFFs member by member
     staffLeft.forEach((lg) => {
@@ -119,12 +132,54 @@ export class UtilsService {
     });
   }
 
+  /** Assigns HOFFs to staff members that have a buddy (i.e. A chose B, then B should also have A) 
+   @param staff - staff members with HOFF buddies
+   @param counter - HOFFs counter in every period
+   @param preAssignedHoffs - the list of the HOFFs that are already assigned (and probably locked) */
+  private assignHoffsToBuddies(
+    staff: Lifeguard[],
+    counter: any,
+    preAssignedHoffs: any
+  ): any {
+    staff.forEach((lg) => {
+      // skip if already assigned by a buddy
+      if (preAssignedHoffs[lg.name]) return;
+
+      let buddy = this.staffList.find((s) => s.name == lg.hoffCo);
+      let p;
+      if (buddy) {
+        const buddyHoff = preAssignedHoffs[buddy.name];
+
+        // if the buddy has a HOFF assigned, assign the same period to the current lifeguard
+        if (buddyHoff && !lg.schedule[buddyHoff].locked) p = buddyHoff;
+        else {
+          p = this.randByPriority(counter);
+          while (lg.schedule[p].locked) {
+            p = this.randByPriority(counter);
+          }
+          // if the buddy doesn't have a HOFF assigned and he isn't locked, assign a random period to both
+          // if the buddy is locked it means that he's out of schedule (DOFF/sick/absent) - don't assign him a HOFF
+          if (!buddyHoff && !buddy.locked) {
+            buddy.schedule[p].activity = 'HOFF';
+            counter[p]++;
+            preAssignedHoffs[buddy.name] = p;
+          }
+        }
+        lg.schedule[p].activity = 'HOFF';
+        counter[p]++;
+        preAssignedHoffs[lg.name] = p;
+      }
+    });
+
+    return counter;
+  }
+
   /** Assign the rest of available activities period by period */
   private assignActivities() {
     const randStaff = this.createUniqueRandomPicker(
       this.staffList
         .filter((s) => !s.locked)
-        .filter((s) => (this.settings.lt ? !s.isLT : true))
+        .filter((s) => (this.settings?.lt ? !s.isLT : true))
     );
 
     const periods = this.periods.filter((p) => !p.locked);
@@ -286,15 +341,15 @@ export class UtilsService {
   }
 
   private getByPreferation(lg: Lifeguard, acts: string[]): string | undefined {
-    if (!this.settings.actPref || lg.preferPool == undefined) return undefined;
+    if (!this.settings?.actPref || lg.preferPool == undefined) return undefined;
     if (lg.preferPool && acts.includes('Pool')) return 'Pool';
     if (!lg.preferPool && acts.includes('Lake')) return 'Lake';
     return undefined;
   }
 
   /** Gets a counter object and returns a random minimal attribute */
-  private randByPriority(counter: any): string {
-    const minVal = Object.values(counter).sort()[0];
+  private randByPriority(counter: { [key: string]: number }): string {
+    const minVal = Object.values(counter).sort((a, b) => a - b)[0];
     const minKeys: string[] = Object.keys(counter).filter(
       (k) => counter[k] == minVal
     );

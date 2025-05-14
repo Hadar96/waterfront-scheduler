@@ -75,6 +75,8 @@ export class StaffListComponent {
   }
 
   onSubmit() {
+    const oldBuddyName = this.selectedStaff.hoffCo; // in case the buddy is changed
+
     this.selectedStaff.name = this.lifeguardForm.value.name;
     this.selectedStaff.preferPool = this.lifeguardForm.value.zonePreference;
     this.selectedStaff.hoffCo = this.lifeguardForm.value.hoffCoPref;
@@ -89,6 +91,9 @@ export class StaffListComponent {
 
     // Set HOFF buddies -> if A chose B, then B should also have A as a buddy
     if (this.lifeguardForm.value.hoffCoPref) {
+      const oldBuddy = this.staffList.find((s) => s.name === oldBuddyName);
+      if (oldBuddy) oldBuddy.hoffCo = undefined;
+
       const buddy = this.staffList.find(
         (s) => s.name === this.lifeguardForm.value.hoffCoPref
       );
