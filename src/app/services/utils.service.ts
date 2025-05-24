@@ -190,22 +190,42 @@ export class UtilsService {
         .filter((a) => a.name !== 'HOFF')
         .filter((a) => !p.excludedActions.includes(a.name)); // included in period's options
       const actCounter = this.resetActCounter(activities);
+      const nextCounter = this.resetActCounter(activities);
 
       // Draw a random staff member
       let currStaff = randStaff(true);
       while (currStaff) {
+        let actName = DEFAULT_ACTIVITY.name;
         if (this.isStaffAvailable(currStaff, p)) {
           const optionalActs = this.getPossibleActsInPeriod(
             activities.map((a) => a.name),
             actCounter
           );
-          const actName =
+          actName =
             this.getActByPreferation(currStaff, optionalActs) ||
             this.randomizeFromArr(optionalActs);
           // Assign the lifeguard to activity in current period
           currStaff.schedule[p.name].activity = actName;
-          actCounter[actName] != undefined && actCounter[actName].curr++;
+
+          if (this.settings?.smart) {
+            const nextPeriod = this.getNextPeriod(
+              p,
+              currStaff,
+              activities.find((a) => a.name == actName)!.name,
+              nextCounter
+            );
+            if (nextPeriod) {
+              currStaff.schedule[nextPeriod.name].activity = actName;
+              nextCounter[actName] != undefined && nextCounter[actName].curr++;
+            }
+          }
         }
+        // if the staff member isn't available maybe it is because this period is already assigned
+        else actName = currStaff.schedule[p.name].activity; // might be DEFAULT_ACTIVITY
+
+        // Update the activity counter if the counter has the activity as key
+        actCounter[actName] != undefined && actCounter[actName].curr++;
+
         currStaff = randStaff();
       }
     });
@@ -254,19 +274,66 @@ export class UtilsService {
 
   //#region Helper Methods
 
-  /** filter the possible activities according to the periodical activities counter */
+  /** Returns the next period only if it is possible to assign the `activity` in it, otherwise return undefined.
+   
+   * Next period is unavailable if: 
+   * - there is no next period (i.e. the current period is the last one) or
+   * - the next period is locked or 
+   * - the `activity` is excluded in it or 
+   * - the `staff` is locked in it or 
+   * - the period is already assigned to another activity
+   * - the `activity` is not possible in the next period according to the periodical activities counter
+   * @param currPeriod - the current period
+   * @param staff - the staff member
+   * @param actName - the activity to be assigned in the next period
+   */
+  private getNextPeriod(
+    currPeriod: Period,
+    staff: Lifeguard,
+    actName: string,
+    nxtCounter: any
+  ): Period | undefined {
+    const acts = this.activities
+      .filter((a) => a.available)
+      .filter((a) => a.name !== 'HOFF')
+      .map((a) => a.name);
+    const currIndex = this.periods.findIndex((p) => p.name == currPeriod.name);
+    const nextPeriod = this.periods[currIndex + 1];
+
+    if (
+      !nextPeriod || // if there is no next period
+      nextPeriod.locked || // if the next period is locked
+      nextPeriod.excludedActions.includes(actName) || // if the activity is excluded in the next period
+      (actName !== 'Pool' && actName !== 'Lake') || // smart assign only apply for Pool/Lake
+      staff.schedule[nextPeriod.name].locked || // if the next period is locked for the staff member
+      staff.schedule[nextPeriod.name].activity != DEFAULT_ACTIVITY.name || // if the next period is already assigned to another activity
+      !this.getPossibleActsInPeriod(acts, nxtCounter).includes(actName) // if the activity is not possible in the next period
+    )
+      return undefined;
+    return nextPeriod;
+  }
+
+  /** Filter the possible activities according to the periodical activities counter */
   private getPossibleActsInPeriod(actNames: string[], counter: any): string[] {
     const notReachedMin = actNames.filter(
-      (a) => counter[a].min != undefined && counter[a].curr < counter[a].min
+      (a) =>
+        counter[a] &&
+        counter[a].min != undefined &&
+        counter[a].curr < counter[a].min
     );
     if (notReachedMin.length) return notReachedMin;
 
     const notReachedMax = actNames.filter(
-      (a) => counter[a].max != undefined && counter[a].curr < counter[a].max
+      (a) =>
+        counter[a] &&
+        counter[a].max != undefined &&
+        counter[a].curr < counter[a].max
     );
     if (notReachedMax.length) return notReachedMax;
 
-    const rest = actNames.filter((a) => counter[a].max == undefined);
+    const rest = actNames.filter(
+      (a) => counter[a] && counter[a].max == undefined
+    );
     if (rest.length) return rest;
 
     return [DEFAULT_ACTIVITY.name];
