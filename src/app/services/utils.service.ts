@@ -200,7 +200,7 @@ export class UtilsService {
             actCounter
           );
           const actName =
-            this.getByPreferation(currStaff, optionalActs) ||
+            this.getActByPreferation(currStaff, optionalActs) ||
             this.randomizeFromArr(optionalActs);
           // Assign the lifeguard to activity in current period
           currStaff.schedule[p.name].activity = actName;
@@ -340,7 +340,10 @@ export class UtilsService {
     return counter;
   }
 
-  private getByPreferation(lg: Lifeguard, acts: string[]): string | undefined {
+  private getActByPreferation(
+    lg: Lifeguard,
+    acts: string[]
+  ): string | undefined {
     if (!this.settings?.actPref || lg.preferPool == undefined) return undefined;
     if (lg.preferPool && acts.includes('Pool')) return 'Pool';
     if (!lg.preferPool && acts.includes('Lake')) return 'Lake';
