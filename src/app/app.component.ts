@@ -49,6 +49,7 @@ export class AppComponent implements OnInit {
       lifeguards: this.convertLifeguards(data.lifeguards),
       activities: this.convertActivities(data.activities),
       currentDayType: this.convertCurrentDayType(data.currentDayType, daytypes),
+      switchesState: data.switchesState || {},
     };
   }
 
