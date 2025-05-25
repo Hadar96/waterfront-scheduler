@@ -186,6 +186,7 @@ export class UtilsService {
     periods.forEach((p) => {
       // what are the available activities to draw for the current period?
       let activities = this.activities
+        .concat([DEFAULT_ACTIVITY])
         .filter((a) => a.available)
         .filter((a) => a.name !== 'HOFF')
         .filter((a) => !p.excludedActions.includes(a.name)); // included in period's options
