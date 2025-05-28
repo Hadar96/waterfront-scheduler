@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Period } from 'src/app/models/period';
+import { DAYCAMP_NAME, Period } from 'src/app/models/period';
 
 @Component({
   selector: 'period-list',
@@ -81,7 +81,7 @@ export class PeriodListComponent implements OnChanges {
   }
 
   onSubmit() {
-    this.selected.name = this.periodForm.value.name;
+    this.selected.name = this.formatName(this.periodForm.value.name);
     this.selected.start = this.periodForm.value.start;
     this.selected.end = this.periodForm.value.end;
     this.selected.workingPeriod = this.periodForm.value.workingPeriod;
@@ -94,5 +94,13 @@ export class PeriodListComponent implements OnChanges {
 
     this.periodsChange.emit(this.periods); // Emit updated periods to parent
     this.showForm = false;
+  }
+
+  private formatName(name: string): string {
+    const normalizedName = name.toLowerCase().replace(/[\s-]/g, '');
+    if (normalizedName === 'daycamp') {
+      return DAYCAMP_NAME;
+    }
+    return name;
   }
 }
