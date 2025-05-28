@@ -6,6 +6,7 @@ import { DbService } from '../services/db.service';
 import { UtilsService } from '../services/utils.service';
 import { Lifeguard } from '../models/lifeguard';
 import { ExcelExportService } from '../services/excel.service';
+import { DAYCAMP_NAME } from '../models/period';
 
 @Component({
   selector: 'app-main',
@@ -87,11 +88,23 @@ export class MainComponent {
     staff
       .filter(
         (s) =>
-          s.schedule['Day camp'] &&
-          s.schedule['Day camp'].activity != DEFAULT_ACTIVITY.name &&
-          s.schedule['Day camp'].activity != 'DOFF'
+          s.schedule[DAYCAMP_NAME] &&
+          this.IsMainActivity(s.schedule[DAYCAMP_NAME].activity)
       )
       .forEach((s) => s.daycampCount++);
     appStore.updateState({ lifeguards: staff });
+  }
+
+  checkDaycampExist() {
+    return (
+      appStore
+        .getSnapshot()
+        .currentDayType.periods.find((p) => p.name === DAYCAMP_NAME) !==
+      undefined
+    );
+  }
+
+  private IsMainActivity(actName: string): boolean {
+    return !!this.activities.find((act) => act.name === actName)?.isMain;
   }
 }

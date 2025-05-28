@@ -28,26 +28,27 @@
         </mat-select>
     </mat-form-field>
 
-    <button mat-icon-button style="color:rgb(85, 226, 85)" (click)="exportExcel()">
+    <button mat-icon-button style="color:rgb(85, 226, 85)" (click)="exportExcel()" alt="Export to Excel">
         <i class="fas fa-file-excel"></i>
     </button>
-    <button mat-icon-button style="color: lightcoral;" (click)="generateSchedule()">
+    <button mat-icon-button style="color: lightcoral;" (click)="generateSchedule()" alt="Generate Schedule">
         <i class="fas fa-play-circle"></i>
     </button>
     <span style="display: flex; flex-direction: column;">
-        <button mat-icon-button (click)="lockAll()">
+        <button mat-icon-button (click)="lockAll()" alt="Lock/Unlock All">
             <i *ngIf="!isAllLocked" class="fas fa-table-cells-row-lock"></i>
             <i *ngIf="isAllLocked" class="fas fa-table-cells-row-unlock"></i>
         </button>
-        <button mat-icon-button style="color: silver;" (click)="clearAll()">
+        <button mat-icon-button style="color: silver;" (click)="clearAll()" alt="Clear Schedule">
             <i class="fas fa-calendar-xmark"></i>
         </button>
     </span>
     <span style="display: flex; flex-direction: column;">
-        <button mat-icon-button style="color: gold;" (click)="saveAllChanges()">
+        <button mat-icon-button style="color: gold;" (click)="saveAllChanges()" alt="Save Changes">
             <i class="fas fa-save"></i>
         </button>
-        <button mat-icon-button style="color: orange;" (click)="updateDaycampCounter()">
+        <button mat-icon-button style="color: orange;" (click)="updateDaycampCounter()" alt="Update Day Camp Counter"
+            *ngIf="checkDaycampExist()">
             <i class="fas fa-baby"></i>
         </button>
     </span>
