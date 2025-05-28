@@ -86,3 +86,5 @@ export class Period {
     this._excludedActions = value;
   }
 }
+
+export const DAYCAMP_NAME = 'Day Camp';

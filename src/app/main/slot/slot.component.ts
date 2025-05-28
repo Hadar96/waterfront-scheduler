@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Activity, DEFAULT_ACTIVITY } from 'src/app/models/activity';
 import { Lifeguard } from 'src/app/models/lifeguard';
-import { Period } from 'src/app/models/period';
+import { DAYCAMP_NAME, Period } from 'src/app/models/period';
 import { appStore } from 'src/app/services/store';
 
 export enum SlotType {
@@ -29,6 +29,7 @@ export class SlotComponent implements OnInit {
   isDisabled: boolean = false;
   SlotTypes = SlotType;
   DEFAULT_ACTIVITY = DEFAULT_ACTIVITY;
+  DAYCAMP_NAME = DAYCAMP_NAME;
 
   constructor() {}
 

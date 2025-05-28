@@ -14,7 +14,7 @@
         </span>
     </div>
 
-    <div class="settings-sections">
+    <div class="settings-section">
         <div class="switches-div">
             <mat-slide-toggle [checked]="switchesState.hoff" (change)="toggleSwitchBtn(SwitchOptions.HOFF, $event)">
                 Attach HOFF buddies</mat-slide-toggle>
@@ -26,9 +26,9 @@
                 (change)="toggleSwitchBtn(SwitchOptions.ACT_PREF, $event)">
                 Activity preferences</mat-slide-toggle>
         </div>
-        <staff-list class="settings-section"></staff-list>
-        <action-list class="settings-section"></action-list>
-        <daytype-tabs class="settings-section"></daytype-tabs>
+        <staff-list class="settings-property"></staff-list>
+        <action-list class="settings-property"></action-list>
+        <daytype-tabs class="settings-property"></daytype-tabs>
     </div>
 
 </div>

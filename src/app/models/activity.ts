@@ -3,6 +3,7 @@ export class Activity {
   private _color: string;
   private _min?: number;
   private _max?: number;
+  private _isMain: boolean;
   private _available: boolean;
   private _allowLT: boolean;
 
@@ -11,13 +12,15 @@ export class Activity {
     color: string = '#ffffff',
     min?: number,
     max?: number,
+    isMain: boolean = false,
     allowLT: boolean = true,
-    available: boolean = true,
+    available: boolean = true
   ) {
     this._name = name;
     this._color = color;
     this._min = min;
     this._max = max;
+    this._isMain = isMain;
     this._available = available;
     this._allowLT = allowLT;
   }
@@ -60,6 +63,14 @@ export class Activity {
 
   set available(value: boolean) {
     this._available = value;
+  }
+
+  get isMain(): boolean {
+    return this._isMain;
+  }
+
+  set isMain(value: boolean) {
+    this._isMain = value;
   }
 
   get allowLT(): boolean {

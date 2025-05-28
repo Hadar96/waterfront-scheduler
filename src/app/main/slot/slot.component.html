@@ -1,10 +1,10 @@
 <div (dblclick)="openActMenu = !openActMenu" (click)="openActMenu = false" class="slot" [class.disabled]="isDisabled">
 
     <span *ngIf="type == SlotTypes.ACTIVITY" class="slot-content" [class.selected]="openActMenu"
-        [ngStyle]="{'background-color': activity.color, 'color': (period.name == 'Day camp') ? 'whitesmoke': activity.color}">
+        [ngStyle]="{'background-color': activity.color, 'color': (period.name == DAYCAMP_NAME) ? 'whitesmoke': activity.color}">
         <i *ngIf="lifeguard.schedule[period.name]?.locked" class="fas fa-lock"></i>
         <i *ngIf="lifeguard.schedule[period.name]?.pm" class="fas fa-crown"></i>
-        {{ period.name == "Day camp" ? lifeguard.daycampCount: "." }}
+        {{ period.name == DAYCAMP_NAME ? lifeguard.daycampCount: "." }}
     </span>
 
     <span *ngIf="type == SlotTypes.STAFF" class="slot-content lg-name" [class.selected]="openActMenu"

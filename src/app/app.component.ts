@@ -111,6 +111,7 @@ export class AppComponent implements OnInit {
         a.color,
         a.min,
         a.max,
+        a.isMain,
         a.allowLT,
         a.available
       );
