@@ -49,11 +49,10 @@
             </mat-form-field>
 
             <div style="margin: 10px 0;" *ngIf="switchesState.actPref">
-                <span>Zone Preference:</span>
+                <span style="margin-right: 10px;">Preferred Area:</span>
                 <mat-button-toggle-group formControlName="zonePreference">
-                    <mat-button-toggle [value]="undefined">/</mat-button-toggle>
-                    <mat-button-toggle [value]="true">Pool</mat-button-toggle>
-                    <mat-button-toggle [value]="false">Lake</mat-button-toggle>
+                    <mat-button-toggle [value]="undefined">None</mat-button-toggle>
+                    <mat-button-toggle *ngFor="let act of mainActs" [value]="act.name">{{act.name}}</mat-button-toggle>
                 </mat-button-toggle-group>
             </div>
 

@@ -4,7 +4,7 @@ export class Lifeguard {
   private _daycampCount: number;
   private _partyCount: number;
   private _hoffCo: string | undefined;
-  private _preferPool: boolean | undefined;
+  private _actPref: string | undefined;
   private _locked: boolean;
   private _isLT: boolean;
   private _isBoss: boolean;
@@ -14,7 +14,7 @@ export class Lifeguard {
     schedule: Schedule = {},
     isLT: boolean = false,
     isBoss: boolean = false,
-    preferPool?: boolean,
+    actPref?: string,
     hoffCo?: string,
     locked: boolean = false,
     daycampCount: number = 0,
@@ -26,7 +26,7 @@ export class Lifeguard {
       this._schedule = schedule;
       this._daycampCount = daycampCount;
       this._partyCount = partyCount;
-      this._preferPool = preferPool;
+      this._actPref = actPref;
       this._locked = locked;
       this._hoffCo = hoffCo;
       this._isLT = isLT;
@@ -37,7 +37,7 @@ export class Lifeguard {
       this._schedule = { ...nameOrCopy.schedule }; // Deep copy of the schedule
       this._daycampCount = nameOrCopy.daycampCount;
       this._partyCount = nameOrCopy.partyCount;
-      this._preferPool = nameOrCopy.preferPool;
+      this._actPref = nameOrCopy.actPref;
       this._locked = nameOrCopy.locked;
       this._hoffCo = nameOrCopy.hoffCo;
       this._isLT = nameOrCopy.isLT;
@@ -79,12 +79,12 @@ export class Lifeguard {
     this._partyCount = partyCount;
   }
 
-  get preferPool(): boolean | undefined {
-    return this._preferPool;
+  get actPref(): string | undefined {
+    return this._actPref;
   }
 
-  set preferPool(preferPool: boolean | undefined) {
-    this._preferPool = preferPool;
+  set actPref(pref: string | undefined) {
+    this._actPref = pref;
   }
 
   get locked(): boolean {

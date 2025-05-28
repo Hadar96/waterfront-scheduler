@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { Activity } from 'src/app/models/activity';
 import { Lifeguard } from 'src/app/models/lifeguard';
 import { appStore } from 'src/app/services/store';
 
@@ -16,14 +17,16 @@ export class StaffListComponent {
   showForm: boolean = false;
   lifeguardForm: FormGroup;
   switchesState: any;
+  mainActs: Activity[];
 
   constructor() {
     this.staffList$ = appStore.getLifeguards();
     this.staffList = appStore.getSnapshot().lifeguards;
     this.selectedStaff = this.staffList[0];
+    this.mainActs = appStore.getSnapshot().activities.filter((a) => a.isMain);
     this.lifeguardForm = new FormGroup({
       name: new FormControl(),
-      zonePreference: new FormControl<boolean | undefined>(undefined),
+      zonePreference: new FormControl<string | undefined>(undefined),
       hoffCoPref: new FormControl(),
       isLT: new FormControl(),
       daycamp: new FormControl(),
@@ -37,7 +40,7 @@ export class StaffListComponent {
     if (this.selectedStaff) {
       this.lifeguardForm.patchValue({
         name: this.selectedStaff.name,
-        zonePreference: this.selectedStaff.preferPool,
+        zonePreference: this.selectedStaff.actPref,
         hoffCoPref: this.selectedStaff.hoffCo,
         isLT: this.selectedStaff.isLT,
         daycamp: this.selectedStaff.daycampCount,
@@ -80,7 +83,7 @@ export class StaffListComponent {
     const oldBuddyName = this.selectedStaff.hoffCo; // in case the buddy is changed
 
     this.selectedStaff.name = this.lifeguardForm.value.name;
-    this.selectedStaff.preferPool = this.lifeguardForm.value.zonePreference;
+    this.selectedStaff.actPref = this.lifeguardForm.value.zonePreference;
     this.selectedStaff.hoffCo = this.lifeguardForm.value.hoffCoPref;
     this.selectedStaff.isLT = this.lifeguardForm.value.isLT;
     this.selectedStaff.daycampCount = this.lifeguardForm.value.daycamp;

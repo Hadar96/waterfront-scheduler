@@ -92,7 +92,7 @@ export class AppComponent implements OnInit {
         g.schedule,
         g.isLT,
         g.isBoss,
-        g.preferPool,
+        g.actPref,
         g.hoffCo,
         g.locked,
         g.daycampCount,

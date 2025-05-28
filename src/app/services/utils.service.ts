@@ -412,10 +412,8 @@ export class UtilsService {
     lg: Lifeguard,
     acts: string[]
   ): string | undefined {
-    if (!this.settings?.actPref || lg.preferPool == undefined) return undefined;
-    if (lg.preferPool && acts.includes('Pool')) return 'Pool';
-    if (!lg.preferPool && acts.includes('Lake')) return 'Lake';
-    return undefined;
+    if (!this.settings?.actPref) return undefined;
+    return lg.actPref;
   }
 
   /** Gets a counter object and returns a random minimal attribute */
