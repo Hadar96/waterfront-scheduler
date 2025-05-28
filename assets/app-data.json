@@ -19,7 +19,7 @@
           "id": 5,
           "start": "1300",
           "end": "1345",
-          "name": "Day camp",
+          "name": "Day Camp",
           "locked": true
         },
         { "id": 6, "start": "1415", "end": "1505", "name": "Chaluzim" },
@@ -61,7 +61,7 @@
           "locked": true,
           "workingPeriod": false
         },
-        { "start": "1300", "end": "1340", "name": "Day camp", "locked": true },
+        { "start": "1300", "end": "1340", "name": "Day Camp", "locked": true },
         { "start": "1400", "end": "1450", "name": "Chaverim" },
         { "start": "1500", "end": "1550", "name": "K/Bolim" }
       ]
@@ -86,12 +86,14 @@
     {
       "name": "Pool",
       "color": "#6d9eeb",
+      "isMain": true,
       "min": 5,
       "max": 8
     },
     {
       "name": "Lake",
       "color": "#6aa84f",
+      "isMain": true,
       "min": 6,
       "max": 10
     },
