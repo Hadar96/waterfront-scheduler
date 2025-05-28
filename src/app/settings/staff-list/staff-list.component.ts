@@ -26,6 +26,7 @@ export class StaffListComponent {
       zonePreference: new FormControl<boolean | undefined>(undefined),
       hoffCoPref: new FormControl(),
       isLT: new FormControl(),
+      daycamp: new FormControl(),
     });
     this.switchesState = appStore.getSnapshot().switchesState;
 
@@ -39,6 +40,7 @@ export class StaffListComponent {
         zonePreference: this.selectedStaff.preferPool,
         hoffCoPref: this.selectedStaff.hoffCo,
         isLT: this.selectedStaff.isLT,
+        daycamp: this.selectedStaff.daycampCount,
       });
     }
   }
@@ -81,6 +83,7 @@ export class StaffListComponent {
     this.selectedStaff.preferPool = this.lifeguardForm.value.zonePreference;
     this.selectedStaff.hoffCo = this.lifeguardForm.value.hoffCoPref;
     this.selectedStaff.isLT = this.lifeguardForm.value.isLT;
+    this.selectedStaff.daycampCount = this.lifeguardForm.value.daycamp;
     this.staffList.push(this.selectedStaff);
 
     // Remove duplicates
